@@ -29,3 +29,6 @@ npm run lint
 ```
 npm run test:unit
 ```
+
+GOOGLE MAPS integration from:
+https://dev.to/terrierscript/example-for-google-map-with-vuejs-without-vue-library--3gf5
