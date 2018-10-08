@@ -76,9 +76,6 @@ export default {
         : this.stores;
     }
   },
-  //   methods: mapActions('map', [
-  //     'getStoreInMap'
-  //   ]),
   created() {
     this.$store.dispatch("stores/getAllStores");
   }
