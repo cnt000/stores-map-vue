@@ -4,8 +4,14 @@
       :map-config="mapConfig"
       apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg"
     >
-      <template v-for="marker in markers">
-        <child-marker :key="marker.lat" :position="marker" />
+      <template slot-scope="scopeProps"> <!-- slot-scope -->
+        <child-marker 
+          v-for="(marker,i) in markers"
+          :key="i"
+          :position="marker" 
+          :google="scopeProps.google"
+          :map="scopeProps.map"
+        />
       </template>
     </map-loader>
   </div>
@@ -30,7 +36,7 @@ export default {
     return {
       mapConfig: {
         zoom: 12,
-        center: this.markers[0]
+        center: this.markers[3]
       }
     };
   },

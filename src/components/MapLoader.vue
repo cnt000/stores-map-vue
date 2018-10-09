@@ -2,12 +2,10 @@
   <div>
     <div id="map"></div>
     <template v-if="!!this.google && !!this.map">
-      <map-provider
+      <slot
         :google="google"
         :map="map"
-      >
-        <slot/>
-      </map-provider>
+      />
     </template>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
-  <div class="stores">
-    <input class="stores_search" type="text" placeholder="filter" v-model="keyword" />
-    <div>
+  <div class="stores-map">
+    <div class="stores">
+      <input class="stores_search" type="text" placeholder="filter" v-model="keyword" />
       <div v-if="error"> ERROR </div>
       <ul v-else>
         <span v-if="pending"> LOADING </span>
@@ -14,6 +14,9 @@
         </li>
       </ul>
     </div>
+    <div class="map">
+      <Map :markers="coords"></Map>
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,9 @@ li {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.stores-map {
+  display: flex;
 }
 .stores {
   text-align: left;
@@ -44,6 +50,9 @@ li {
   border-top: none;
   padding: 4px;
 }
+.map {
+  width: 100%;
+}
 .store-name {
   font-weight: bold;
 }
@@ -51,6 +60,7 @@ li {
 
 <script>
 import { mapState } from "vuex";
+import Map from "@/components/Map.vue";
 
 export default {
   data() {
@@ -64,6 +74,16 @@ export default {
       pending: state => state.pending,
       error: state => state.error
     }),
+    coords() {
+      return this.stores
+        .filter(obj => obj.lat !== "" && obj.lng !== "")
+        .reduce(function(accumulator, currentValue) {
+          return accumulator.concat({
+            lat: parseFloat(currentValue.lat),
+            lng: parseFloat(currentValue.lng)
+          });
+        }, []);
+    },
     filteredStores() {
       return this.keyword.length > 0
         ? this.stores.filter(item => {
@@ -78,6 +98,9 @@ export default {
   },
   created() {
     this.$store.dispatch("stores/getAllStores");
+  },
+  components: {
+    Map
   }
 };
 </script>
