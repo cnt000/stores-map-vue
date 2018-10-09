@@ -3,7 +3,8 @@ import storesJson from "../../../data/store-locator";
 const state = {
   all: [],
   pending: false,
-  error: false
+  error: false,
+  selectedStoreId: 0
 };
 
 const getters = {};
@@ -16,7 +17,6 @@ const actions = {
       "receiveAll",
       storesJson.sort((a, b) => (a.post_title < b.post_title ? -1 : 1))
     );
-
     // return fetch("../../../data/store-locator.json")
     //   .then(r => r.json())
     //   .then(json => {
@@ -25,6 +25,9 @@ const actions = {
     //   .catch(e => {
     //     commit("apiFailure", e);
     //   });
+  },
+  selectStore({ commit, id }) {
+    commit("selectStore", id);
   }
 };
 
@@ -38,6 +41,9 @@ const mutations = {
   apiFailure(state) {
     state.pending = false;
     state.error = true;
+  },
+  selectStore(state, id) {
+    state.selectedStoreId = id;
   }
 };
 

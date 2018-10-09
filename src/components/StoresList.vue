@@ -7,7 +7,8 @@
         <span v-if="pending"> LOADING </span>
         <li
           v-for="store in filteredStores"
-          :key="store.ID">
+          :key="store.ID"
+          v-on:click="selectStore(store.ID)">
           <span class="store-name">{{ store.post_title }}</span><br>
           Latitude:  {{ store.lat }}
           Longitude: {{ store.lng }}
@@ -67,6 +68,14 @@ export default {
     return {
       keyword: ""
     };
+  },
+  methods: {
+    selectStore: function(clickedId) {
+      this.$store.dispatch({
+        type: "stores/selectStore",
+        id: clickedId
+      });
+    }
   },
   computed: {
     ...mapState({

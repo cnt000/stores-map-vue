@@ -7,16 +7,16 @@ export default {
     map: Object,
     position: Object
   },
-  data(){
-    return { marker: null }
+  data() {
+    return { marker: null };
   },
-  mounted(){
-    const { Marker } = this.google.maps
+  mounted() {
+    const { Marker } = this.google.maps;
     this.marker = new Marker({
       position: this.position,
       map: this.map,
       title: "Child marker!"
-    })
+    });
   }
-}
+};
 </script>

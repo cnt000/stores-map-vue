@@ -35,10 +35,15 @@ export default {
   data() {
     return {
       mapConfig: {
-        zoom: 12,
+        zoom: 8,
         center: this.markers[3]
       }
     };
+  },
+  actions: {
+    increment(context) {
+      context.commit("increment");
+    }
   },
   components: {
     MapLoader,
