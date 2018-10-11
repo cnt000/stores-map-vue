@@ -30,20 +30,16 @@ import ChildMarker from "./ChildMarker";
 
 export default {
   props: {
-    markers: Array
+    markers: Array,
+    selectedStore: Object
   },
   data() {
     return {
       mapConfig: {
         zoom: 8,
-        center: this.markers[3]
+        center: { lat: parseFloat(this.selectedStore.lat), lng: parseFloat(this.selectedStore.lng) }
       }
     };
-  },
-  actions: {
-    increment(context) {
-      context.commit("increment");
-    }
   },
   components: {
     MapLoader,
