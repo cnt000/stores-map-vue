@@ -16,7 +16,7 @@
       </ul>
     </div>
     <div class="map">
-      <Map :markers="coords"></Map>
+      <Map :markers="coords" :selectedStore="selectedStoreCoords"></Map>
     </div>
   </div>
 </template>
@@ -81,7 +81,8 @@ export default {
     ...mapState({
       stores: state => state.stores.all,
       pending: state => state.pending,
-      error: state => state.error
+      error: state => state.error,
+      selectedStoreId: state => state.selectedStoreId
     }),
     coords() {
       return this.stores
@@ -103,6 +104,8 @@ export default {
             );
           })
         : this.stores;
+    },
+    selectedStoreCoords() {
     }
   },
   created() {
