@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     selectStore: function(clickedId) {
-          debugger;
       this.$store.dispatch({
         type: "stores/selectStore",
         id: clickedId

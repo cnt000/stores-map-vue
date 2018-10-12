@@ -31,7 +31,6 @@ const actions = {
     //   });
   },
   selectStore({ commit }, { id }) {
-    debugger;
     commit("selectStore", id);
   }
 };
@@ -48,7 +47,6 @@ const mutations = {
     state.error = true;
   },
   selectStore(state, id) {
-    debugger;
     state.selectedStoreId = id;
   }
 };
