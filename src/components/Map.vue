@@ -31,7 +31,7 @@ import ChildMarker from "./ChildMarker";
 export default {
   props: {
     markers: Array,
-    selectedStore: Object
+    selectedStore: Number
   },
   data() {
     return {

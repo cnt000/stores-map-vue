@@ -4,10 +4,14 @@ const state = {
   all: [],
   pending: false,
   error: false,
-  selectedStoreId: 0
+  selectedStoreId: 7978
 };
 
-const getters = {};
+const getters = {
+  getCenteredStore: state => {
+    return state.all.filter(store => store.ID === state.selectedStoreId)[0];
+  }
+};
 
 const actions = {
   getAllStores({ commit }) {

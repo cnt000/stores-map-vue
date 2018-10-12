@@ -16,7 +16,7 @@
       </ul>
     </div>
     <div class="map">
-      <Map :markers="coords" :selectedStore="selectedStoreCoords"></Map>
+      <Map :markers="coords" :selectedStore="storeSelected"></Map>
     </div>
   </div>
 </template>
@@ -60,7 +60,7 @@ li {
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import Map from "@/components/Map.vue";
 
 export default {
@@ -84,6 +84,12 @@ export default {
       error: state => state.error,
       selectedStoreId: state => state.selectedStoreId
     }),
+    ...mapGetters([{
+      getCenteredStore: 'getCenteredStore'
+    }]),
+    storeSelected() {
+      return this.$store.state.stores.all.filter(store => store.ID === this.$store.state.stores.selectedStoreId)[0];
+    },
     coords() {
       return this.stores
         .filter(obj => obj.lat !== "" && obj.lng !== "")
@@ -104,8 +110,6 @@ export default {
             );
           })
         : this.stores;
-    },
-    selectedStoreCoords() {
     }
   },
   created() {
