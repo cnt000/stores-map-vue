@@ -2,9 +2,9 @@
   <div class="stores-map">
     <div class="stores">
       <input class="stores_search" type="text" placeholder="filter" v-model="keyword" />
-      <div v-if="error"> ERROR </div>
+      <div v-if="error"> ... ERROR ... </div>
       <ul v-else>
-        <span v-if="pending"> LOADING </span>
+        <span v-if="pending"> ... LOADING ... </span>
         <li
           v-for="store in filteredStores"
           :key="store.ID"
@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     selectStore: function(clickedId) {
+          debugger;
       this.$store.dispatch({
         type: "stores/selectStore",
         id: clickedId
