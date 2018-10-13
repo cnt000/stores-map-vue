@@ -3,6 +3,7 @@
     <map-loader 
       :map-config="mapConfig"
       apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg"
+      :selectedStoreId="selectedStoreId"
     >
       <template slot-scope="scopeProps"> <!-- slot-scope -->
         <child-marker 
@@ -14,6 +15,7 @@
         />
       </template>
     </map-loader>
+    <span>selectedStore: {{selectedStoreId}}</span>
   </div>
 </template>
 
@@ -31,13 +33,18 @@ import ChildMarker from "./ChildMarker";
 export default {
   props: {
     markers: Array,
-    selectedStore: Object
+    selectedStoreId: Number,
+    selectedStoreLat: Number,
+    selectedStoreLng: Number
   },
   data() {
     return {
       mapConfig: {
         zoom: 8,
-        center: { lat: parseFloat(this.selectedStore.lat), lng: parseFloat(this.selectedStore.lng) }
+        center: {
+          lat: this.selectedStoreLat,
+          lng: this.selectedStoreLng
+        }
       }
     };
   },

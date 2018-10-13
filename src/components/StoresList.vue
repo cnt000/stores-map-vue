@@ -9,14 +9,19 @@
           v-for="store in filteredStores"
           :key="store.ID"
           v-on:click="selectStore(store.ID)">
-          <span class="store-name">{{ store.post_title }}</span><br>
+          <span class="store-name">{{store.ID}}: {{ store.post_title }}</span><br>
           Latitude:  {{ store.lat }}
           Longitude: {{ store.lng }}
         </li>
       </ul>
     </div>
     <div class="map">
-      <Map :markers="coords" :selectedStore="storeSelected"></Map>
+      <span>selectedStore: {{selectedStoreId}}</span>
+      <Map
+        :markers="coords"
+        :selectedStoreId="selectedStoreId"
+        :selectedStoreLat="selectedStoreLat"
+        :selectedStoreLng="selectedStoreLng"></Map>
     </div>
   </div>
 </template>
@@ -50,6 +55,13 @@ li {
   border: 1px solid black;
   border-top: none;
   padding: 4px;
+  cursor: pointer;
+}
+li:hover {
+  background-color: lightgreen;
+}
+li:active {
+  background-color: lightcoral;
 }
 .map {
   width: 100%;
@@ -60,7 +72,7 @@ li {
 </style>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import Map from "@/components/Map.vue";
 
 export default {
@@ -80,16 +92,21 @@ export default {
   computed: {
     ...mapState({
       stores: state => state.stores.all,
-      pending: state => state.pending,
-      error: state => state.error,
-      selectedStoreId: state => state.selectedStoreId
+      pending: state => state.stores.pending,
+      error: state => state.stores.error,
+      selectedStoreId: state => state.stores.selectedStoreId,
+      selectedStoreLat: state => {
+        return parseFloat(
+          state.stores.all.filter(store => store.ID === state.stores.selectedStoreId)[0]
+            .lat
+        )
+      },
+      selectedStoreLng: state =>
+        parseFloat(
+          state.stores.all.filter(store => store.ID === state.stores.selectedStoreId)[0]
+            .lng
+        )
     }),
-    ...mapGetters([{
-      getCenteredStore: 'getCenteredStore'
-    }]),
-    storeSelected() {
-      return this.$store.state.stores.all.filter(store => store.ID === this.$store.state.stores.selectedStoreId)[0];
-    },
     coords() {
       return this.stores
         .filter(obj => obj.lat !== "" && obj.lng !== "")
