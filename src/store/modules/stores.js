@@ -37,6 +37,7 @@ const actions = {
 
 const mutations = {
   receiveAll(state, stores) {
+    state.pending = false;
     state.all = stores;
   },
   apiPending(state) {
