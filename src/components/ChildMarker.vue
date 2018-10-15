@@ -5,7 +5,8 @@ export default {
   props: {
     google: Object,
     map: Object,
-    position: Object
+    position: Object,
+    selectedStoreId: Number
   },
   data() {
     return { marker: null };
