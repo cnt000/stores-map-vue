@@ -1,3 +1,9 @@
 module.exports = {
-  baseUrl: process.env.NODE_ENV === "production" ? "/stores-map-vue/" : "/"
+  baseUrl: '/stores-map-vue/',
+  outputDir: undefined,
+  assetsDir: undefined,
+  runtimeCompiler: undefined,
+  productionSourceMap: undefined,
+  parallel: undefined,
+  css: undefined
 };

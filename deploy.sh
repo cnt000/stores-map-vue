@@ -1,10 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 
 # abort on errors
 set -e
 
 # build
-npm run build
+#npm run build
 
 # navigate into the build output directory
 cd dist
