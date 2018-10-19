@@ -9,6 +9,7 @@
         :position="marker" 
         :google="scopeProps.google"
         :map="scopeProps.map"
+        :geocoder="scopeProps.geocoder"
         :selectedStoreId="selectedStoreId"
       />
     </template>
