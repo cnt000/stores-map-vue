@@ -1,11 +1,15 @@
 <template>
   <div class="map-container">
-    <StoresList :selectStore="selectStore" />
+    <StoresList 
+      :selectStore="selectStore"
+      :selectCountry="selectCountry" 
+    />
     <div id="map"></div>
-    <template v-if="!!this.google && !!this.map">
+    <template v-if="!!this.google && !!this.map && !!this.geocoder">
       <slot
         :google="google"
         :map="map"
+        :geocoder="geocoder"
       />
     </template>
   </div>
@@ -13,9 +17,9 @@
 
 <script>
 import GoogleMapsApiLoader from "google-maps-api-loader";
+import { mapState } from "vuex";
 import MapProvider from "./MapProvider";
 import StoresList from "./StoresList";
-import { mapState } from "vuex";
 
 export default {
   props: {
@@ -30,6 +34,7 @@ export default {
     return {
       google: null,
       map: null,
+      geocoder: null,
       keyword: ""
     };
   },
@@ -46,32 +51,8 @@ export default {
       stores: state => state.stores.all,
       pending: state => state.stores.pending,
       error: state => state.stores.error,
-      selectedStoreId: state => state.stores.selectedStoreId,
-      selectedStoreLat: state => {
-        return parseFloat(
-          state.stores.all.filter(
-            store => store.ID === state.stores.selectedStoreId
-          )[0].lat
-        );
-      },
-      selectedStoreLng: state =>
-        parseFloat(
-          state.stores.all.filter(
-            store => store.ID === state.stores.selectedStoreId
-          )[0].lng
-        )
-    }),
-    filteredStores() {
-      return this.keyword.length > 0
-        ? this.stores.filter(item => {
-            return (
-              item.post_title
-                .toLowerCase()
-                .indexOf(this.keyword.toLowerCase()) > -1
-            );
-          })
-        : this.stores;
-    }
+      selectedStoreId: state => state.stores.selectedStoreId
+    })
   },
   methods: {
     initializeMap() {
@@ -91,12 +72,33 @@ export default {
         this.map.setZoom(14);
       }
     },
-    selectStore: function(clickedId) {
+    selectStore(clickedId) {
       this.$store.dispatch({
         type: "stores/selectStore",
         id: clickedId
       });
       this.panTo();
+    },
+    selectCountry(selectedTermId) {
+      const map = this.map;
+      const countrySelected = this.$store.state.stores.countries.filter(
+        country => country.term_id === selectedTermId
+      )[0];
+      const { Geocoder } = this.google.maps;
+      this.geocoder = new Geocoder();
+      this.geocoder.geocode({ address: countrySelected.name }, function(
+        results,
+        status
+      ) {
+        if (status === "OK") {
+          map.setCenter(results[0].geometry.location);
+          map.setZoom(6);
+        } else {
+          alert(
+            "Geocode was not successful for the following reason: " + status
+          );
+        }
+      });
     }
   }
 };
@@ -114,34 +116,6 @@ li {
 }
 .stores-map {
   display: flex;
-}
-.stores {
-  float: left;
-  text-align: left;
-  width: 300px;
-  &_search {
-    box-sizing: border-box;
-    border: 1px solid black;
-    width: 100%;
-    height: 36px;
-    font-size: 24px;
-  }
-}
-ul {
-  border-top: 1px solid black;
-  width: 300px;
-}
-li {
-  border: 1px solid black;
-  border-top: none;
-  padding: 4px;
-  cursor: pointer;
-}
-li:hover {
-  background-color: lightgreen;
-}
-li:active {
-  background-color: lightcoral;
 }
 .map {
   width: 100%;
