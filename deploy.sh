@@ -4,7 +4,7 @@
 set -e
 
 # build
-#npm run build
+npm run build
 
 # navigate into the build output directory
 cd dist
@@ -21,3 +21,5 @@ git commit -m 'deploy'
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f https://github.com/cnt000/stores-map-vue.git master:gh-page
+
+cd ..
