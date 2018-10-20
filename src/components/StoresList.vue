@@ -1,14 +1,14 @@
 <template>
   <div class="stores">
-    <ul>
-      <li
+    <select @change="selectTermId()" v-model="key">
+      <option
         v-for="country in countries"
         :key="country.term_id"
-        v-on:click="selectTermId(country.term_id)"
-        :class="selectedClass(country.term_id)">
+        :value="country.term_id"
+        @change="selectTermId(country.term_id)">
           {{ country.name }}
-      </li>
-    </ul>
+      </option>
+    </select>
     <div v-if="selectedCountryTermId">
       <input class="stores_search" type="text" placeholder="filter" v-model="keyword" />
       <div v-if="error"> ... ERROR ... </div>
@@ -70,7 +70,8 @@ export default {
   data() {
     return {
       keyword: "",
-      active: false
+      active: false,
+      key: 162
     };
   },
   computed: {
@@ -110,9 +111,9 @@ export default {
     selectStoreParent(id) {
       return this.selectStore(id);
     },
-    selectTermId(term_id) {
-      this.$store.dispatch("stores/selectCountryTermId", term_id);
-      this.selectCountry(term_id);
+    selectTermId() {
+      this.$store.dispatch("stores/selectCountryTermId", this.key);
+      this.selectCountry(this.key);
     }
   },
   created() {

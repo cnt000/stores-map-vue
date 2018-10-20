@@ -5,11 +5,10 @@
       :selectCountry="selectCountry" 
     />
     <div id="map"></div>
-    <template v-if="!!this.google && !!this.map && !!this.geocoder">
+    <template v-if="!!this.google && !!this.map">
       <slot
         :google="google"
         :map="map"
-        :geocoder="geocoder"
       />
     </template>
   </div>
@@ -59,6 +58,8 @@ export default {
       const mapContainer = this.$el.querySelector("#map");
       const { Map } = this.google.maps;
       this.map = new Map(mapContainer, this.mapConfig);
+      const { Geocoder } = this.google.maps;
+      this.geocoder = new Geocoder();
     },
     panTo() {
       let storeSelected = this.$store.state.stores.all.filter(
@@ -84,8 +85,6 @@ export default {
       const countrySelected = this.$store.state.stores.countries.filter(
         country => country.term_id === selectedTermId
       )[0];
-      const { Geocoder } = this.google.maps;
-      this.geocoder = new Geocoder();
       this.geocoder.geocode({ address: countrySelected.name }, function(
         results,
         status
