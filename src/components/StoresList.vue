@@ -1,6 +1,7 @@
 <template>
   <div class="stores">
     <select @change="selectTermId()" v-model="key">
+      <option value="">-</option>
       <option
         v-for="country in countries"
         :key="country.term_id"

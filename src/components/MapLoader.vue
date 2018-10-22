@@ -23,7 +23,8 @@ import StoresList from "./StoresList";
 export default {
   props: {
     mapConfig: Object,
-    apiKey: String
+    apiKey: String,
+    markers: Array
   },
   components: {
     MapProvider,
@@ -50,7 +51,8 @@ export default {
       stores: state => state.stores.all,
       pending: state => state.stores.pending,
       error: state => state.stores.error,
-      selectedStoreId: state => state.stores.selectedStoreId
+      selectedStoreId: state => state.stores.selectedStoreId,
+      markers: state => state.stores.markers
     })
   },
   methods: {
@@ -61,16 +63,34 @@ export default {
       const { Geocoder } = this.google.maps;
       this.geocoder = new Geocoder();
     },
-    panTo() {
+    centerMap() {
+      const map = this.map;
       let storeSelected = this.$store.state.stores.all.filter(
         store => store.ID === this.$store.state.stores.selectedStoreId
       )[0];
       if (storeSelected.lat !== "" && storeSelected.lng !== "") {
-        this.map.panTo({
+        map.panTo({
           lat: parseFloat(storeSelected.lat),
           lng: parseFloat(storeSelected.lng)
         });
-        this.map.setZoom(14);
+        map.setZoom(14);
+      } else {
+        this.geocoder.geocode(
+          { address: storeSelected.custom["wpcf-yoox-store-address"][0] },
+          function(results, status) {
+            if (status === "OK") {
+              map.setCenter({
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng()
+              });
+              map.setZoom(18);
+            } else {
+              alert(
+                "Geocode was not successful for the following reason: " + status
+              );
+            }
+          }
+        );
       }
     },
     selectStore(clickedId) {
@@ -78,7 +98,7 @@ export default {
         type: "stores/selectStore",
         id: clickedId
       });
-      this.panTo();
+      this.centerMap();
     },
     selectCountry(selectedTermId) {
       const map = this.map;
