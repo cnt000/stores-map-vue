@@ -6,18 +6,22 @@ export default {
     google: Object,
     map: Object,
     position: Object,
-    selectedStoreId: Number
-  },
-  data() {
-    return { marker: null };
+    markerName: String
   },
   mounted() {
     const { Marker } = this.google.maps;
-    this.marker = new Marker({
+    const { InfoWindow} = this.google.maps;
+    var infowindow = new google.maps.InfoWindow({
+      content: this.position.markerName
+    });
+    var marker = new Marker({
       position: this.position,
       map: this.map,
-      title: "Child marker!"
+      title: this.position.markerName
     });
+    marker.addListener('click', function() {
+      infowindow.open(this.map, marker);
+    })
   }
 };
 </script>

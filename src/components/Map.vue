@@ -10,7 +10,7 @@
         :google="scopeProps.google"
         :map="scopeProps.map"
         :geocoder="scopeProps.geocoder"
-        :selectedStoreId="selectedStoreId"
+        :markerName="scopeProps.markerName"
       />
     </template>
   </map-loader>
@@ -36,11 +36,12 @@ export default {
   computed: {
     markers() {
       return this.stores
-        .filter(obj => obj.lat !== "" && obj.lng !== "")
+        // .filter(obj => obj.lat !== "" && obj.lng !== "")
         .reduce(function(accumulator, currentValue) {
           return accumulator.concat({
             lat: parseFloat(currentValue.lat),
-            lng: parseFloat(currentValue.lng)
+            lng: parseFloat(currentValue.lng),
+            markerName: currentValue.post_title
           });
         }, []);
     },
