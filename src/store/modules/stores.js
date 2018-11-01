@@ -1,11 +1,11 @@
-import storesJson from "../../../data/store-locator";
+import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
 
 const state = {
   all: [],
   pending: false,
   error: false,
-  selectedStoreId: 7978,
+  selectedStoreId: 0,
   countries: [],
   selectedCountryTermId: 0
 };
@@ -30,7 +30,7 @@ const actions = {
 
     commit(
       "receiveAll",
-      storesJson.sort((a, b) => (a.post_title < b.post_title ? -1 : 1))
+      places.sort((a, b) => (a.post_title < b.post_title ? -1 : 1))
     );
     // return fetch("../../../data/store-locator.json")
     //   .then(r => r.json())
@@ -40,9 +40,6 @@ const actions = {
     //   .catch(e => {
     //     commit("apiFailure", e);
     //   });
-  },
-  rectifyMarkers({ commit }) {
-    commit("rectifyMarkers");
   },
   selectStore({ commit }, { id }) {
     commit("selectStore", id);
@@ -73,35 +70,6 @@ const mutations = {
   },
   selectStore(state, id) {
     state.selectedStoreId = id;
-  },
-  rectifyMarkers(state) {
-    return state.reduce(function(accumulator, currentValue) {
-      if (currentValue.lat !== "" && currentValue.lng !== "") {
-        return accumulator.concat({
-          lat: parseFloat(currentValue.lat),
-          lng: parseFloat(currentValue.lng)
-        });
-      } else {
-        debugger;
-        /*this.geocoder.geocode(
-          { address: storeSelected.custom["wpcf-yoox-store-address"][0] },
-          function(results, status) {
-            if (status === "OK") {
-              map.setCenter({
-                lat: results[0].geometry.location.lat(),
-                lng: results[0].geometry.location.lng()
-              });
-              map.setZoom(18);
-            } else {
-              alert(
-                "Geocode was not successful for the following reason: " +
-                  status
-              );
-            }
-          }
-        );*/
-      }
-    }, []);
   }
 };
 

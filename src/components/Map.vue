@@ -25,10 +25,10 @@ export default {
   data() {
     return {
       mapConfig: {
-        zoom: 8,
+        zoom: 4,
         center: {
-          lat: 42.1,
-          lng: 15.4
+          lat: 51,
+          lng: 0
         }
       }
     };

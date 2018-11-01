@@ -1,7 +1,7 @@
 <template>
   <div class="stores">
     <select @change="selectTermId()" v-model="key">
-      <option value="">-</option>
+      <option value="0">All</option>
       <option
         v-for="country in countries"
         :key="country.term_id"
@@ -10,7 +10,7 @@
           {{ country.name }}
       </option>
     </select>
-    <div v-if="selectedCountryTermId">
+    <div>
       <input class="stores_search" type="text" placeholder="filter" v-model="keyword" />
       <div v-if="error"> ... ERROR ... </div>
         <ul v-else>
@@ -33,18 +33,27 @@
   background-color: yellowgreen;
 }
 .stores {
-  display: flex;
   &_search {
+    margin-top: 2px;
     box-sizing: border-box;
     border: 1px solid black;
     width: 100%;
     height: 36px;
-    font-size: 24px;
+    font-size: 18px;
+    border-bottom: 0;
+    &::placeholder {
+      font-size: 14px;
+      text-indent: 4px;
+    }
   }
+}
+select {
+  width: 100%;
+  height: 60px;
 }
 ul {
   border-top: 1px solid black;
-  width: 300px;
+  width: 100%;
 }
 li {
   border: 1px solid black;
@@ -72,7 +81,7 @@ export default {
     return {
       keyword: "",
       active: false,
-      key: 162
+      key: 0
     };
   },
   computed: {
@@ -84,22 +93,19 @@ export default {
       selectedCountryTermId: state => state.stores.selectedCountryTermId
     }),
     filteredStores() {
-      // return this.keyword.length > 0
-      //   ? this.stores
-      //       .filter(item =>
-      //         item.terms.find(o => o.term_id === this.selectedCountryTermId)
-      //       )
-      //       .filter(item => {
-      //         return (
-      //           item.post_title
-      //             .toLowerCase()
-      //             .indexOf(this.keyword.toLowerCase()) > -1
-      //         );
-      //       })
-      //   :
-      return this.stores.filter(item =>
-        item.terms.find(o => o.term_id === this.selectedCountryTermId)
-      );
+      if (this.keyword.length === 0 && !this.selectedCountryTermId) {
+        return this.stores;
+      } else if (this.selectedCountryTermId) {
+        return this.stores.filter(item =>
+          item.terms.find(o => o.term_id === this.selectedCountryTermId)
+        );
+      } else {
+        return this.stores.filter(
+          item =>
+            item.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) >
+            -1
+        );
+      }
     },
     hasSelectedCountry() {
       return !!this.$store.state.stores.selectedCountryTermId;
