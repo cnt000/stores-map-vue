@@ -1,6 +1,6 @@
 <template>
   <div class="map-container">
-    <StoresList 
+    <stores-list 
       :selectStore="selectStore"
       :selectCountry="selectCountry" 
     />
@@ -17,7 +17,6 @@
 <script>
 import GoogleMapsApiLoader from "google-maps-api-loader";
 import { mapState } from "vuex";
-import MapProvider from "./MapProvider";
 import StoresList from "./StoresList";
 
 export default {
@@ -27,7 +26,6 @@ export default {
     markers: Array
   },
   components: {
-    MapProvider,
     StoresList
   },
   data() {
@@ -51,8 +49,7 @@ export default {
       stores: state => state.stores.all,
       pending: state => state.stores.pending,
       error: state => state.stores.error,
-      selectedStoreId: state => state.stores.selectedStoreId,
-      markers: state => state.stores.markers
+      selectedStoreId: state => state.stores.selectedStoreId
     })
   },
   methods: {
@@ -102,6 +99,11 @@ export default {
     },
     selectCountry(selectedTermId) {
       const map = this.map;
+      if (selectedTermId === "0") {
+        map.setCenter({ lat: 51, lng: 0 });
+        map.setZoom(4);
+        return;
+      }
       const countrySelected = this.$store.state.stores.countries.filter(
         country => country.term_id === selectedTermId
       )[0];
@@ -132,12 +134,6 @@ li {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-.stores-map {
-  display: flex;
-}
-.map {
-  width: 100%;
 }
 .store-name {
   font-weight: bold;
