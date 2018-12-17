@@ -35,15 +35,17 @@ export default {
   },
   computed: {
     markers() {
-      return this.stores
-        // .filter(obj => obj.lat !== "" && obj.lng !== "")
-        .reduce(function(accumulator, currentValue) {
-          return accumulator.concat({
-            lat: parseFloat(currentValue.lat),
-            lng: parseFloat(currentValue.lng),
-            markerName: currentValue.post_title
-          });
-        }, []);
+      return (
+        this.stores
+          // .filter(obj => obj.lat !== "" && obj.lng !== "")
+          .reduce(function(accumulator, currentValue) {
+            return accumulator.concat({
+              lat: parseFloat(currentValue.lat),
+              lng: parseFloat(currentValue.lng),
+              markerName: currentValue.post_title
+            });
+          }, [])
+      );
     },
     ...mapState({
       stores: state => state.stores.all,
