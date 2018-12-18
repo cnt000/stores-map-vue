@@ -11,10 +11,10 @@ export default {
   mounted() {
     const { Marker } = this.google.maps;
     const { InfoWindow } = this.google.maps;
-    var infowindow = new InfoWindow({
+    let infowindow = new InfoWindow({
       content: this.position.markerName
     });
-    var marker = new Marker({
+    let marker = new Marker({
       position: this.position,
       map: this.map,
       title: this.position.markerName
