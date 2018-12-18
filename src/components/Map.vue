@@ -1,25 +1,32 @@
 <template>
-  <map-loader 
-    :map-config="mapConfig"
-    apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg">
-    <template slot-scope="scopeProps">
-      <child-marker 
-        v-for="(marker,i) in markers"
-        :key="i"
-        :position="marker" 
-        :google="scopeProps.google"
-        :map="scopeProps.map"
-        :geocoder="scopeProps.geocoder"
-        :markerName="scopeProps.markerName"
-      />
-    </template>
-  </map-loader>
+  <div>
+    <map-loader :map-config="mapConfig" apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg">
+      <template slot-scope="scopeProps">
+        <sidebar>
+          <stores-list :map="scopeProps.map" :google="scopeProps.google"/>
+        </sidebar>
+        <div class="markers">
+          <child-marker
+            v-for="(marker,i) in markers"
+            :key="i"
+            :position="marker"
+            :google="scopeProps.google"
+            :map="scopeProps.map"
+            :geocoder="scopeProps.geocoder"
+            :markerName="scopeProps.markerName"
+          />
+        </div>
+      </template>
+    </map-loader>
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import MapLoader from "./MapLoader.vue";
-import ChildMarker from "./ChildMarker";
+import ChildMarker from "./ChildMarker.vue";
+import Sidebar from "./Sidebar.vue";
+import StoresList from "./StoresList.vue";
 
 export default {
   data() {
@@ -35,17 +42,13 @@ export default {
   },
   computed: {
     markers() {
-      return (
-        this.stores
-          // .filter(obj => obj.lat !== "" && obj.lng !== "")
-          .reduce(function(accumulator, currentValue) {
-            return accumulator.concat({
-              lat: parseFloat(currentValue.lat),
-              lng: parseFloat(currentValue.lng),
-              markerName: currentValue.post_title
-            });
-          }, [])
-      );
+      return this.stores.reduce(function(accumulator, currentValue) {
+        return accumulator.concat({
+          lat: parseFloat(currentValue.lat),
+          lng: parseFloat(currentValue.lng),
+          markerName: currentValue.post_title
+        });
+      }, []);
     },
     ...mapState({
       stores: state => state.stores.all,
@@ -55,9 +58,16 @@ export default {
   created() {
     this.$store.dispatch("stores/getAllStores");
   },
+  methods: {
+    log(a) {
+      console.log("asda ", a);
+    }
+  },
   components: {
     MapLoader,
-    ChildMarker
+    ChildMarker,
+    Sidebar,
+    StoresList
   }
 };
 </script>
