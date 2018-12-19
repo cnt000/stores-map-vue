@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{selectedStoreChange}} - {{selectedNationChange}}
     <template v-if="!!this.google && !!this.map">
       <slot :google="google" :map="map"/>
     </template>
