@@ -44,8 +44,8 @@ const actions = {
   selectStore({ commit }, { id }) {
     commit("selectStore", id);
   },
-  selectCountryTermId({ commit }, term_id) {
-    commit("selectCountryTermId", term_id);
+  selectCountryTermId({ commit }, { id }) {
+    commit("selectCountryTermId", id);
   }
 };
 
