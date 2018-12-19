@@ -23,3 +23,7 @@ git commit -m 'deploy'
 git push -f https://github.com/cnt000/stores-map-vue.git master:gh-pages
 
 cd ..
+
+rm -fr dist/
+
+echo "build, pushed and cleaned"
