@@ -15,14 +15,14 @@
         <span v-if="pending">... LOADING ...</span>
         <li
           v-for="store in filteredStores"
+          :data-storeid="store.ID"
           :key="store.ID"
           v-on:click="selectStore(store.ID)"
           class="stores_list_store"
         >
-          <span class="stores_list_storename">{{store.ID}}: {{ store.post_title }}</span>
-          <br>
-          Latitude: {{ store.lat }}
-          Longitude: {{ store.lng }}
+          <span class="stores_list_store_name">{{ store.post_title }}</span>
+          <span>Latitude: {{ store.lat }}</span>
+          <span>Longitude: {{ store.lng }}</span>
         </li>
       </ul>
     </div>
@@ -55,6 +55,8 @@
     margin: 0;
     padding: 0;
     &_store {
+      display: flex;
+      flex-direction: column;
       border: 1px solid black;
       border-top: none;
       padding: 4px;
@@ -110,6 +112,7 @@ export default {
   },
   methods: {
     selectStore(clickedId) {
+      debugger;
       this.$store.dispatch({
         type: "stores/selectStore",
         id: clickedId
