@@ -5,8 +5,7 @@ export default {
   props: {
     google: Object,
     map: Object,
-    position: Object,
-    markerName: String
+    position: Object
   },
   mounted() {
     const { Marker } = this.google.maps;
