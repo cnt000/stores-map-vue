@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <Map />
+    <store-locator />
   </div>
 </template>
 
 <script>
-import Map from "@/components/Map.vue";
+import StoreLocator from "@/components/StoreLocator.vue";
 
 export default {
   name: "home",
   components: {
-    Map
+    StoreLocator
   }
 };
 </script>
