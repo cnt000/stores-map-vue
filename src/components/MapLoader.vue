@@ -82,6 +82,7 @@ export default {
       }
     },
     selectCountry(selectedTermId) {
+      const map = this.map;
       if (selectedTermId === 0 && this.map) {
         this.map.setCenter({ lat: 51, lng: 0 });
         this.map.setZoom(4);
@@ -96,8 +97,8 @@ export default {
           status
         ) {
           if (status === "OK" && this.map) {
-            this.map.setCenter(results[0].geometry.location);
-            this.map.setZoom(6);
+            map.setCenter(results[0].geometry.location);
+            map.setZoom(6);
           } else {
             alert(
               "Geocode was not successful for the following reason: " + status

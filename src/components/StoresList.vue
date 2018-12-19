@@ -77,10 +77,6 @@
 import { mapState } from "vuex";
 
 export default {
-  props: {
-    google: Object,
-    map: Object
-  },
   data() {
     return {
       keyword: "",

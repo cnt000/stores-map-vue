@@ -3,7 +3,7 @@
     <map-loader :map-config="mapConfig" apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg">
       <template slot-scope="scopeProps">
         <sidebar>
-          <stores-list :map="scopeProps.map" :google="scopeProps.google"/>
+          <stores-list />
         </sidebar>
         <div class="markers">
           <child-marker
