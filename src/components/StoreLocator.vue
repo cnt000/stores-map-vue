@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="app-container">
+    <sidebar>
+      <stores-list/>
+    </sidebar>
     <map-loader :map-config="mapConfig" apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg">
       <template slot-scope="scopeProps">
-        <sidebar>
-          <stores-list />
-        </sidebar>
         <div class="markers">
           <child-marker
             v-for="(marker,i) in markers"
