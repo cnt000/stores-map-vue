@@ -21,8 +21,8 @@
           class="stores_list_store"
         >
           <span class="stores_list_store_name">{{ store.post_title }}</span>
-          <span>Latitude: {{ store.lat }}</span>
-          <span>Longitude: {{ store.lng }}</span>
+          <span>{{ store.custom["wpcf-yoox-store-address"][0] }}</span>
+          <span>({{ store.lat }} - {{ store.lng }})</span>
         </li>
       </ul>
     </div>
