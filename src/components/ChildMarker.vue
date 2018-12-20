@@ -13,15 +13,18 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedStoreId: function(state) {
-        if (state.stores.selectedStoreId === this.storeid) {
-          this.infowindow.open(this.map, this.marker);
-        } else {
-          //debugger;
-          //this.infowindow.close();
-        }
-      }
+      selectedStoreId: state => state.stores.selectedStoreId
     })
+  },
+  watch: {
+    selectedStoreId: function(val) {
+      console.log(val, this.storeid);
+      if (val === this.storeid) {
+        this.infowindow.open(this.map, this.marker);
+      } else {
+        this.infowindow.close();
+      }
+    }
   },
   mounted() {
     const { Marker } = this.google.maps;
@@ -33,6 +36,9 @@ export default {
     });
     const infowindow = new InfoWindow({
       content: this.position.markerName
+    });
+    marker.addListener("click", function() {
+      infowindow.open(this.map, marker);
     });
     this.infowindow = infowindow;
     this.marker = marker;
