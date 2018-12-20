@@ -12,7 +12,7 @@
             :position="marker"
             :google="scopeProps.google"
             :map="scopeProps.map"
-            :storeid="selectedStoreId"
+            :storeid="marker.storeid"
           />
         </div>
       </template>
@@ -45,7 +45,8 @@ export default {
         return accumulator.concat({
           lat: parseFloat(currentValue.lat),
           lng: parseFloat(currentValue.lng),
-          markerName: currentValue.post_title
+          markerName: currentValue.post_title,
+          storeid: currentValue.ID
         });
       }, []);
     },

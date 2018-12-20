@@ -1,5 +1,5 @@
 <template>
-  <div :stova="showinfo"></div>
+  <div :store="selectedStoreId"></div>
 </template>
 <script>
 import { mapState } from "vuex";
@@ -13,19 +13,19 @@ export default {
   },
   computed: {
     ...mapState({
-      showinfo: function(state) {
+      selectedStoreId: function(state) {
         if (state.stores.selectedStoreId === this.storeid) {
-          // const { Marker } = this.google.maps;
-          // const { InfoWindow } = this.google.maps;
-          // let infowindow = new InfoWindow({
-          //   content: this.position.markerName
-          // });
-          // let marker = new Marker({
-          //   position: this.position,
-          //   map: this.map,
-          //   title: this.position.markerName
-          // });
-          // infowindow.open(this.map, marker);
+          const { Marker } = this.google.maps;
+          const { InfoWindow } = this.google.maps;
+          let infowindow = new InfoWindow({
+            content: this.position.markerName
+          });
+          let marker = new Marker({
+            position: this.position,
+            map: this.map,
+            title: this.position.markerName
+          });
+          infowindow.open(this.map, marker);
         }
       }
     })
