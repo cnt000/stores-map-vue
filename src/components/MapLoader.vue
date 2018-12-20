@@ -1,5 +1,5 @@
 <template>
-  <div :store="selectedStoreChange" :country="selectedNationChange">
+  <div>
     <template v-if="!!this.google && !!this.map">
       <slot :google="google" :map="map"/>
     </template>
@@ -33,15 +33,17 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedStoreChange: function(state) {
-        this.centerMap(state.stores.selectedStoreId);
-        return state.stores.selectedStoreId;
-      },
-      selectedNationChange: function(state) {
-        this.selectCountry(state.stores.selectedCountryTermId);
-        return state.stores.selectedCountryTermId;
-      }
+      store: state => state.stores.selectedStoreId,
+      country: state => state.stores.selectedCountryTermId
     })
+  },
+  watch: {
+    store: function(val) {
+      this.centerMap(val);
+    },
+    country: function(val) {
+      this.selectCountry(val);
+    }
   },
   methods: {
     initializeMap() {

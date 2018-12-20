@@ -11,12 +11,6 @@ export default {
     position: Object,
     storeid: Number
   },
-  data() {
-    return {
-      infowindow: {},
-      marker: {}
-    };
-  },
   computed: {
     ...mapState({
       selectedStoreId: function(state) {
@@ -32,14 +26,16 @@ export default {
   mounted() {
     const { Marker } = this.google.maps;
     const { InfoWindow } = this.google.maps;
-    this.marker = new Marker({
+    const marker = new Marker({
       position: this.position,
       map: this.map,
       title: this.position.markerName
     });
-    this.infowindow = new InfoWindow({
+    const infowindow = new InfoWindow({
       content: this.position.markerName
     });
+    this.infowindow = infowindow;
+    this.marker = marker;
   }
 };
 </script>

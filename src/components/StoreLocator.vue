@@ -49,7 +49,6 @@ export default {
           storeid: currentValue.ID
         });
       }, []);
-
     },
     ...mapState({
       stores: state => state.stores.all,
