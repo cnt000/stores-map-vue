@@ -39,9 +39,9 @@
     height: 36px;
     font-size: 18px;
     border-bottom: 0;
+    text-indent: 8px;
     &::placeholder {
       font-size: 14px;
-      text-indent: 4px;
     }
   }
   &_nations {

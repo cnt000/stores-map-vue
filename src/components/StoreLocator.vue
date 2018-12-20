@@ -41,14 +41,15 @@ export default {
   },
   computed: {
     markers() {
-      return this.stores.reduce(function(accumulator, currentValue) {
-        return accumulator.concat({
-          lat: parseFloat(currentValue.lat),
-          lng: parseFloat(currentValue.lng),
-          markerName: currentValue.post_title,
-          storeid: currentValue.ID
-        });
-      }, []);
+      return this.stores.reduce(
+        (acc, val) =>
+          acc.concat({
+            lat: parseFloat(val.lat),
+            lng: parseFloat(val.lng),
+            storeid: val.ID
+          }),
+        []
+      );
     },
     ...mapState({
       stores: state => state.stores.all,
