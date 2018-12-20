@@ -95,24 +95,20 @@ export default {
       selectedCountryTermId: state => state.stores.selectedCountryTermId
     }),
     filteredStores() {
-      if (this.keyword.length === 0 && !this.selectedCountryTermId) {
-        return this.stores;
-      } else if (this.selectedCountryTermId) {
-        return this.stores.filter(item =>
+      const filteredStoreList = this.stores.filter(
+        item =>
+          item.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1
+      );
+      if (this.selectedCountryTermId) {
+        return filteredStoreList.filter(item =>
           item.terms.find(o => o.term_id === this.selectedCountryTermId)
         );
-      } else {
-        return this.stores.filter(
-          item =>
-            item.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) >
-            -1
-        );
       }
+      return filteredStoreList;
     }
   },
   methods: {
     selectStore(clickedId) {
-      debugger;
       this.$store.dispatch({
         type: "stores/selectStore",
         id: clickedId

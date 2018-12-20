@@ -12,8 +12,7 @@
             :position="marker"
             :google="scopeProps.google"
             :map="scopeProps.map"
-            :geocoder="scopeProps.geocoder"
-            :markerName="scopeProps.markerName"
+            :storeid="selectedStoreId"
           />
         </div>
       </template>
@@ -57,11 +56,6 @@ export default {
   },
   created() {
     this.$store.dispatch("stores/getAllStores");
-  },
-  methods: {
-    log(a) {
-      console.log("asda ", a);
-    }
   },
   components: {
     MapLoader,
