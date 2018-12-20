@@ -1,11 +1,34 @@
-<!-- ChildMarker -->
-<template><div></div></template>
+<template>
+  <div :stova="showinfo"></div>
+</template>
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
     google: Object,
     map: Object,
-    position: Object
+    position: Object,
+    storeid: String
+  },
+  computed: {
+    ...mapState({
+      showinfo: function(state) {
+        if (state.stores.selectedStoreId === this.storeid) {
+          // const { Marker } = this.google.maps;
+          // const { InfoWindow } = this.google.maps;
+          // let infowindow = new InfoWindow({
+          //   content: this.position.markerName
+          // });
+          // let marker = new Marker({
+          //   position: this.position,
+          //   map: this.map,
+          //   title: this.position.markerName
+          // });
+          // infowindow.open(this.map, marker);
+        }
+      }
+    })
   },
   mounted() {
     const { Marker } = this.google.maps;
