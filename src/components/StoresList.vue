@@ -1,6 +1,6 @@
 <template>
   <div class="stores">
-    <select @change="selectTermId()" v-model="key" class="stores_nations">
+    <select @change="selectTermId" v-model="countryId" class="stores_nations">
       <option value="0">All</option>
       <option
         v-for="country in countries"
@@ -10,10 +10,15 @@
     </select>
     <div>
       <input class="stores_search" type="text" placeholder="filter" v-model="keyword">
-      <div v-if="error">... ERROR ...</div>
-      <ul v-else class="stores_list">
-        <span v-if="pending">... LOADING ...</span>
+      <span v-if="pending">... LOADING ...</span>
+      <span v-if="error">... ERROR!!! ...</span>
+      <ul class="stores_list">
         <li
+          v-if="filteredStores.length === 0"
+          class="stores_list_store stores_list_store--empty"
+        >Non ci sono risultati</li>
+        <li
+          v-else
           v-for="store in filteredStores"
           :data-storeid="store.ID"
           :key="store.ID"
@@ -61,6 +66,9 @@
       border-top: none;
       padding: 4px;
       cursor: pointer;
+      &--empty {
+        background-color: lightsalmon;
+      }
       &:hover {
         background-color: lightgreen;
       }
@@ -82,29 +90,27 @@ export default {
   data() {
     return {
       keyword: "",
-      active: false,
-      key: 0
+      countryId: 0
     };
   },
   computed: {
     ...mapState({
       stores: state => state.stores.all,
-      pending: state => state.stores.pending,
-      error: state => state.stores.error,
       countries: state => state.stores.countries,
-      countryTermId: state => state.stores.selectedCountryTermId
+      countryTermId: state => state.stores.selectedCountryTermId,
+      pending: state => state.stores.pending,
+      error: state => state.stores.error
     }),
     filteredStores() {
       const filteredStoreList = this.stores.filter(
         item =>
           item.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1
       );
-      if (this.countryTermId) {
-        return filteredStoreList.filter(item =>
-          item.terms.find(o => o.term_id === this.countryTermId)
-        );
-      }
-      return filteredStoreList;
+      return this.countryTermId
+        ? filteredStoreList.filter(item =>
+            item.terms.find(o => o.term_id === this.countryTermId)
+          )
+        : filteredStoreList;
     }
   },
   methods: {
@@ -117,7 +123,7 @@ export default {
     selectTermId() {
       this.$store.dispatch({
         type: "stores/selectCountryTermId",
-        id: +this.key
+        id: +this.countryId
       });
     }
   },
