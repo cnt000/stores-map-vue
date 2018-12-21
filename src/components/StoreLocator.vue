@@ -3,7 +3,7 @@
     <sidebar>
       <stores-list/>
     </sidebar>
-    <map-loader :map-config="mapConfig" apiKey="AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg">
+    <map-loader :map-config="mapConfig" :apiKey="apiKey">
       <template slot-scope="scopeProps">
         <div class="markers">
           <child-marker
@@ -26,17 +26,13 @@ import MapLoader from "./MapLoader.vue";
 import ChildMarker from "./ChildMarker.vue";
 import Sidebar from "./Sidebar.vue";
 import StoresList from "./StoresList.vue";
+import { mapConfig, apiKey } from "../conf.js"
 
 export default {
   data() {
     return {
-      mapConfig: {
-        zoom: 4,
-        center: {
-          lat: 51,
-          lng: 0
-        }
-      }
+      mapConfig: mapConfig,
+      apiKey: apiKey
     };
   },
   computed: {

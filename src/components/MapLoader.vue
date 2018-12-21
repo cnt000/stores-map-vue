@@ -62,9 +62,7 @@ export default {
           { address: storeSelected.custom["wpcf-yoox-store-address"][0] },
           function(results, status) {
             if (status !== "OK") {
-              console.log(
-                "Geocode was not successful for the following reason: " + status
-              );
+              console.log("Geocode was not successful: " + status);
             }
             this.panToAndZoom(
               results[0].geometry.location.lat(),
@@ -77,7 +75,11 @@ export default {
     },
     selectCountry(selectedTermId) {
       if (selectedTermId === 0) {
-        this.panToAndZoom(51, 0, 4);
+        this.panToAndZoom(
+          this.mapConfig.center.lat,
+          this.mapConfig.center.lng,
+          this.mapConfig.zoom
+        );
         return;
       }
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
@@ -88,9 +90,7 @@ export default {
           status
         ) {
           if (status !== "OK") {
-            console.log(
-              "Geocode was not successful for the following reason: " + status
-            );
+            console.log("Geocode was not successful: " + status);
           }
           istance.panToAndZoom(
             results[0].geometry.location.lat(),
