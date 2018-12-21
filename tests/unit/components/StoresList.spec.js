@@ -74,8 +74,8 @@ describe("StoresList.vue", () => {
     expect(wrapper.find("select option").text()).toMatch(msg);
   });
 
-  it("renders countries select with America second option", () => {
-    const msg = "China";
+  it("renders countries select with China second option", () => {
+    const msg = "Asia"; // not important if nation or continents in this test
     const wrapper = shallowMount(StoresList, {
       store,
       localVue
