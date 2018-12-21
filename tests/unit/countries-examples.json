@@ -1,0 +1,38 @@
+[
+  {
+    "term_id": 165,
+    "name": "China",
+    "slug": "china",
+    "term_group": 0,
+    "term_taxonomy_id": 165,
+    "taxonomy": "location",
+    "description": "",
+    "parent": 164,
+    "count": 144,
+    "filter": "raw"
+  },
+  {
+    "term_id": 191,
+    "name": "France",
+    "slug": "france",
+    "term_group": 0,
+    "term_taxonomy_id": 191,
+    "taxonomy": "location",
+    "description": "",
+    "parent": 153,
+    "count": 36,
+    "filter": "raw"
+  },
+  {
+    "term_id": 295,
+    "name": "Indonesia",
+    "slug": "indonesia",
+    "term_group": 0,
+    "term_taxonomy_id": 295,
+    "taxonomy": "location",
+    "description": "",
+    "parent": 164,
+    "count": 1,
+    "filter": "raw"
+  }
+]

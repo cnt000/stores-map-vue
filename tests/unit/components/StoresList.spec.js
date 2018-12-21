@@ -1,18 +1,8 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-import Sidebar from "@/components/Sidebar.vue";
 import StoresList from "@/components/StoresList.vue";
-import storesExamples from "./stores-examples.json";
-
-describe("Sidebar.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "";
-    const wrapper = shallowMount(Sidebar, {
-      propsData: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
-  });
-});
+import storesExamples from "../stores-examples.json";
+import countriesExamples from "../countries-examples.json";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -21,6 +11,7 @@ describe("StoresList.vue", () => {
   let actions;
   let state;
   let store;
+  let testState;
 
   beforeEach(() => {
     state = {
@@ -37,17 +28,19 @@ describe("StoresList.vue", () => {
       "stores/selectCountryTermId": jest.fn()
     };
 
+    testState = {
+      all: storesExamples,
+      pending: false,
+      error: false,
+      selectedStoreId: 0,
+      countries: countriesExamples,
+      selectedCountryTermId: 0
+    };
+
     store = new Vuex.Store({
       modules: {
         stores: {
-          state: {
-            all: storesExamples,
-            pending: false,
-            error: false,
-            selectedStoreId: 0,
-            countries: [],
-            selectedCountryTermId: 0
-          },
+          state: testState,
           actions
         }
       }
@@ -70,6 +63,46 @@ describe("StoresList.vue", () => {
       localVue
     });
     expect(wrapper.find("li:nth-child(2) > span").text()).toMatch(msg);
+  });
+
+  it("renders countries select with All", () => {
+    const msg = "All";
+    const wrapper = shallowMount(StoresList, {
+      store,
+      localVue
+    });
+    expect(wrapper.find("select option").text()).toMatch(msg);
+  });
+
+  it("renders countries select with America second option", () => {
+    const msg = "China";
+    const wrapper = shallowMount(StoresList, {
+      store,
+      localVue
+    });
+    expect(wrapper.find("select option:nth-child(2)").text()).toMatch(msg);
+  });
+
+  it("renders one store searching for BAKU - PORT BAKU", () => {
+    const msg = "BAKU - PORT BAKU";
+    const wrapper = shallowMount(StoresList, {
+      store,
+      localVue
+    });
+    wrapper.find(".stores_search").element.value = msg;
+    wrapper.find(".stores_search").trigger("input");
+    expect(wrapper.find("li:first-child > span").text()).toMatch(msg);
+  });
+
+  it("renders any store searching for AAA", () => {
+    const msg = "";
+    const wrapper = shallowMount(StoresList, {
+      store,
+      localVue
+    });
+    wrapper.find(".stores_search").element.value = msg;
+    wrapper.find(".stores_search").trigger("input");
+    expect(wrapper.find("li:first-child > span").text()).toMatch(msg);
   });
 
   it('calls store action "selectStore" when list item is clicked', () => {
