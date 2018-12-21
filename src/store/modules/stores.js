@@ -55,7 +55,6 @@ const mutations = {
   },
   receiveNations(state, jsonTerms) {
     state.pending = false;
-    debugger;
     state.countries = termsToCountries(jsonTerms.terms).countries;
   },
   receiveAll(state, stores) {
