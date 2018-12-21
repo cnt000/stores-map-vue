@@ -53,59 +53,58 @@ export default {
       const { Geocoder } = this.google.maps;
       this.geocoder = new Geocoder();
     },
-    centerMap(storeId) {
-      let storeSelected = this.$store.state.stores.all.filter(
-        store => store.ID === storeId
-      )[0];
-      if (this.map && storeSelected.lat !== "" && storeSelected.lng !== "") {
-        this.map.panTo({
-          lat: parseFloat(storeSelected.lat),
-          lng: parseFloat(storeSelected.lng)
-        });
-        this.map.setZoom(14);
+    centerMap() {
+      let storeSelected = this.$store.getters["stores/getSelectedStore"];
+      if (storeSelected.lat !== "" && storeSelected.lng !== "") {
+        this.panToAndZoom(storeSelected.lat, storeSelected.lng, 14);
       } else if (this.geocoder) {
         this.geocoder.geocode(
           { address: storeSelected.custom["wpcf-yoox-store-address"][0] },
           function(results, status) {
-            if (status === "OK") {
-              this.map.setCenter({
-                lat: results[0].geometry.location.lat(),
-                lng: results[0].geometry.location.lng()
-              });
-              this.map.setZoom(18);
-            } else {
-              alert(
+            if (status !== "OK") {
+              console.log(
                 "Geocode was not successful for the following reason: " + status
               );
             }
+            this.panToAndZoom(
+              results[0].geometry.location.lat(),
+              results[0].geometry.location.lng(),
+              18
+            );
           }
         );
       }
     },
     selectCountry(selectedTermId) {
-      const map = this.map;
-      if (selectedTermId === 0 && this.map) {
-        this.map.setCenter({ lat: 51, lng: 0 });
-        this.map.setZoom(4);
+      if (selectedTermId === 0) {
+        this.panToAndZoom(51, 0, 4);
         return;
       }
-      const countrySelected = this.$store.state.stores.countries.filter(
-        country => country.term_id === selectedTermId
-      )[0];
+      const countrySelected = this.$store.getters["stores/getSelectedCountry"];
+      const istance = this;
       this.geocoder &&
         this.geocoder.geocode({ address: countrySelected.name }, function(
           results,
           status
         ) {
-          if (status === "OK" && this.map) {
-            map.setCenter(results[0].geometry.location);
-            map.setZoom(6);
-          } else {
-            alert(
+          if (status !== "OK") {
+            console.log(
               "Geocode was not successful for the following reason: " + status
             );
           }
+          istance.panToAndZoom(
+            results[0].geometry.location.lat(),
+            results[0].geometry.location.lng(),
+            6
+          );
         });
+    },
+    panToAndZoom(lat, lng, zoom) {
+      this.map.panTo({
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
+      });
+      this.map.setZoom(zoom);
     }
   }
 };

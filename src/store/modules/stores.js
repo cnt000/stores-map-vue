@@ -1,6 +1,7 @@
 import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
 import { termsToCountries } from "../../helpers";
+
 const state = {
   all: [],
   pending: false,
@@ -11,11 +12,13 @@ const state = {
 };
 
 const getters = {
-  getCenteredStore: state => {
+  getSelectedStore: state => {
     return state.all.filter(store => store.ID === state.selectedStoreId)[0];
   },
-  getSelectedCountryTermId: state => {
-    return state.selectedCountryTermId;
+  getSelectedCountry: state => {
+    return state.countries.filter(
+      country => country.term_id === state.selectedCountryTermId
+    )[0];
   }
 };
 
