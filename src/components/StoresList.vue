@@ -92,16 +92,16 @@ export default {
       pending: state => state.stores.pending,
       error: state => state.stores.error,
       countries: state => state.stores.countries,
-      selectedCountryTermId: state => state.stores.selectedCountryTermId
+      countryTermId: state => state.stores.selectedCountryTermId
     }),
     filteredStores() {
       const filteredStoreList = this.stores.filter(
         item =>
           item.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1
       );
-      if (this.selectedCountryTermId) {
+      if (this.countryTermId) {
         return filteredStoreList.filter(item =>
-          item.terms.find(o => o.term_id === this.selectedCountryTermId)
+          item.terms.find(o => o.term_id === this.countryTermId)
         );
       }
       return filteredStoreList;
