@@ -8,8 +8,7 @@ export default {
   props: {
     google: Object,
     map: Object,
-    position: Object,
-    storeid: Number
+    position: Object
   },
   computed: {
     ...mapState({
@@ -18,7 +17,7 @@ export default {
   },
   watch: {
     storeId: function(val) {
-      if (val === this.storeid) {
+      if (val === this.position.storeId) {
         this.infowindow.open(this.map, this.marker);
       } else {
         this.infowindow.close();
