@@ -36,12 +36,12 @@ export default {
   },
   computed: {
     markers() {
-      return this.stores.reduce((accumulator, currentValue) => {
-        return accumulator.concat({
-          lat: parseFloat(currentValue.lat),
-          lng: parseFloat(currentValue.lng),
-          markerName: currentValue.post_title,
-          storeId: currentValue.ID
+      return this.stores.reduce((acc, cur) => {
+        return acc.concat({
+          lat: parseFloat(cur.lat),
+          lng: parseFloat(cur.lng),
+          markerName: cur.post_title,
+          storeId: cur.ID
         });
       }, []);
     },
