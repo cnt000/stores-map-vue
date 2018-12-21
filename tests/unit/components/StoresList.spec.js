@@ -123,4 +123,8 @@ describe("StoresList.vue", () => {
     shallowMount(StoresList, { store, localVue });
     expect(actions["stores/getCountries"]).toHaveBeenCalled();
   });
+  it("matches snapshot", () => {
+    const wrapper = shallowMount(StoresList, { store, localVue });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });
