@@ -18,7 +18,6 @@ export default {
   },
   watch: {
     selectedStoreId: function(val) {
-      console.log(val, this.storeid);
       if (val === this.storeid) {
         this.infowindow.open(this.map, this.marker);
       } else {
