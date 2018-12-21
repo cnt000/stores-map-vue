@@ -26,7 +26,7 @@ import MapLoader from "./MapLoader.vue";
 import ChildMarker from "./ChildMarker.vue";
 import Sidebar from "./Sidebar.vue";
 import StoresList from "./StoresList.vue";
-import { mapConfig, apiKey } from "../conf.js"
+import { mapConfig, apiKey } from "../conf.js";
 
 export default {
   data() {

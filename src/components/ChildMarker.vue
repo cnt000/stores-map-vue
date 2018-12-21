@@ -1,5 +1,5 @@
 <template>
-  <div :store="selectedStoreId"></div>
+  <div></div>
 </template>
 <script>
 import { mapState } from "vuex";
@@ -13,11 +13,11 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedStoreId: state => state.stores.selectedStoreId
+      storeId: state => state.stores.selectedStoreId
     })
   },
   watch: {
-    selectedStoreId: function(val) {
+    storeId: function(val) {
       if (val === this.storeid) {
         this.infowindow.open(this.map, this.marker);
       } else {
