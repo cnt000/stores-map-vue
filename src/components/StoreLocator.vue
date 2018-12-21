@@ -12,7 +12,6 @@
             :position="marker"
             :google="scopeProps.google"
             :map="scopeProps.map"
-            :storeid="marker.storeid"
           />
         </div>
       </template>
@@ -42,7 +41,7 @@ export default {
           lat: parseFloat(currentValue.lat),
           lng: parseFloat(currentValue.lng),
           markerName: currentValue.post_title,
-          storeid: currentValue.ID
+          storeId: currentValue.ID
         });
       }, []);
     },
