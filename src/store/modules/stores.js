@@ -1,6 +1,6 @@
 import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
-
+import { termsToCountries } from "../../helpers";
 const state = {
   all: [],
   pending: false,
@@ -55,7 +55,8 @@ const mutations = {
   },
   receiveNations(state, jsonTerms) {
     state.pending = false;
-    state.countries = terms(jsonTerms.terms).countries;
+    debugger;
+    state.countries = termsToCountries(jsonTerms.terms).countries;
   },
   receiveAll(state, stores) {
     state.pending = false;
@@ -80,17 +81,3 @@ export default {
   actions,
   mutations
 };
-
-const terms = terms =>
-  terms.map(term => term).reduce(
-    (acc, cur) => {
-      if (cur.parent === 0) {
-        acc.continents.push(cur.term_id);
-      }
-      if (acc.continents.indexOf(cur.parent) > -1) {
-        acc.countries.push(cur);
-      }
-      return acc;
-    },
-    { continents: [], countries: [] }
-  );
