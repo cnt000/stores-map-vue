@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <store-locator />
+    <a href="/sotre-locator">Visit our stores</a>
   </div>
 </template>
 
