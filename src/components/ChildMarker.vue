@@ -24,9 +24,18 @@ export default {
       }
     }
   },
+  methods: {
+    selectStore() {
+      this.$store.dispatch({
+        type: "stores/selectStore",
+        id: this.position.storeId
+      });
+    }
+  },
   mounted() {
     const { Marker } = this.google.maps;
     const { InfoWindow } = this.google.maps;
+    const self = this;
     const marker = new Marker({
       position: this.position,
       map: this.map,
@@ -36,7 +45,7 @@ export default {
       content: this.position.markerName
     });
     marker.addListener("click", function() {
-      infowindow.open(this.map, marker);
+      self.selectStore();
     });
     this.infowindow = infowindow;
     this.marker = marker;
