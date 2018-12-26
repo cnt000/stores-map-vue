@@ -7,11 +7,14 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
+    "testWatch" : "npm run test:unit -- --watch",
     "ui": "vue ui",
     "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "google-maps-api-loader": "^1.1.1",
+    "rambda": "^2.2.0",
+    "ramda": "^0.26.1",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

@@ -85,6 +85,7 @@
 
 <script>
 import { mapState } from "vuex";
+import * as R from "ramda";
 
 export default {
   data() {
@@ -102,15 +103,15 @@ export default {
       error: state => state.stores.error
     }),
     filteredStores() {
-      const filteredStoreList = this.stores.filter(
-        item =>
-          item.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1
-      );
+      const keywordInName = post =>
+        post.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1;
+      const filteredStoreListByKeyword = R.filter(keywordInName);
+      const hasCountryId = term => term.term_id === this.countryTermId;
       return this.countryTermId
-        ? filteredStoreList.filter(item =>
+        ? filterByKeyword(this.stores).filter(item =>
             item.terms.find(o => o.term_id === this.countryTermId)
           )
-        : filteredStoreList;
+        : filterByKeyword(this.stores);
     }
   },
   methods: {
