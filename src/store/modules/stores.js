@@ -1,3 +1,4 @@
+import * as R from "rambda";
 import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
 import { termsToCountries } from "../../helpers";
@@ -13,12 +14,17 @@ const state = {
 
 const getters = {
   getSelectedStore: state => {
-    return state.all.filter(store => store.ID === state.selectedStoreId)[0];
+    const selectStoreFromId = post => post.ID === state.selectedStoreId;
+    const selectStore = pred => R.filter(pred);
+    const getStore = selectStore(selectStoreFromId);
+    return R.head(getStore(state.all));
   },
   getSelectedCountry: state => {
-    return state.countries.filter(
-      country => country.term_id === state.selectedCountryTermId
-    )[0];
+    const selectStoreFromId = post =>
+      post.term_id === state.selectedCountryTermId;
+    const selectStore = pred => R.filter(pred);
+    const getStore = selectStore(selectStoreFromId);
+    return R.head(getStore(state.countries));
   }
 };
 

@@ -106,7 +106,9 @@ export default {
       const keywordInName = post =>
         post.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1;
       const filterByKeyword = R.filter(keywordInName);
-      // const hasCountryId = term => term.term_id === this.countryTermId;
+      // const filterTermId = terms => terms.term_id === this.countryTermId;
+      // const filterByCountryId = stores => R.filter(filterTermId);
+      // return filterByCountryId(this.stores);
       return this.countryTermId
         ? filterByKeyword(this.stores).filter(item =>
             item.terms.find(o => o.term_id === this.countryTermId)
