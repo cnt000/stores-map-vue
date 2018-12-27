@@ -39,7 +39,7 @@ const actions = {
 
     commit(
       "receiveAll",
-      places.sort((a, b) => (a.post_title < b.post_title ? -1 : 1))
+      places.sort((a, b) => (a.post_title < b.post_title ? -1 : 1)) // stink
     );
     // return fetch("../../../data/store-locator.json")
     //   .then(r => r.json())
