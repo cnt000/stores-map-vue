@@ -9,19 +9,10 @@ localVue.use(Vuex);
 
 describe("StoresList.vue", () => {
   let actions;
-  let state;
   let store;
   let testState;
 
   beforeEach(() => {
-    state = {
-      stores: storesExamples,
-      pending: false,
-      error: false,
-      countries: [{ term_id: 0, name: "Italy" }],
-      selectedCountryTermId: 0
-    };
-
     actions = {
       "stores/selectStore": jest.fn(),
       "stores/getCountries": jest.fn(),

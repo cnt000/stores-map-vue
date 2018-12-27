@@ -8,19 +8,10 @@ localVue.use(Vuex);
 
 describe("ChildMarker.vue", () => {
   let actions;
-  let state;
   let store;
   let testState;
 
   beforeEach(() => {
-    state = {
-      stores: storesExamples,
-      pending: false,
-      error: false,
-      countries: [{ term_id: 0, name: "Italy" }],
-      selectedCountryTermId: 0
-    };
-
     actions = {
       "stores/selectCountryTermId": jest.fn()
     };
@@ -73,6 +64,8 @@ describe("ChildMarker.vue", () => {
     // console.log(wrapper.html());
     expect(wrapper.find("div").text()).toMatch(msg);
   });
+
+  //if click on marker, selecte a store
 
   // it("renders infowindow with marker name", () => {
   //   const msg = "NEGOZIO 1";
