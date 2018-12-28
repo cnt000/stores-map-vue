@@ -103,17 +103,23 @@ export default {
       error: state => state.stores.error
     }),
     filteredStores() {
-      const keywordInName = post =>
-        post.post_title.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1;
-      const filterByKeyword = R.filter(keywordInName);
-      // const filterTermId = terms => terms.term_id === this.countryTermId;
-      // const filterByCountryId = stores => R.filter(filterTermId);
-      // return filterByCountryId(this.stores);
+      const filterByKeywordR = R.filter(
+        R.compose(
+          R.includes(R.toLower(this.keyword)),
+          R.toLower,
+          R.prop("post_title")
+        )
+      );
+      const hasTermId = R.any(R.propEq("term_id", this.countryTermId));
+      const filterByTermId = R.filter(
+        R.compose(
+          hasTermId,
+          R.prop("terms")
+        )
+      );
       return this.countryTermId
-        ? filterByKeyword(this.stores).filter(item =>
-            item.terms.find(o => o.term_id === this.countryTermId)
-          )
-        : filterByKeyword(this.stores);
+        ? filterByTermId(filterByKeyword(this.stores))
+        : filterByKeywordR(this.stores);
     }
   },
   methods: {
