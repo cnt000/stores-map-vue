@@ -34,6 +34,69 @@
   </div>
 </template>
 
+<script>
+import { mapState } from "vuex";
+import * as R from "ramda";
+
+export default {
+  data() {
+    return {
+      keyword: "",
+      countryId: 0
+    };
+  },
+  computed: {
+    ...mapState({
+      stores: state => state.stores.all,
+      countries: state => state.stores.countries,
+      countryTermId: state => state.stores.selectedCountryTermId,
+      pending: state => state.stores.pending,
+      error: state => state.stores.error
+    }),
+    filteredStores() {
+      const hasKeywordInTitle = R.includes(R.toLower(this.keyword));
+      const filterByKeyword = R.filter(
+        R.compose(
+          hasKeywordInTitle,
+          R.toLower,
+          R.prop("post_title")
+        )
+      );
+      const hasTermId = R.any(R.propEq("term_id", this.countryTermId));
+      const filterByTermId = R.filter(
+        R.compose(
+          hasTermId,
+          R.prop("terms")
+        )
+      );
+      //const termIdNotZero = R.gt(this.countryTermId, 0);
+      const filterByTermIdAndKeyword = R.compose(
+        filterByKeyword,
+        R.when(() => this.countryTermId, filterByTermId)
+      );
+      return filterByTermIdAndKeyword(this.stores);
+    }
+  },
+  methods: {
+    selectStore(clickedId) {
+      this.$store.dispatch({
+        type: "stores/selectStore",
+        id: clickedId
+      });
+    },
+    selectTermId() {
+      this.$store.dispatch({
+        type: "stores/selectCountryTermId",
+        id: +this.countryId
+      });
+    }
+  },
+  created() {
+    this.$store.dispatch("stores/getCountries");
+  }
+};
+</script>
+
 <style lang="scss">
 .stores {
   &_search {
@@ -82,62 +145,3 @@
   }
 }
 </style>
-
-<script>
-import { mapState } from "vuex";
-import * as R from "ramda";
-
-export default {
-  data() {
-    return {
-      keyword: "",
-      countryId: 0
-    };
-  },
-  computed: {
-    ...mapState({
-      stores: state => state.stores.all,
-      countries: state => state.stores.countries,
-      countryTermId: state => state.stores.selectedCountryTermId,
-      pending: state => state.stores.pending,
-      error: state => state.stores.error
-    }),
-    filteredStores() {
-      const filterByKeywordR = R.filter(
-        R.compose(
-          R.includes(R.toLower(this.keyword)),
-          R.toLower,
-          R.prop("post_title")
-        )
-      );
-      const hasTermId = R.any(R.propEq("term_id", this.countryTermId));
-      const filterByTermId = R.filter(
-        R.compose(
-          hasTermId,
-          R.prop("terms")
-        )
-      );
-      return this.countryTermId
-        ? filterByTermId(filterByKeyword(this.stores))
-        : filterByKeywordR(this.stores);
-    }
-  },
-  methods: {
-    selectStore(clickedId) {
-      this.$store.dispatch({
-        type: "stores/selectStore",
-        id: clickedId
-      });
-    },
-    selectTermId() {
-      this.$store.dispatch({
-        type: "stores/selectCountryTermId",
-        id: +this.countryId
-      });
-    }
-  },
-  created() {
-    this.$store.dispatch("stores/getCountries");
-  }
-};
-</script>
