@@ -7,7 +7,7 @@ describe("Testing Getters", () => {
   const state = {
     all: [{ ID: 1 }],
     selectedStoreId: 1,
-    selectedCountryTermId: 2,
+    selectedCountryId: 2,
     countries: [{ term_id: 2 }]
   };
   it("getSelectedStore", () => {
@@ -40,7 +40,7 @@ describe("Testing Actions", () => {
     stores.actions.getCountries(obj);
     expect(actionNames).toEqual([
       { key: "apiPending" },
-      { key: "receiveNations", payload: termsJson }
+      { key: "receiveCountries", payload: termsJson }
     ]);
   });
   it("getAllStores", () => {
@@ -54,9 +54,9 @@ describe("Testing Actions", () => {
     stores.actions.selectStore(obj, payload);
     expect(actionNames).toEqual([{ key: "selectStore", payload: 1 }]);
   });
-  it("selectCountryTermId", () => {
-    stores.actions.selectCountryTermId(obj, payload);
-    expect(actionNames).toEqual([{ key: "selectCountryTermId", payload: 1 }]);
+  it("selectCountryId", () => {
+    stores.actions.selectCountryId(obj, payload);
+    expect(actionNames).toEqual([{ key: "selectCountryId", payload: 1 }]);
   });
 });
 
@@ -67,20 +67,20 @@ describe("Testing Mutations", () => {
 
   beforeEach(() => {
     state = {
-      selectedCountryTermId: 0,
+      selectedCountryId: 0,
       selectedStoreId: 0,
       pending: false
     };
     term_id = 1;
     storeId = 2;
   });
-  it("selectCountryTermId", () => {
-    stores.mutations.selectCountryTermId(state, term_id);
-    expect(state).toEqual({ ...state, selectedCountryTermId: 1 });
+  it("selectCountryId", () => {
+    stores.mutations.selectCountryId(state, term_id);
+    expect(state).toEqual({ ...state, selectedCountryId: 1 });
   });
-  it("receiveNations", () => {
+  it("receiveCountries", () => {
     const apiPendingState = { ...state, pending: true };
-    stores.mutations.receiveNations(apiPendingState, termsJson);
+    stores.mutations.receiveCountries(apiPendingState, termsJson);
     expect(apiPendingState).toEqual({
       ...apiPendingState,
       pending: false,

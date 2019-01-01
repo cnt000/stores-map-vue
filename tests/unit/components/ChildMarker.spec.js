@@ -13,7 +13,7 @@ describe("ChildMarker.vue", () => {
 
   beforeEach(() => {
     actions = {
-      "stores/selectCountryTermId": jest.fn()
+      "stores/selectCountryId": jest.fn()
     };
 
     testState = {
@@ -22,7 +22,7 @@ describe("ChildMarker.vue", () => {
       error: false,
       selectedStoreId: 1,
       countries: [],
-      selectedCountryTermId: 0
+      selectedCountryId: 0
     };
 
     store = new Vuex.Store({

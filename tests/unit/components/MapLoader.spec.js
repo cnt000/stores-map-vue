@@ -21,7 +21,7 @@ describe("MapLoader.vue", () => {
       error: false,
       selectedStoreId: 0,
       countries: countriesExamples,
-      selectedCountryTermId: 0
+      selectedCountryId: 0
     };
 
     store = new Vuex.Store({

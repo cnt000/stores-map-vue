@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StoresList.vue matches snapshot 1`] = `
-<div class="stores"><select class="stores_nations">
+<div class="stores"><select class="stores_countries">
     <option value="0">All</option>
     <option value="164">Asia</option>
     <option value="165">China</option>

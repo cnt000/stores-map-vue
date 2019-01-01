@@ -16,7 +16,7 @@ describe("StoresList.vue", () => {
     actions = {
       "stores/selectStore": jest.fn(),
       "stores/getCountries": jest.fn(),
-      "stores/selectCountryTermId": jest.fn()
+      "stores/selectCountryId": jest.fn()
     };
 
     testState = {
@@ -25,7 +25,7 @@ describe("StoresList.vue", () => {
       error: false,
       selectedStoreId: 0,
       countries: countriesExamples,
-      selectedCountryTermId: 0
+      selectedCountryId: 0
     };
 
     store = new Vuex.Store({
@@ -66,7 +66,7 @@ describe("StoresList.vue", () => {
   });
 
   it("renders countries select with China second option", () => {
-    const msg = "Asia"; // not important if nation or continents in this test
+    const msg = "Asia"; // not important if country or continents in this test
     const wrapper = shallowMount(StoresList, {
       store,
       localVue
@@ -103,11 +103,11 @@ describe("StoresList.vue", () => {
     expect(actions["stores/selectStore"]).toHaveBeenCalled();
   });
 
-  it('calls store action "selectCountryTermId" when list item is clicked', () => {
+  it('calls store action "selectCountryId" when list item is clicked', () => {
     const wrapper = shallowMount(StoresList, { store, localVue });
     const selectCountry = wrapper.find("select");
     selectCountry.trigger("change", 0);
-    expect(actions["stores/selectCountryTermId"]).toHaveBeenCalled();
+    expect(actions["stores/selectCountryId"]).toHaveBeenCalled();
   });
 
   it('calls store action "getCountries" when is created', () => {
