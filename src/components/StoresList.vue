@@ -1,6 +1,6 @@
 <template>
   <div class="stores">
-    <select @change="selectTermId" v-model="countryId" class="stores_nations">
+    <select @change="selectCountryId" v-model="countryId" class="stores_countries">
       <option value="0">All</option>
       <option
         v-for="country in countries"
@@ -49,32 +49,35 @@ export default {
     ...mapState({
       stores: state => state.stores.all,
       countries: state => state.stores.countries,
-      countryTermId: state => state.stores.selectedCountryTermId,
+      CountryId: state => state.stores.selectedCountryId,
       pending: state => state.stores.pending,
       error: state => state.stores.error
     }),
     filteredStores() {
-      const hasKeywordInTitle = R.includes(R.toLower(this.keyword));
+      const keywordInLowerCase = R.toLower(this.keyword);
+      const hasKeywordInTitle = R.includes(keywordInLowerCase);
+      const storeName = R.prop("post_title");
       const filterByKeyword = R.filter(
         R.compose(
           hasKeywordInTitle,
           R.toLower,
-          R.prop("post_title")
+          storeName
         )
       );
-      const hasTermId = R.any(R.propEq("term_id", this.countryTermId));
-      const filterByTermId = R.filter(
+      const countryId = this.CountryId;
+      const hasCountryId = R.any(R.propEq("term_id", countryId));
+      const filterByCountryId = R.filter(
         R.compose(
-          hasTermId,
+          hasCountryId,
           R.prop("terms")
         )
       );
-      //const termIdNotZero = R.gt(this.countryTermId, 0);
-      const filterByTermIdAndKeyword = R.compose(
+      const countryIdGtZero = () => R.gt(this.CountryId, 0);
+      const filterByCountryIdAndKeyword = R.compose(
         filterByKeyword,
-        R.when(() => this.countryTermId, filterByTermId)
+        R.when(countryIdGtZero, filterByCountryId)
       );
-      return filterByTermIdAndKeyword(this.stores);
+      return filterByCountryIdAndKeyword(this.stores);
     }
   },
   methods: {
@@ -84,9 +87,9 @@ export default {
         id: clickedId
       });
     },
-    selectTermId() {
+    selectCountryId() {
       this.$store.dispatch({
-        type: "stores/selectCountryTermId",
+        type: "stores/selectCountryId",
         id: +this.countryId
       });
     }
@@ -112,7 +115,7 @@ export default {
       font-size: 14px;
     }
   }
-  &_nations {
+  &_countries {
     width: 100%;
     height: 60px;
   }
