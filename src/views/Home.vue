@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <a href="/sotre-locator">Visit our stores</a>
+    <a href="/store-locator">Visit our stores</a>
   </div>
 </template>
 
