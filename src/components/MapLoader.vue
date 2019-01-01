@@ -34,15 +34,19 @@ export default {
   computed: {
     ...mapState({
       store: state => state.stores.selectedStoreId,
-      country: state => state.stores.selectedCountryTermId
+      country: state => state.stores.selectedCountryId,
+      mapLoaded: state => state.stores.mapLoaded
     })
   },
   watch: {
     store: function(val) {
-      this.centerMap(val);
+      this.mapLoaded && this.centerMap(val);
     },
     country: function(val) {
       this.selectCountry(val);
+    },
+    mapLoaded: function() {
+      this.centerMap(this.store);
     }
   },
   methods: {
@@ -52,6 +56,9 @@ export default {
       this.map = new Map(mapContainer, this.mapConfig);
       const { Geocoder } = this.google.maps;
       this.geocoder = new Geocoder();
+      this.$store.dispatch({
+        type: "stores/mapLoaded"
+      });
     },
     centerMap() {
       let storeSelected = this.$store.getters["stores/getSelectedStore"];
@@ -73,8 +80,8 @@ export default {
         );
       }
     },
-    selectCountry(selectedTermId) {
-      if (selectedTermId === 0) {
+    selectCountry(selectedCountryId) {
+      if (selectedCountryId === 0) {
         this.panToAndZoom(
           this.mapConfig.center.lat,
           this.mapConfig.center.lng,
