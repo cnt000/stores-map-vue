@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import StoreLocator from "./components/StoreLocator.vue";
 
 Vue.use(Router);
 
@@ -23,13 +24,9 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
     {
-      path: "/store-locator",
+      path: "/store-locator/:store?",
       name: "store-locator",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "store-locator" */ "./components/StoreLocator.vue")
+      component: StoreLocator
     }
   ]
 });

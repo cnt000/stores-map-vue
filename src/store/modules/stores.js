@@ -2,6 +2,7 @@ import * as R from "rambda";
 import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
 import { termsToCountries } from "../../helpers";
+import router from "../../router";
 
 const state = {
   all: [],
@@ -9,22 +10,23 @@ const state = {
   error: false,
   selectedStoreId: 0,
   countries: [],
-  selectedCountryTermId: 0
+  selectedCountryId: 0,
+  path: "/store-locator",
+  mapLoaded: false
 };
 
 const getters = {
   getSelectedStore: state => {
-    const selectStoreFromId = post => post.ID === state.selectedStoreId;
-    const selectStore = pred => R.filter(pred);
-    const getStore = selectStore(selectStoreFromId);
-    return R.head(getStore(state.all));
+    const getStoreFromId = R.filter(() =>
+      R.any(R.propEq("ID", state.selectedStoreId))
+    );
+    return R.head(getStoreFromId(state.all));
   },
   getSelectedCountry: state => {
-    const selectStoreFromId = post =>
-      post.term_id === state.selectedCountryTermId;
-    const selectStore = pred => R.filter(pred);
-    const getStore = selectStore(selectStoreFromId);
-    return R.head(getStore(state.countries));
+    const getStoreFromCountryId = R.filter(() =>
+      R.any(R.propEq("term_id", state.selectedCountryId))
+    );
+    return R.head(getStoreFromCountryId(state.countries));
   }
 };
 
@@ -32,7 +34,7 @@ const actions = {
   getCountries({ commit }) {
     commit("apiPending");
 
-    commit("receiveNations", termsJson);
+    commit("receiveCountries", termsJson);
   },
   getAllStores({ commit }) {
     commit("apiPending");
@@ -53,16 +55,19 @@ const actions = {
   selectStore({ commit }, { id }) {
     commit("selectStore", id);
   },
-  selectCountryTermId({ commit }, { id }) {
-    commit("selectCountryTermId", id);
+  selectCountryId({ commit }, { id }) {
+    commit("selectCountryId", id);
+  },
+  mapLoaded({ commit }) {
+    commit("mapLoaded");
   }
 };
 
 const mutations = {
-  selectCountryTermId(state, term_id) {
-    state.selectedCountryTermId = term_id;
+  selectCountryId(state, term_id) {
+    state.selectedCountryId = term_id;
   },
-  receiveNations(state, jsonTerms) {
+  receiveCountries(state, jsonTerms) {
     state.pending = false;
     state.countries = termsToCountries(jsonTerms.terms).countries;
   },
@@ -79,6 +84,11 @@ const mutations = {
   },
   selectStore(state, id) {
     state.selectedStoreId = id;
+    state.path = `/store-locator/${state.selectedStoreId}`;
+    router.push(state.path);
+  },
+  mapLoaded(state) {
+    state.mapLoaded = true;
   }
 };
 
