@@ -50,6 +50,14 @@ export default {
       selectedStoreId: state => state.stores.selectedStoreId
     })
   },
+  mounted() {
+    const storeId = this.$route.params.store;
+    storeId &&
+      this.$store.dispatch({
+        type: "stores/selectStore",
+        id: storeId
+      });
+  },
   created() {
     this.$store.dispatch("stores/getAllStores");
   },
