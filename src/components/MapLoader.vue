@@ -39,14 +39,14 @@ export default {
     })
   },
   watch: {
-    store: function(val) {
-      this.mapLoaded && this.centerMap(val);
+    store: function() {
+      this.mapLoaded && this.panToSelectedStore();
     },
     country: function(val) {
       this.selectCountry(val);
     },
     mapLoaded: function() {
-      this.centerMap(this.store);
+      this.panToSelectedStore();
     }
   },
   methods: {
@@ -56,28 +56,34 @@ export default {
       this.map = new Map(mapContainer, this.mapConfig);
       const { Geocoder } = this.google.maps;
       this.geocoder = new Geocoder();
+      this.mapIsLoaded();
+    },
+    mapIsLoaded() {
       this.$store.dispatch({
         type: "stores/mapLoaded"
       });
     },
-    centerMap() {
-      let storeSelected = this.$store.getters["stores/getSelectedStore"];
+    panToSelectedStore() {
+      const storeSelected = this.$store.getters["stores/getSelectedStore"];
+      console.log(storeSelected);
+      
       if (storeSelected.lat !== "" && storeSelected.lng !== "") {
         this.panToAndZoom(storeSelected.lat, storeSelected.lng, 14);
-      } else if (this.geocoder) {
-        this.geocoder.geocode(
-          { address: storeSelected.custom["wpcf-yoox-store-address"][0] },
-          function(results, status) {
-            if (status !== "OK") {
-              console.log("Geocode was not successful: " + status);
-            }
-            this.panToAndZoom(
-              results[0].geometry.location.lat(),
-              results[0].geometry.location.lng(),
-              18
-            );
+      } else {
+        const storeAddress = storeSelected.custom["wpcf-yoox-store-address"][0];
+        this.geocoder.geocode({ address: storeAddress }, function(
+          results,
+          status
+        ) {
+          if (status !== "OK") {
+            console.log("Geocode was not successful: " + status);
           }
-        );
+          this.panToAndZoom(
+            results[0].geometry.location.lat(),
+            results[0].geometry.location.lng(),
+            18
+          );
+        });
       }
     },
     selectCountry(selectedCountryId) {
@@ -90,21 +96,17 @@ export default {
         return;
       }
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
-      const istance = this;
-      this.geocoder &&
-        this.geocoder.geocode({ address: countrySelected.name }, function(
-          results,
-          status
-        ) {
-          if (status !== "OK") {
-            console.log("Geocode was not successful: " + status);
-          }
-          istance.panToAndZoom(
-            results[0].geometry.location.lat(),
-            results[0].geometry.location.lng(),
-            6
-          );
-        });
+      this.geocoder.geocode(
+        { address: countrySelected.name },
+        (results, status) =>
+          status === "OK"
+            ? this.panToAndZoom(
+                results[0].geometry.location.lat(),
+                results[0].geometry.location.lng(),
+                6
+              )
+            : console.log("Geocode was not successful: " + status)
+      );
     },
     panToAndZoom(lat, lng, zoom) {
       this.map.panTo({
