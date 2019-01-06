@@ -65,8 +65,6 @@ export default {
     },
     panToSelectedStore() {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];
-      console.log(storeSelected);
-      
       if (storeSelected.lat !== "" && storeSelected.lng !== "") {
         this.panToAndZoom(storeSelected.lat, storeSelected.lng, 14);
       } else {
