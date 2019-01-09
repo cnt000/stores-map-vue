@@ -47,6 +47,9 @@ export default {
     marker.addListener("click", function() {
       self.selectStore();
     });
+    if (+this.storeId === this.position.storeId) {
+      infowindow.open(this.map, marker);
+    }
     this.infowindow = infowindow;
     this.marker = marker;
   }
