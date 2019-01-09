@@ -17,14 +17,14 @@ const state = {
 
 const getters = {
   getSelectedStore: state => {
-    const getStoreFromId = R.filter(() =>
-      R.any(R.propEq("ID", state.selectedStoreId))
-    );
-    return R.head(getStoreFromId(state.all));
+    const selectStoreFromId = post => post.ID === +state.selectedStoreId;
+    const selectStore = pred => R.filter(pred);
+    const getStore = selectStore(selectStoreFromId);
+    return R.head(getStore(state.all));
   },
   getSelectedCountry: state => {
-    const getStoreFromCountryId = R.filter(() =>
-      R.any(R.propEq("term_id", state.selectedCountryId))
+    const getStoreFromCountryId = R.filter(
+      R.propEq("term_id", state.selectedCountryId)
     );
     return R.head(getStoreFromCountryId(state.countries));
   }

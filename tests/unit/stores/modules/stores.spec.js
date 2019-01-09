@@ -5,16 +5,16 @@ import { termsToCountries } from "../../../../src/helpers";
 
 describe("Testing Getters", () => {
   const state = {
-    all: [{ ID: 1 }],
-    selectedStoreId: 1,
-    selectedCountryId: 2,
-    countries: [{ term_id: 2 }]
+    all: [{ ID: 1 }, { ID: 3 }, { ID: 5 }],
+    selectedStoreId: 3,
+    selectedCountryId: 6,
+    countries: [{ term_id: 2 }, { term_id: 6 }, { term_id: 8 }]
   };
   it("getSelectedStore", () => {
-    expect(stores.getters.getSelectedStore(state)).toEqual({ ID: 1 });
+    expect(stores.getters.getSelectedStore(state)).toEqual({ ID: 3 });
   });
   it("getSelectedCountry", () => {
-    expect(stores.getters.getSelectedCountry(state)).toEqual({ term_id: 2 });
+    expect(stores.getters.getSelectedCountry(state)).toEqual({ term_id: 6 });
   });
 });
 

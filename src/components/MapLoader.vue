@@ -35,18 +35,19 @@ export default {
     ...mapState({
       store: state => state.stores.selectedStoreId,
       country: state => state.stores.selectedCountryId,
-      mapLoaded: state => state.stores.mapLoaded
+      mapLoaded: state => state.stores.mapLoaded,
+      selectedStoreId: state => state.stores.selectedStoreId
     })
   },
   watch: {
     store: function() {
-      this.mapLoaded && this.panToSelectedStore();
+      this.mapLoaded && this.selectedStoreId && this.panToSelectedStore();
     },
     country: function(val) {
       this.selectCountry(val);
     },
     mapLoaded: function() {
-      this.panToSelectedStore();
+      this.selectedStoreId && this.panToSelectedStore();
     }
   },
   methods: {
