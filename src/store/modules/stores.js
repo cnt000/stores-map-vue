@@ -11,7 +11,7 @@ const state = {
   selectedStoreId: 0,
   countries: [],
   selectedCountryId: 0,
-  path: "/store-locator",
+  path: "/stores-map-vue/store-locator",
   mapLoaded: false
 };
 
