@@ -21,8 +21,6 @@ body {
   color: #2c3e50;
 }
 #nav {
-  display: none;
-  padding: 2px;
   a {
     font-weight: bold;
     color: #2c3e50;
