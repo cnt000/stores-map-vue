@@ -1,4 +1,4 @@
-import * as R from "rambda";
+import * as R from "ramda";
 import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
 import { termsToCountries } from "../../helpers";
