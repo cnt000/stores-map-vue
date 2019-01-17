@@ -19,8 +19,10 @@ export default {
     storeId: function(val) {
       if (val === this.position.storeId) {
         this.infowindow.open(this.map, this.marker);
+        this.marker.setAnimation(this.google.maps.Animation.BOUNCE);
       } else {
         this.infowindow.close();
+        this.marker.setAnimation(null);
       }
     }
   },
@@ -30,6 +32,8 @@ export default {
         type: "stores/selectStore",
         id: this.position.storeId
       });
+      // caso se è già selezionaot nel vuex stato
+      this.infowindow.open(this.map, this.marker);
     }
   },
   mounted() {
@@ -44,14 +48,15 @@ export default {
     const infowindow = new InfoWindow({
       content: this.position.markerName
     });
+    this.infowindow = infowindow;
+    this.marker = marker;
     marker.addListener("click", function() {
       self.selectStore();
     });
     if (+this.storeId === this.position.storeId) {
       infowindow.open(this.map, marker);
+      this.marker.setAnimation(this.google.maps.Animation.BOUNCE);
     }
-    this.infowindow = infowindow;
-    this.marker = marker;
   }
 };
 </script>
