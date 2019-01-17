@@ -32,7 +32,7 @@ export default {
         type: "stores/selectStore",
         id: this.position.storeId
       });
-      // caso se è già selezionaot nel vuex stato
+      // caso se è già selezionato nel vuex stato
       this.infowindow.open(this.map, this.marker);
     }
   },
