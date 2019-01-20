@@ -1,7 +1,7 @@
-import stores from "../../../../src/store/modules/stores";
-import places from "../../../../data/alexandermcqueen";
-import termsJson from "../../../../data/terms";
-import { termsToCountries } from "../../../../src/helpers";
+import stores from "@/store/modules/stores";
+import { termsToCountries } from "@/helpers";
+import places from "#/alexandermcqueen";
+import termsJson from "#/terms";
 
 describe("Testing Getters", () => {
   const state = {

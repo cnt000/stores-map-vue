@@ -1,10 +1,9 @@
-import { shallowMount, createLocalVue } from "@vue/test-utils";
+import { mount, shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-// import GoogleMapsApiLoader from "google-maps-api-loader";
 import MapLoader from "@/components/MapLoader.vue";
 import storesExamples from "../stores-examples.json";
 import countriesExamples from "../countries-examples.json";
-// import { mapConfig, apiKey } from "../../../src/conf";
+import { mapConfig, apiKey } from "@/conf";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -13,6 +12,8 @@ describe("MapLoader.vue", () => {
   let actions;
   let store;
   let testState;
+  let GoogleMapsApiLoader;
+  let initializeMap;
 
   beforeEach(() => {
     actions = {};
@@ -34,10 +35,13 @@ describe("MapLoader.vue", () => {
         }
       }
     });
+
+    GoogleMapsApiLoader = jest.fn();
+    initializeMap = jest.fn();
   });
 
   it("matches snapshot", () => {
-    const wrapper = shallowMount(MapLoader, {
+    const wrapper = mount(MapLoader, {
       store,
       localVue
     });
@@ -54,19 +58,18 @@ describe("MapLoader.vue", () => {
     );
   });
 
-  // it("has props apiKey and mapConfig object", () => {
-  //   const wrapper = shallowMount(MapLoader, {
-  //     propsData: {
-  //       apiKey: apiKey,
-  //       mapConfig: mapConfig
-  //     },
-  //     store,
-  //     localVue
-  //   });
-  //   console.log(wrapper.html());
-    
-  //   expect(actions["stores/selectStore"]).toHaveBeenCalled();
-  // });
+  it("has props apiKey and mapConfig object", () => {
+    const wrapper = shallowMount(MapLoader, {
+      propsData: {
+        apiKey: apiKey,
+        mapConfig: mapConfig
+      },
+      store,
+      localVue
+    });
+    // console.log(wrapper.html());
+    // expect(initializeMap).toHaveBeenCalled();
+  });
 });
 
 /* 

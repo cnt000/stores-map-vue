@@ -1,8 +1,8 @@
 import * as R from "ramda";
 import places from "../../../data/alexandermcqueen";
 import termsJson from "../../../data/terms";
-import { termsToCountries } from "../../helpers";
-import router from "../../router";
+import { termsToCountries } from "@/helpers";
+import router from "@/router";
 
 const state = {
   all: [],
