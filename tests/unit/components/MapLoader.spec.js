@@ -59,16 +59,17 @@ describe("MapLoader.vue", () => {
   });
 
   it("has props apiKey and mapConfig object", () => {
-    const wrapper = shallowMount(MapLoader, {
+    const wrapper = mount(MapLoader, {
       propsData: {
-        apiKey: apiKey,
-        mapConfig: mapConfig
+        apiKey: "GAPIkey",
+        mapConfig: { a: 1, b: 3 }
       },
       store,
       localVue
     });
-    // console.log(wrapper.html());
-    // expect(initializeMap).toHaveBeenCalled();
+    console.log(wrapper.html());
+    expect(wrapper.props().apiKey).toBe("GAPIkey");
+    expect(wrapper.props().mapConfig).toEqual({ a: 1, b: 3 });
   });
 });
 

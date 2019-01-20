@@ -70,19 +70,16 @@ export default {
         this.panToAndZoom(storeSelected.lat, storeSelected.lng, 14);
       } else {
         const storeAddress = storeSelected.custom["wpcf-yoox-store-address"][0];
-        this.geocoder.geocode({ address: storeAddress }, function(
-          results,
-          status
-        ) {
-          if (status !== "OK") {
-            console.log("Geocode was not successful: " + status);
-          }
+        const position = this.geocode(storeAddress);
+        if (position.geometry) {
           this.panToAndZoom(
-            results[0].geometry.location.lat(),
-            results[0].geometry.location.lng(),
+            position.geometry.location.lat(),
+            position.geometry.location.lng(),
             18
           );
-        });
+        } else {
+          throw "Geocode was not successful: " + status;
+        }
       }
     },
     selectCountry(selectedCountryId) {
@@ -95,17 +92,16 @@ export default {
         return;
       }
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
-      this.geocoder.geocode(
-        { address: countrySelected.name },
-        (results, status) =>
-          status === "OK"
-            ? this.panToAndZoom(
-                results[0].geometry.location.lat(),
-                results[0].geometry.location.lng(),
-                6
-              )
-            : console.log("Geocode was not successful: " + status)
-      );
+      const position = this.geocode(countrySelected.name);
+      if (position.geometry) {
+        this.panToAndZoom(
+          position.geometry.location.lat(),
+          position.geometry.location.lng(),
+          6
+        );
+      } else {
+        throw "Geocode was not successful: " + status;
+      }
     },
     panToAndZoom(lat, lng, zoom) {
       this.map.panTo({
@@ -113,6 +109,11 @@ export default {
         lng: parseFloat(lng)
       });
       this.map.setZoom(zoom);
+    },
+    geocode(searchKey) {
+      this.geocoder.geocode({ address: searchKey }, (results, status) =>
+        status === "OK" ? results[0] : `Geocode was not successful: ${status}`
+      );
     }
   }
 };
