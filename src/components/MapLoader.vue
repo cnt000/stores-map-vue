@@ -41,7 +41,7 @@ export default {
   },
   watch: {
     store: function() {
-      this.mapLoaded && this.selectedStoreId && this.panToSelectedStore();
+      this.mapLoaded && this.panToSelectedStore();
     },
     country: function(val) {
       this.selectCountry(val);
@@ -111,8 +111,10 @@ export default {
       this.map.setZoom(zoom);
     },
     geocode(searchKey) {
-      this.geocoder.geocode({ address: searchKey }, (results, status) =>
-        status === "OK" ? results[0] : `Geocode was not successful: ${status}`
+      this.geocoder.geocode(
+        { address: searchKey },
+        (results, status) =>
+          status === "OK" ? results[0] : `Geocode was not successful: ${status}`
       );
     }
   }
