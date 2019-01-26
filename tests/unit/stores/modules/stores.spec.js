@@ -1,6 +1,6 @@
 import stores from "@/store/modules/stores";
 import { termsToCountries } from "@/helpers";
-import places from "#/alexandermcqueen";
+import places from "#/alessandrore";
 import termsJson from "#/terms";
 
 describe("Testing Getters", () => {

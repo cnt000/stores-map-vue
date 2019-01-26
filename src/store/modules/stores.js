@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import places from "../../../data/alexandermcqueen";
+import places from "../../../data/alessandrore";
 import termsJson from "../../../data/terms";
 import { termsToCountries } from "@/helpers";
 import router from "@/router";
