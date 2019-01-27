@@ -3,9 +3,16 @@ import Sidebar from "@/components/Sidebar.vue";
 
 describe("Sidebar.vue", () => {
   it("renders props.msg when passed", () => {
-    const msg = "";
-    const wrapper = shallowMount(Sidebar, {});
-    expect(wrapper.text()).toMatch(msg);
+    const msg = "test";
+    const wrapper = shallowMount(Sidebar, {
+      propsData: {
+        msg
+      },
+      slots: {
+        default: "<div>test</div>"
+      }
+    });
+    expect(wrapper.find("div").text()).toMatch(msg);
   });
   it("matches snapshot", () => {
     const wrapper = shallowMount(Sidebar, {});
