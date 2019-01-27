@@ -35,8 +35,7 @@ export default {
     ...mapState({
       store: state => state.stores.selectedStoreId,
       country: state => state.stores.selectedCountryId,
-      mapLoaded: state => state.stores.mapLoaded,
-      selectedStoreId: state => state.stores.selectedStoreId
+      mapLoaded: state => state.stores.mapLoaded
     })
   },
   watch: {
@@ -47,7 +46,7 @@ export default {
       this.selectCountry(val);
     },
     mapLoaded: function() {
-      this.selectedStoreId && this.panToSelectedStore();
+      this.store && this.panToSelectedStore();
     }
   },
   methods: {
