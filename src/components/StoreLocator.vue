@@ -21,6 +21,7 @@
 
 <script>
 import { mapState } from "vuex";
+import * as R from "ramda";
 import MapLoader from "./MapLoader.vue";
 import ChildMarker from "./ChildMarker.vue";
 import Sidebar from "./Sidebar.vue";
@@ -51,7 +52,9 @@ export default {
     })
   },
   mounted() {
-    const storeId = this.$route.params.store;
+    const splitWords = R.split("-");
+    const storeParam = this.$route.params.store || "";
+    const storeId = R.last(splitWords(storeParam));
     storeId &&
       this.$store.dispatch({
         type: "stores/selectStore",

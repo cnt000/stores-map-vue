@@ -67,18 +67,6 @@ export default {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];
       if (storeSelected.lat !== "" && storeSelected.lng !== "") {
         this.panToAndZoom(storeSelected.lat, storeSelected.lng, 14);
-      } else {
-        const storeAddress = storeSelected.custom["wpcf-yoox-store-address"][0];
-        const position = this.geocode(storeAddress);
-        if (position.geometry) {
-          this.panToAndZoom(
-            position.geometry.location.lat(),
-            position.geometry.location.lng(),
-            18
-          );
-        } else {
-          throw "Geocode was not successful: " + status;
-        }
       }
     },
     selectCountry(selectedCountryId) {
@@ -90,16 +78,18 @@ export default {
         );
         return;
       }
+      debugger;
+      
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
       const position = this.geocode(countrySelected.name);
-      if (position.geometry) {
+      try {
         this.panToAndZoom(
           position.geometry.location.lat(),
           position.geometry.location.lng(),
           6
         );
-      } else {
-        throw "Geocode was not successful: " + status;
+      } catch (error) {
+        throw "Geocode was not successful: " + error;
       }
     },
     panToAndZoom(lat, lng, zoom) {
@@ -110,10 +100,8 @@ export default {
       this.map.setZoom(zoom);
     },
     geocode(searchKey) {
-      this.geocoder.geocode(
-        { address: searchKey },
-        (results, status) =>
-          status === "OK" ? results[0] : `Geocode was not successful: ${status}`
+      this.geocoder.geocode({ address: searchKey }, (results, status) =>
+        status === "OK" ? results[0] : `Geocode was not successful: ${status}`
       );
     }
   }

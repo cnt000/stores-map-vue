@@ -9,6 +9,7 @@ const state = {
   pending: false,
   error: false,
   selectedStoreId: 0,
+  storeName: "",
   countries: [],
   selectedCountryId: 0,
   path: "/stores-map-vue/store-locator",
@@ -84,7 +85,11 @@ const mutations = {
   },
   selectStore(state, id) {
     state.selectedStoreId = id;
-    state.path = `/store-locator/${state.selectedStoreId}`;
+    const getStoreById = R.filter(elm => elm.ID === +id, state.all);
+    const storeName = R.prop("post_title", R.head(getStoreById));
+    const sanitize = name => R.replace(/([ ]+)/g, "", R.toLower(name));
+    state.storeName = sanitize(storeName);
+    state.path = `/store-locator/${state.storeName}-${id}`;
     router.push(state.path);
   },
   mapLoaded(state) {
