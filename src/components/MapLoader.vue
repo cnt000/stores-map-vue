@@ -79,16 +79,14 @@ export default {
         return;
       }
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
-      const position = this.geocode(countrySelected.name);
-      try {
-        this.panToAndZoom(
-          position.geometry.location.lat(),
-          position.geometry.location.lng(),
-          6
-        );
-      } catch (error) {
-        throw "Geocode was not successful: " + error;
-      }
+      this.geocoder.geocode(
+        { address: countrySelected.name },
+        (results, status) => {
+          let lat = results[0].geometry.location.lat();
+          let lng = results[0].geometry.location.lng();
+          this.panToAndZoom(lat, lng, 6);
+        }
+      );
     },
     panToAndZoom(lat, lng, zoom) {
       this.map.panTo({
@@ -96,11 +94,6 @@ export default {
         lng: parseFloat(lng)
       });
       this.map.setZoom(zoom);
-    },
-    geocode(searchKey) {
-      this.geocoder.geocode({ address: searchKey }, (results, status) =>
-        status === "OK" ? results[0] : `Geocode was not successful: ${status}`
-      );
     }
   }
 };
