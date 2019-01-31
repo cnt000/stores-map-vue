@@ -78,8 +78,6 @@ export default {
         );
         return;
       }
-      debugger;
-      
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
       const position = this.geocode(countrySelected.name);
       try {
