@@ -79,14 +79,11 @@ export default {
         return;
       }
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
-      this.geocoder.geocode(
-        { address: countrySelected.name },
-        (results, status) => {
-          let lat = results[0].geometry.location.lat();
-          let lng = results[0].geometry.location.lng();
-          this.panToAndZoom(lat, lng, 6);
-        }
-      );
+      this.geocoder.geocode({ address: countrySelected.name }, results => {
+        let lat = results[0].geometry.location.lat();
+        let lng = results[0].geometry.location.lng();
+        this.panToAndZoom(lat, lng, 6);
+      });
     },
     panToAndZoom(lat, lng, zoom) {
       this.map.panTo({
