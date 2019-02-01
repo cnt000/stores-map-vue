@@ -69,7 +69,14 @@ describe("Testing Mutations", () => {
     state = {
       selectedCountryId: 0,
       selectedStoreId: 0,
-      pending: false
+      pending: false,
+      all: [
+        {
+          post_title: "ciao - prova prova",
+          ID: 2,
+          path: ""
+        }
+      ]
     };
     term_id = 1;
     storeId = 2;
@@ -106,6 +113,11 @@ describe("Testing Mutations", () => {
   });
   it("selectStore", () => {
     stores.mutations.selectStore(state, storeId);
-    expect(state).toEqual({ ...state, selectedStoreId: storeId });
+    expect(state).toEqual({
+      ...state,
+      selectedStoreId: storeId,
+      storeName: "ciao-provaprova",
+      path: "/store-locator/ciao-provaprova-2"
+    });
   });
 });
