@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     const splitWords = R.split("-");
-    const storeParam = this.$route.params.store || 0;
+    const storeParam = this.$route.params.store || "";
     const storeId = R.last(splitWords(storeParam));
     storeId &&
       this.$store.dispatch({

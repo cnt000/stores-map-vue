@@ -12,6 +12,7 @@
 <script>
 import GoogleMapsApiLoader from "google-maps-api-loader";
 import { mapState } from "vuex";
+import * as R from "ramda";
 
 export default {
   props: {
@@ -72,16 +73,17 @@ export default {
     selectCountry(selectedCountryId) {
       if (selectedCountryId === 0) {
         this.panToAndZoom(
-          this.mapConfig.center.lat,
-          this.mapConfig.center.lng,
-          this.mapConfig.zoom
+          R.path(["center", "lat"], this.mapConfig),
+          R.path(["center", "lng"], this.mapConfig),
+          R.path(["zoom"], this.mapConfig)
         );
         return;
       }
       const countrySelected = this.$store.getters["stores/getSelectedCountry"];
       this.geocoder.geocode({ address: countrySelected.name }, results => {
-        let lat = results[0].geometry.location.lat();
-        let lng = results[0].geometry.location.lng();
+        const location = R.path([0, "geometry", "location"], results);
+        let lat = location.lat();
+        let lng = location.lng();
         this.panToAndZoom(lat, lng, 6);
       });
     },

@@ -66,6 +66,10 @@ const actions = {
 
 const mutations = {
   selectCountryId(state, term_id) {
+    if (term_id === 0) {
+      state.path = `/store-locator/`;
+      router.push(state.path);
+    }
     state.selectedCountryId = term_id;
   },
   receiveCountries(state, jsonTerms) {
