@@ -118,7 +118,7 @@ export default {
   grid-template-areas: "nav content";
   grid-template-columns: 300px 1fr;
   grid-template-rows: auto 1fr;
-  grid-gap: 10px;
+  grid-gap: 2px;
 }
 .map-container {
   grid-area: content;

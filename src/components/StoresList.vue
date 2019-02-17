@@ -103,15 +103,20 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 .stores {
-  max-height: 100vh;
   overflow: hidden;
+  height: 100vh;
+  > div {
+    height: inherit;
+  }
   &_search {
     margin-top: 2px;
-    box-sizing: border-box;
     border: 1px solid black;
     width: 100%;
-    height: 36px;
+    height: 56px;
     font-size: 18px;
     border-bottom: 0;
     text-indent: 8px;
@@ -125,12 +130,13 @@ export default {
   }
   &_list {
     border-top: 1px solid black;
+    box-sizing: border-box;
     width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
     overflow-y: auto;
-    max-height: 87vh;
+    max-height: calc(100vh - 60px);
     &_store {
       border: 1px solid black;
       border-top: none;
