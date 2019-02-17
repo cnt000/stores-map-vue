@@ -2,7 +2,6 @@
 
 exports[`MapLoader.vue matches snapshot 1`] = `
 <div>
-  <!---->
   <div class="map-container">
     <div id="map" class="map"></div>
   </div>

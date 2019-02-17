@@ -21,6 +21,7 @@ describe("StoresList.vue", () => {
 
     testState = {
       all: storesExamples,
+      activeStores: storesExamples,
       pending: false,
       error: false,
       selectedStoreId: 0,
