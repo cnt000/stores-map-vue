@@ -23,7 +23,7 @@
           :data-storeid="store.ID"
           :key="store.ID"
           v-on:click="selectStore(store.ID)"
-          class="stores_list_store"
+          :class="{'selected': storeId === store.ID, 'stores_list_store': true}"
         >
           <span class="stores_list_store_name">{{ store.post_title }}</span>
           <span>{{ store.custom["wpcf-yoox-store-address"][0] }}</span>
@@ -50,8 +50,11 @@ export default {
       stores: state => state.stores.all,
       countries: state => state.stores.countries,
       CountryId: state => state.stores.selectedCountryId,
+      storeId: state => state.stores.selectedStoreId,
       pending: state => state.stores.pending,
-      error: state => state.stores.error
+      error: state => state.stores.error,
+      activeMarkers: state => state.stores.activeMarkers
+      // filteredStores: state => state.stores.filteredStores
     }),
     filteredStores() {
       const keywordInLowerCase = R.toLower(this.keyword);
@@ -143,6 +146,9 @@ export default {
       }
       &_name {
         font-weight: bold;
+      }
+      &.selected {
+        background: lightcyan;
       }
     }
   }
