@@ -36,18 +36,9 @@ export default {
     };
   },
   computed: {
-    markers() {
-      return this.stores.reduce((acc, cur) => {
-        return acc.concat({
-          lat: parseFloat(cur.lat),
-          lng: parseFloat(cur.lng),
-          markerName: cur.post_title,
-          storeId: cur.ID
-        });
-      }, []);
-    },
     ...mapState({
       stores: state => state.stores.all,
+      markers: state => state.stores.markers,
       selectedStoreId: state => state.stores.selectedStoreId
     })
   },
