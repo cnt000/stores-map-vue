@@ -1,20 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StoresList.vue matches snapshot 1`] = `
-<div class="stores"><select class="stores_countries">
-    <option value="0">All</option>
-    <option value="164">Asia</option>
-    <option value="165">China</option>
-    <option value="168">Japan</option>
-    <option value="194">Saudi Arabia</option>
-  </select>
+<div class="stores">
   <div><input type="text" placeholder="filter" class="stores_search">
     <!---->
     <!---->
     <ul class="stores_list">
-      <li data-storeid="1742" class="stores_list_store"><span class="stores_list_store_name">ABU DHABI - SOWWAH</span> <span>The Galleria, Sowwah Square</span> <span>(24.50138013631387 - 54.38876131600796)</span></li>
-      <li data-storeid="1744" class="stores_list_store"><span class="stores_list_store_name">BAKU - PORT BAKU</span> <span>Port Baku Mall, Neftchiler ave. 153</span> <span>(40.3751057 - 49.8636196)</span></li>
-      <li data-storeid="1721" class="stores_list_store"><span class="stores_list_store_name">BEIJING - SANLITUN</span> <span>Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027</span> <span>(39.938991808861964 - 116.45540810317993)</span></li>
+      <li data-storeid="1742" class="stores_list_store">
+        <div title="ABU DHABI - SOWWAH" class="stores_list_store_name">ABU DHABI - SOWWAH</div>
+        <div class="stores_list_store_address">The Galleria, Sowwah Square</div>
+      </li>
+      <li data-storeid="1744" class="stores_list_store">
+        <div title="BAKU - PORT BAKU" class="stores_list_store_name">BAKU - PORT BAKU</div>
+        <div class="stores_list_store_address">Port Baku Mall, Neftchiler ave. 153</div>
+      </li>
+      <li data-storeid="1721" class="stores_list_store">
+        <div title="BEIJING - SANLITUN" class="stores_list_store_name">BEIJING - SANLITUN</div>
+        <div class="stores_list_store_address">Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027</div>
+      </li>
     </ul>
   </div>
 </div>
