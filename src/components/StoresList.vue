@@ -1,13 +1,13 @@
 <template>
   <div class="stores">
-    <select @change="selectCountryId" v-model="countryId" class="stores_countries">
+    <!-- <select @change="selectCountryId" v-model="countryId" class="stores_countries">
       <option value="0">All</option>
       <option
         v-for="country in countries"
         :key="country.term_id"
         :value="country.term_id"
       >{{ country.name }}</option>
-    </select>
+    </select>-->
     <div>
       <input class="stores_search" type="text" placeholder="filter" v-model="keyword">
       <span v-if="pending">... LOADING ...</span>
@@ -25,9 +25,9 @@
           v-on:click="selectStore(store.ID)"
           :class="{'selected': storeId === store.ID, 'stores_list_store': true}"
         >
-          <span class="stores_list_store_name">{{ store.post_title }}</span>
-          <span>{{ store.custom["wpcf-yoox-store-address"][0] }}</span>
-          <span>({{ store.lat }} - {{ store.lng }})</span>
+          <div class="stores_list_store_name" :title="store.post_title">{{ store.post_title }}</div>
+          <div class="stores_list_store_address">{{ store.custom["wpcf-yoox-store-address"][0] }}</div>
+          <!--div>({{ store.lat }} - {{ store.lng }})</div-->
         </li>
       </ul>
     </div>
@@ -104,6 +104,8 @@ export default {
 
 <style lang="scss">
 .stores {
+  max-height: 100vh;
+  overflow: hidden;
   &_search {
     margin-top: 2px;
     box-sizing: border-box;
@@ -127,13 +129,15 @@ export default {
     list-style: none;
     margin: 0;
     padding: 0;
+    overflow-y: auto;
+    max-height: 87vh;
     &_store {
-      display: flex;
-      flex-direction: column;
       border: 1px solid black;
       border-top: none;
       padding: 4px;
+      height: 60px;
       cursor: pointer;
+      overflow: hidden;
       &--empty {
         background-color: lightsalmon;
       }
@@ -145,6 +149,12 @@ export default {
       }
       &_name {
         font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &_address {
+        font-size: 80%;
       }
       &.selected {
         background: lightcyan;
