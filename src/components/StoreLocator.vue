@@ -5,6 +5,7 @@
     </sidebar>
     <map-loader :map-config="mapConfig" :apiKey="apiKey">
       <template slot-scope="scopeProps">
+        <my-position :google="scopeProps.google" :map="scopeProps.map"/>
         <div class="markers">
           <child-marker
             v-for="(marker,i) in markers"
@@ -24,6 +25,7 @@ import { mapState } from "vuex";
 import * as R from "ramda";
 import MapLoader from "./MapLoader.vue";
 import ChildMarker from "./ChildMarker.vue";
+import MyPosition from "./MyPosition.vue";
 import Sidebar from "./Sidebar.vue";
 import StoresList from "./StoresList.vue";
 import { mapConfig, apiKey } from "@/conf.js";
@@ -59,7 +61,8 @@ export default {
     MapLoader,
     ChildMarker,
     Sidebar,
-    StoresList
+    StoresList,
+    MyPosition
   }
 };
 </script>
