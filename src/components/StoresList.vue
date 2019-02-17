@@ -47,14 +47,13 @@ export default {
   },
   computed: {
     ...mapState({
-      stores: state => state.stores.all,
+      activeStores: state => state.stores.activeStores,
       countries: state => state.stores.countries,
       CountryId: state => state.stores.selectedCountryId,
       storeId: state => state.stores.selectedStoreId,
       pending: state => state.stores.pending,
       error: state => state.stores.error,
       activeMarkers: state => state.stores.activeMarkers
-      // filteredStores: state => state.stores.filteredStores
     }),
     filteredStores() {
       const keywordInLowerCase = R.toLower(this.keyword);
@@ -80,7 +79,7 @@ export default {
         filterByKeyword,
         R.when(countryIdGtZero, filterByCountryId)
       );
-      return filterByCountryIdAndKeyword(this.stores);
+      return filterByCountryIdAndKeyword(this.activeStores);
     }
   },
   methods: {

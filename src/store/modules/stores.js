@@ -6,6 +6,7 @@ import router from "@/router";
 
 const state = {
   all: [],
+  activeStores: [],
   pending: false,
   error: false,
   selectedStoreId: 0,
@@ -115,9 +116,11 @@ const mutations = {
     state.activeMarkers = state.markers.filter(m =>
       map.getBounds().contains({ lat: m.lat, lng: m.lng })
     );
+    state.activeStores = state.all.filter(s => {
+      return state.activeMarkers.some(m => m.storeId === s.ID);
+    });
   },
-  mapLoaded(state, { map, geocoder }) {
-    // state.map = { map };
+  mapLoaded(state, { geocoder }) {
     state.geocoder = geocoder;
     state.mapLoaded = true;
   }
