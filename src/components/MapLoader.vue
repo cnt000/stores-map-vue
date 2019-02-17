@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="!!this.google && !!this.map">
+    <template v-if="!!this.mapLoaded">
       <slot :google="google" :map="map"/>
     </template>
     <div class="map-container">
@@ -36,7 +36,8 @@ export default {
     ...mapState({
       store: state => state.stores.selectedStoreId,
       country: state => state.stores.selectedCountryId,
-      mapLoaded: state => state.stores.mapLoaded
+      mapLoaded: state => state.stores.mapLoaded,
+      geocoder: state => state.stores.geocoder
     })
   },
   watch: {
@@ -51,17 +52,30 @@ export default {
     }
   },
   methods: {
+    boundsChanged() {
+      this.$store.dispatch({
+        type: "stores/activeMarkers",
+        map: this.map
+      });
+    },
     initializeMap() {
       const mapContainer = this.$el.querySelector("#map");
       const { Map } = this.google.maps;
       this.map = new Map(mapContainer, this.mapConfig);
+      this.google.maps.event.addListener(
+        this.map,
+        "bounds_changed",
+        this.boundsChanged
+      );
       const { Geocoder } = this.google.maps;
-      this.geocoder = new Geocoder();
-      this.mapIsLoaded();
+      const geocoder = new Geocoder();
+      this.mapIsLoaded({ map: this.map, geocoder });
     },
-    mapIsLoaded() {
+    mapIsLoaded({ map, geocoder }) {
       this.$store.dispatch({
-        type: "stores/mapLoaded"
+        type: "stores/mapLoaded",
+        map,
+        geocoder
       });
     },
     panToSelectedStore() {

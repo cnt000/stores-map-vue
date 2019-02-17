@@ -13,7 +13,11 @@ const state = {
   countries: [],
   selectedCountryId: 0,
   path: "/stores-map-vue/store-locator",
-  mapLoaded: false
+  mapLoaded: false,
+  markers: [],
+  activeMarkers: [],
+  map: null,
+  geocoder: {}
 };
 
 const getters = {
@@ -59,8 +63,11 @@ const actions = {
   selectCountryId({ commit }, { id }) {
     commit("selectCountryId", id);
   },
-  mapLoaded({ commit }) {
-    commit("mapLoaded");
+  mapLoaded({ commit }, { map, geocoder }) {
+    commit("mapLoaded", { map, geocoder });
+  },
+  activeMarkers({ commit }, { map }) {
+    commit("activeMarkers", { map });
   }
 };
 
@@ -78,6 +85,14 @@ const mutations = {
   },
   receiveAll(state, stores) {
     state.pending = false;
+    state.markers = stores.reduce((acc, cur) => {
+      return acc.concat({
+        lat: parseFloat(cur.lat),
+        lng: parseFloat(cur.lng),
+        markerName: cur.post_title,
+        storeId: cur.ID
+      });
+    }, []);
     state.all = stores;
   },
   apiPending(state) {
@@ -96,7 +111,14 @@ const mutations = {
     state.path = `/store-locator/${state.storeName}-${id}`;
     router.push(state.path);
   },
-  mapLoaded(state) {
+  activeMarkers(state, { map }) {
+    state.activeMarkers = state.markers.filter(m =>
+      map.getBounds().contains({ lat: m.lat, lng: m.lng })
+    );
+  },
+  mapLoaded(state, { map, geocoder }) {
+    // state.map = { map };
+    state.geocoder = geocoder;
     state.mapLoaded = true;
   }
 };
