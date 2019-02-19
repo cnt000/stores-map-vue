@@ -5,9 +5,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import MarkerClusterer from "@google/markerclusterer";
-
 export default {
   props: {
     google: Object,
