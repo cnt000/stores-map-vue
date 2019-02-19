@@ -5,13 +5,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import MarkerClusterer from "@google/markerclusterer";
+
 export default {
   props: {
     google: Object,
     map: Object
-  },
-  data() {
-    return {};
   },
   methods: {
     localize() {
@@ -24,6 +24,7 @@ export default {
               lng: position.coords.longitude
             };
             map.setCenter(pos);
+            map.setZoom(10);
           },
           function() {
             // handleLocationError(true, infoWindow, map.getCenter());
