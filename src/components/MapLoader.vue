@@ -62,11 +62,7 @@ export default {
       const mapContainer = this.$el.querySelector("#map");
       const { Map } = this.google.maps;
       this.map = new Map(mapContainer, this.mapConfig);
-      this.google.maps.event.addListener(
-        this.map,
-        "bounds_changed",
-        this.boundsChanged
-      );
+      this.google.maps.event.addListener(this.map, "idle", this.boundsChanged);
       const { Geocoder } = this.google.maps;
       const geocoder = new Geocoder();
       this.mapIsLoaded({ map: this.map, geocoder });
@@ -106,7 +102,7 @@ export default {
         lat: parseFloat(lat),
         lng: parseFloat(lng)
       });
-      this.map.setZoom(zoom);
+      //this.map.setZoom(zoom);
     }
   }
 };
