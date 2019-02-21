@@ -77,7 +77,7 @@ export default {
     panToSelectedStore() {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];
       if (storeSelected.lat !== "" && storeSelected.lng !== "") {
-        this.panToAndZoom(storeSelected.lat, storeSelected.lng, 14);
+        this.panToAndZoom(storeSelected.lat, storeSelected.lng, 10);
       }
     },
     selectCountry(selectedCountryId) {
@@ -102,7 +102,7 @@ export default {
         lat: parseFloat(lat),
         lng: parseFloat(lng)
       });
-      //this.map.setZoom(zoom);
+      this.map.setZoom(zoom);
     }
   }
 };
