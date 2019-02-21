@@ -6,26 +6,17 @@
     <map-loader :map-config="mapConfig" :apiKey="apiKey">
       <template slot-scope="scopeProps">
         <my-position :google="scopeProps.google" :map="scopeProps.map"/>
-        <div class="markers">
-          <child-marker
-            v-for="(marker,i) in markers"
-            :key="i"
-            :position="marker"
-            :google="scopeProps.google"
-            :map="scopeProps.map"
-          />
-        </div>
+        <cluster :google="scopeProps.google" :map="scopeProps.map"/>
       </template>
     </map-loader>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import * as R from "ramda";
 import MapLoader from "./MapLoader.vue";
-import ChildMarker from "./ChildMarker.vue";
 import MyPosition from "./MyPosition.vue";
+import Cluster from "./Cluster.vue";
 import Sidebar from "./Sidebar.vue";
 import StoresList from "./StoresList.vue";
 import { mapConfig, apiKey } from "@/conf.js";
@@ -36,13 +27,6 @@ export default {
       mapConfig: mapConfig,
       apiKey: apiKey
     };
-  },
-  computed: {
-    ...mapState({
-      stores: state => state.stores.all,
-      markers: state => state.stores.markers,
-      selectedStoreId: state => state.stores.selectedStoreId
-    })
   },
   mounted() {
     const splitWords = R.split("-");
@@ -59,10 +43,10 @@ export default {
   },
   components: {
     MapLoader,
-    ChildMarker,
     Sidebar,
     StoresList,
-    MyPosition
+    MyPosition,
+    Cluster
   }
 };
 </script>
