@@ -5,6 +5,7 @@
 <script>
 import { mapState } from "vuex";
 import MarkerClusterer from "@google/markerclusterer";
+import { clusterImgs, clusterizeResults, markerIcon } from "@/conf.js";
 
 export default {
   props: {
@@ -35,6 +36,10 @@ export default {
   },
   methods: {
     setActive(id) {
+      if (id === 0) {
+        return;
+      }
+      const { InfoWindow } = this.google.maps;
       const store = this.stores.filter(pos => {
         return pos.ID === id;
       })[0];
@@ -42,7 +47,7 @@ export default {
         return m.getPosition().lat() === +store.lat;
       })[0];
 
-      const infowindow = new this.google.maps.InfoWindow({
+      const infowindow = new InfoWindow({
         content: store.post_title + ""
       });
       this.infowindows.forEach(element => {
@@ -58,6 +63,7 @@ export default {
       this.gMarkers = this.stores.map(marker => {
         mark = new Marker({
           position: { lat: +marker.lat, lng: +marker.lng },
+          icon: markerIcon,
           map: gMap
         });
         mark.addListener("click", () => {
@@ -68,11 +74,11 @@ export default {
         });
         return mark;
       });
-
-      this.markerCluster = new MarkerClusterer(this.map, this.gMarkers, {
-        imagePath:
-          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
-      });
+      if (clusterizeResults) {
+        this.markerCluster = new MarkerClusterer(this.map, this.gMarkers, {
+          imagePath: clusterImgs
+        });
+      }
     }
   }
 };
