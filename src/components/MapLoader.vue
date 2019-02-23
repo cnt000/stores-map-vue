@@ -74,7 +74,7 @@ export default {
     },
     panToSelectedStore() {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];
-      let zoom = storeSelected.ID === 0 ? 10 : 16;
+      let zoom = !storeSelected.id ? 10 : 16;
       this.panToAndZoom(storeSelected.lat, storeSelected.lng, zoom);
     },
     selectCountry(selectedCountryId) {

@@ -23,7 +23,7 @@ describe("MapLoader.vue", () => {
       all: storesExamples,
       pending: false,
       error: false,
-      selectedStoreId: 1934,
+      selectedStoreId: "1934",
       countries: countriesExamples,
       selectedCountryId: 0,
       mapLoaded: true
@@ -76,7 +76,7 @@ describe("MapLoader.vue", () => {
 
   it("initial values for store state", () => {
     const wrapper = mount(MapLoader, { store, localVue });
-    expect(wrapper.vm.store).toBe(1934);
+    expect(wrapper.vm.store).toBe("1934");
     expect(wrapper.vm.country).toBe(0);
     expect(wrapper.vm.mapLoaded).toBe(true);
     // console.log(wrapper.vm.$watch("store"));

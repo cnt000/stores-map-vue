@@ -24,7 +24,7 @@ describe("StoresList.vue", () => {
       active: storesExamples,
       pending: false,
       error: false,
-      selectedStoreId: 0,
+      selectedStoreId: "",
       countries: countriesExamples,
       selectedCountryId: 0
     };

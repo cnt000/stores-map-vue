@@ -6,7 +6,7 @@ import termsJson from "#/terms";
 describe("Testing Getters", () => {
   const state = {
     all: [{ ID: 1 }, { ID: 3 }, { ID: 5 }],
-    selectedStoreId: 3,
+    selectedStoreId: "3",
     selectedCountryId: 6,
     countries: [{ term_id: 2 }, { term_id: 6 }, { term_id: 8 }]
   };
@@ -68,11 +68,11 @@ describe("Testing Mutations", () => {
   beforeEach(() => {
     state = {
       selectedCountryId: 0,
-      selectedStoreId: 0,
+      selectedStoreId: "",
       pending: false,
       all: [
         {
-          post_title: "ciao - prova prova",
+          name: "ciao - prova prova",
           ID: 2,
           path: ""
         }

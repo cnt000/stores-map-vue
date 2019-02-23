@@ -18,6 +18,14 @@ exports[`StoresList.vue matches snapshot 1`] = `
         <div title="BEIJING - SANLITUN" class="stores_list_store_name">BEIJING - SANLITUN</div>
         <div class="stores_list_store_address">Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027</div>
       </li>
+      <li data-storeid="1739" class="stores_list_store">
+        <div title="BEIJING - Shin Kong Place" class="stores_list_store_name">BEIJING - Shin Kong Place</div>
+        <div class="stores_list_store_address">Shop D1046, D4010, D4052-1 (WRTW), D2040 (Men’s)
+          Level 1
+          Shin Kong Place
+          No. 87 Jianguo Road, Chaoyang District
+          China 10025</div>
+      </li>
     </ul>
   </div>
 </div>

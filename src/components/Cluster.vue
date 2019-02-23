@@ -36,12 +36,13 @@ export default {
   },
   methods: {
     setActive(id) {
-      if (id === 0) {
+      if (!id) {
         return;
       }
       const { InfoWindow } = this.google.maps;
+      // TODO better get for mark
       const store = this.stores.filter(pos => {
-        return pos.ID === id;
+        return pos.id === id;
       })[0];
       const mark = this.gMarkers.filter(m => {
         return (
@@ -51,7 +52,7 @@ export default {
       })[0];
 
       const infowindow = new InfoWindow({
-        content: store.post_title + ""
+        content: store.name + ""
       });
       this.infowindows.forEach(element => {
         element.close();
@@ -63,17 +64,17 @@ export default {
       const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;
-      this.gMarkers = this.stores.map(marker => {
+      this.gMarkers = this.stores.map(store => {
         mark = new Marker({
-          position: { lat: +marker.lat, lng: +marker.lng },
+          position: { lat: +store.lat, lng: +store.lng },
           icon: markerIcon,
-          title: marker.post_title,
+          title: store.name,
           map: gMap
         });
         mark.addListener("click", () => {
           this.$store.dispatch({
             type: "stores/selectStore",
-            id: marker.ID
+            id: store.id
           });
         });
         return mark;

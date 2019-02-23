@@ -20,13 +20,13 @@
         <li
           v-else
           v-for="store in filteredStores"
-          :data-storeid="store.ID"
-          :key="store.ID"
-          v-on:click="selectStore(store.ID)"
-          :class="{'selected': storeId === store.ID, 'stores_list_store': true}"
+          :data-storeid="store.id"
+          :key="store.id"
+          v-on:click="selectStore(store.id)"
+          :class="{'selected': storeId === store.id, 'stores_list_store': true}"
         >
-          <div class="stores_list_store_name" :title="store.post_title">{{ store.post_title }}</div>
-          <div class="stores_list_store_address">{{ store.custom["wpcf-yoox-store-address"][0] }}</div>
+          <div class="stores_list_store_name" :title="store.name">{{ store.name }}</div>
+          <div class="stores_list_store_address">{{ store.address }}</div>
           <!--div>({{ store.lat }} - {{ store.lng }})</div-->
         </li>
       </ul>
@@ -55,7 +55,7 @@ export default {
       error: state => state.stores.error
     }),
     filteredStores() {
-      const storeName = R.prop("post_title");
+      const storeName = R.prop("name");
       const keywordInLowerCase = R.toLower(this.keyword);
       const hasKeywordInTitle = R.includes(keywordInLowerCase);
       const filterByKeyword = R.filter(
