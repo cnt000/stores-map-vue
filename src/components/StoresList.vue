@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     ...mapState({
-      activeMarkers: state => state.stores.activeMarkers,
+      active: state => state.stores.active,
       countries: state => state.stores.countries,
       CountryId: state => state.stores.selectedCountryId,
       storeId: state => state.stores.selectedStoreId,
@@ -78,7 +78,7 @@ export default {
         filterByKeyword,
         R.when(countryIdGtZero, filterByCountryId)
       );
-      return filterByCountryIdAndKeyword(this.activeMarkers);
+      return filterByCountryIdAndKeyword(this.active);
     }
   },
   methods: {

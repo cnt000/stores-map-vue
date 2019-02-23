@@ -25,7 +25,16 @@ export default {
     })
   },
   watch: {
-    selectedStoreId: function(id) {
+    selectedStoreId(id) {
+      this.setActive(id);
+    }
+  },
+  mounted() {
+    this.clusterize();
+    this.setActive(this.selectedStoreId);
+  },
+  methods: {
+    setActive(id) {
       const store = this.stores.filter(pos => {
         return pos.ID === id;
       })[0];
@@ -41,12 +50,7 @@ export default {
       });
       infowindow.open(this.map, mark);
       this.infowindows.push(infowindow);
-    }
-  },
-  mounted() {
-    this.clusterize();
-  },
-  methods: {
+    },
     clusterize() {
       const { Marker } = this.google.maps;
       const gMap = this.map;

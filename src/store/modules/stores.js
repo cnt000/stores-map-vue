@@ -6,7 +6,7 @@ import router from "@/router";
 
 const state = {
   all: [],
-  activeMarkers: [],
+  active: [],
   path: "/stores-map-vue/store-locator",
   selectedStoreId: 0,
   pending: false,
@@ -62,8 +62,8 @@ const actions = {
   mapLoaded({ commit }) {
     commit("mapLoaded");
   },
-  activeMarkers({ commit }, { map }) {
-    commit("activeMarkers", { map });
+  getActive({ commit }, { map }) {
+    commit("getActive", { map });
   }
 };
 
@@ -91,16 +91,16 @@ const mutations = {
     state.error = true;
   },
   selectStore(state, id) {
-    state.selectedStoreId = id;
     const getStoreById = R.filter(elm => elm.ID === +id, state.all);
     const storeName = R.prop("post_title", R.head(getStoreById));
     const sanitize = name => R.replace(/([ ]+)/g, "", R.toLower(name));
     state.storeName = sanitize(storeName);
     state.path = `/store-locator/${state.storeName}-${id}`;
     router.push(state.path);
+    state.selectedStoreId = +id;
   },
-  activeMarkers(state, { map }) {
-    state.activeMarkers = state.all.filter(m =>
+  getActive(state, { map }) {
+    state.active = state.all.filter(m =>
       map.getBounds().contains({ lat: +m.lat, lng: +m.lng })
     );
   },

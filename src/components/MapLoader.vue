@@ -54,7 +54,7 @@ export default {
   methods: {
     boundsChanged() {
       this.$store.dispatch({
-        type: "stores/activeMarkers",
+        type: "stores/getActive",
         map: this.map
       });
     },
