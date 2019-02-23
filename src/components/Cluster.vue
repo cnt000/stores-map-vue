@@ -20,7 +20,6 @@ export default {
   },
   computed: {
     ...mapState({
-      markers: state => state.stores.markers,
       selectedStoreId: state => state.stores.selectedStoreId,
       stores: state => state.stores.all
     })
@@ -52,15 +51,15 @@ export default {
       const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;
-      this.gMarkers = this.markers.map(marker => {
+      this.gMarkers = this.stores.map(marker => {
         mark = new Marker({
-          position: { lat: marker.lat, lng: marker.lng },
+          position: { lat: +marker.lat, lng: +marker.lng },
           map: gMap
         });
         mark.addListener("click", () => {
           this.$store.dispatch({
             type: "stores/selectStore",
-            id: marker.storeId
+            id: marker.ID
           });
         });
         return mark;

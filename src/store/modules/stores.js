@@ -6,8 +6,6 @@ import router from "@/router";
 
 const state = {
   all: [],
-  markers: [],
-  activeStores: [],
   activeMarkers: [],
   path: "/stores-map-vue/store-locator",
   selectedStoreId: 0,
@@ -83,14 +81,6 @@ const mutations = {
   },
   receiveAll(state, stores) {
     state.pending = false;
-    state.markers = stores.reduce((acc, cur) => {
-      return acc.concat({
-        lat: parseFloat(cur.lat),
-        lng: parseFloat(cur.lng),
-        markerName: cur.post_title,
-        storeId: cur.ID
-      });
-    }, []);
     state.all = stores;
   },
   apiPending(state) {
@@ -110,12 +100,9 @@ const mutations = {
     router.push(state.path);
   },
   activeMarkers(state, { map }) {
-    state.activeMarkers = state.markers.filter(m =>
-      map.getBounds().contains({ lat: m.lat, lng: m.lng })
+    state.activeMarkers = state.all.filter(m =>
+      map.getBounds().contains({ lat: +m.lat, lng: +m.lng })
     );
-    state.activeStores = state.all.filter(s => {
-      return state.activeMarkers.some(m => m.storeId === s.ID);
-    });
   },
   mapLoaded(state) {
     state.mapLoaded = true;
