@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return {
-      google: null
+      google: null,
+      geocoder: null
     };
   },
   mounted() {
@@ -36,8 +37,7 @@ export default {
     ...mapState({
       store: state => state.stores.selectedStoreId,
       country: state => state.stores.selectedCountryId,
-      mapLoaded: state => state.stores.mapLoaded,
-      geocoder: state => state.stores.geocoder
+      mapLoaded: state => state.stores.mapLoaded
     })
   },
   watch: {
@@ -60,18 +60,16 @@ export default {
     },
     initializeMap() {
       const mapContainer = this.$el.querySelector("#map");
-      const { Map } = this.google.maps;
+      const { Map, Geocoder } = this.google.maps;
       this.map = new Map(mapContainer, this.mapConfig);
       this.google.maps.event.addListener(this.map, "idle", this.boundsChanged);
-      const { Geocoder } = this.google.maps;
-      const geocoder = new Geocoder();
-      this.mapIsLoaded({ map: this.map, geocoder });
+      this.geocoder = new Geocoder();
+      this.mapIsLoaded({ map: this.map });
     },
-    mapIsLoaded({ map, geocoder }) {
+    mapIsLoaded({ map }) {
       this.$store.dispatch({
         type: "stores/mapLoaded",
-        map,
-        geocoder
+        map
       });
     },
     panToSelectedStore() {

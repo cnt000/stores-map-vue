@@ -6,19 +6,16 @@ import router from "@/router";
 
 const state = {
   all: [],
+  markers: [],
   activeStores: [],
+  activeMarkers: [],
+  path: "/stores-map-vue/store-locator",
+  selectedStoreId: 0,
   pending: false,
   error: false,
-  selectedStoreId: 0,
-  storeName: "",
-  countries: [],
-  selectedCountryId: 0,
-  path: "/stores-map-vue/store-locator",
   mapLoaded: false,
-  markers: [],
-  activeMarkers: [],
-  map: null,
-  geocoder: {}
+  selectedCountryId: 0,
+  countries: []
 };
 
 const getters = {
@@ -64,8 +61,8 @@ const actions = {
   selectCountryId({ commit }, { id }) {
     commit("selectCountryId", id);
   },
-  mapLoaded({ commit }, { map, geocoder }) {
-    commit("mapLoaded", { map, geocoder });
+  mapLoaded({ commit }) {
+    commit("mapLoaded");
   },
   activeMarkers({ commit }, { map }) {
     commit("activeMarkers", { map });
@@ -120,8 +117,7 @@ const mutations = {
       return state.activeMarkers.some(m => m.storeId === s.ID);
     });
   },
-  mapLoaded(state, { geocoder }) {
-    state.geocoder = geocoder;
+  mapLoaded(state) {
     state.mapLoaded = true;
   }
 };
