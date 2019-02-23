@@ -67,6 +67,7 @@ export default {
         mark = new Marker({
           position: { lat: +marker.lat, lng: +marker.lng },
           icon: markerIcon,
+          title: marker.post_title,
           map: gMap
         });
         mark.addListener("click", () => {

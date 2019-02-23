@@ -74,9 +74,8 @@ export default {
     },
     panToSelectedStore() {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];
-      if (storeSelected.lat !== "" && storeSelected.lng !== "") {
-        this.panToAndZoom(storeSelected.lat, storeSelected.lng, 10);
-      }
+      let zoom = storeSelected.ID === 0 ? 10 : 16;
+      this.panToAndZoom(storeSelected.lat, storeSelected.lng, zoom);
     },
     selectCountry(selectedCountryId) {
       if (selectedCountryId === 0) {
@@ -100,7 +99,8 @@ export default {
         lat: parseFloat(lat),
         lng: parseFloat(lng)
       });
-      this.map.setZoom(zoom);
+      const actualZoom = this.map.getZoom();
+      if (actualZoom < zoom) this.map.setZoom(zoom);
     }
   }
 };

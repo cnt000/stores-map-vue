@@ -55,30 +55,30 @@ export default {
       error: state => state.stores.error
     }),
     filteredStores() {
+      const storeName = R.prop("post_title");
       const keywordInLowerCase = R.toLower(this.keyword);
       const hasKeywordInTitle = R.includes(keywordInLowerCase);
-      const storeName = R.prop("post_title");
       const filterByKeyword = R.filter(
-        R.compose(
-          hasKeywordInTitle,
+        R.pipe(
+          storeName,
           R.toLower,
-          storeName
+          hasKeywordInTitle
         )
       );
-      const countryId = this.CountryId;
-      const hasCountryId = R.any(R.propEq("term_id", countryId));
-      const filterByCountryId = R.filter(
-        R.compose(
-          hasCountryId,
-          R.prop("terms")
-        )
-      );
-      const countryIdGtZero = () => R.gt(this.CountryId, 0);
-      const filterByCountryIdAndKeyword = R.compose(
-        filterByKeyword,
-        R.when(countryIdGtZero, filterByCountryId)
-      );
-      return filterByCountryIdAndKeyword(this.active);
+      // const countryId = this.CountryId;
+      // const hasCountryId = R.any(R.propEq("term_id", countryId));
+      // const filterByCountryId = R.filter(
+      //   R.compose(
+      //     hasCountryId,
+      //     R.prop("terms")
+      //   )
+      // );
+      // const countryIdGtZero = () => R.gt(this.CountryId, 0);
+      // const filterByCountryIdAndKeyword = R.compose(
+      //   filterByKeyword,
+      //   R.when(countryIdGtZero, filterByCountryId)
+      // );
+      return filterByKeyword(this.active);
     }
   },
   methods: {
