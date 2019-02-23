@@ -44,7 +44,10 @@ export default {
         return pos.ID === id;
       })[0];
       const mark = this.gMarkers.filter(m => {
-        return m.getPosition().lat() === +store.lat;
+        return (
+          m.getPosition().lat() === +store.lat &&
+          m.getPosition().lng() === +store.lng
+        );
       })[0];
 
       const infowindow = new InfoWindow({
