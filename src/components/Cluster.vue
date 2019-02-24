@@ -16,25 +16,49 @@ export default {
     return {
       gMarkers: null,
       infowindows: [],
-      MarkerCluster: null
+      MarkerCluster: null,
+      isClusterized: false
     };
   },
   computed: {
     ...mapState({
       selectedStoreId: state => state.stores.selectedStoreId,
-      stores: state => state.stores.all
+      stores: state => state.stores.all,
+      active: state => state.stores.active
     })
   },
   watch: {
     selectedStoreId(id) {
       this.setActive(id);
+    },
+    active() {
+      if (clusterizeResults) {
+        this.checkZoom();
+      }
     }
   },
   mounted() {
-    this.clusterize();
+    this.addMarker();
+    if (clusterizeResults) this.clusterize();
     this.setActive(this.selectedStoreId);
   },
   methods: {
+    clusterize() {
+      this.markerCluster = new MarkerClusterer(this.map, this.gMarkers, {
+        imagePath: clusterImgs
+      });
+      this.isClusterized = true;
+    },
+    checkZoom() {
+      const zoom = this.map.getZoom();
+      if (zoom > 20 && this.isClusterized) {
+        this.markerCluster.clearMarkers();
+        this.isClusterized = false;
+        this.addMarker();
+      } else if (zoom < 14 && !this.isClusterized) {
+        this.clusterize();
+      }
+    },
     setActive(id) {
       if (!id) {
         return;
@@ -64,7 +88,7 @@ export default {
       infowindow.open(this.map, mark);
       this.infowindows.push(infowindow);
     },
-    clusterize() {
+    addMarker() {
       const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;
@@ -83,11 +107,6 @@ export default {
         });
         return mark;
       });
-      if (clusterizeResults) {
-        this.markerCluster = new MarkerClusterer(this.map, this.gMarkers, {
-          imagePath: clusterImgs
-        });
-      }
     }
   }
 };
