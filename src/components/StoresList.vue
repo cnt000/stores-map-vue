@@ -36,7 +36,6 @@
 
 <script>
 import { mapState } from "vuex";
-import * as R from "ramda";
 
 export default {
   data() {
@@ -55,31 +54,59 @@ export default {
       error: state => state.stores.error
     }),
     filteredStores() {
-      const storeName = R.prop("name");
-      const keywordInLowerCase = R.toLower(this.keyword);
-      const hasKeywordInTitle = R.includes(keywordInLowerCase);
-      const filterByKeyword = R.filter(
-        R.pipe(
-          storeName,
-          R.toLower,
-          hasKeywordInTitle
-        )
-      );
-      // const countryId = this.CountryId;
-      // const hasCountryId = R.any(R.propEq("term_id", countryId));
-      // const filterByCountryId = R.filter(
-      //   R.compose(
-      //     hasCountryId,
-      //     R.prop("terms")
-      //   )
-      // );
-      // const countryIdGtZero = () => R.gt(this.CountryId, 0);
-      // const filterByCountryIdAndKeyword = R.compose(
-      //   filterByKeyword,
-      //   R.when(countryIdGtZero, filterByCountryId)
-      // );
-      return filterByKeyword(this.active);
+      if (this.keyword === "") return this.active;
+      return this.active.filter(elm => {
+        let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
+          elm.country
+        } ${elm.continent}`;
+        return string.toLowerCase().includes(this.keyword.toLowerCase());
+      });
     }
+    // filteredStores() {
+    //   const storeName = R.prop("name");
+    //   const address = R.prop("address");
+    //   const gender = R.prop("gender");
+    //   const city = R.path(["locations", "city", "name"]);
+    //   const country = R.path(["locations", "country", "name"]);
+    //   const continent = R.path(["locations", "continent", "name"]);
+
+    //   const keywordInLowerCase = R.toLower(this.keyword);
+    //   const hasKeywordInTitle = R.includes(keywordInLowerCase);
+
+    //   const filterByKeywordAddress = R.filter(
+    //     R.pipe(
+    //       address,
+    //       R.toLower,
+    //       hasKeywordInTitle
+    //     )
+    //   );
+    //   const filterByKeywordGender = R.filter(
+    //     R.pipe(
+    //       gender,
+    //       R.toLower,
+    //       hasKeywordInTitle
+    //     )
+    //   );
+    //   // const countryId = this.CountryId;
+    //   // const hasCountryId = R.any(R.propEq("term_id", countryId));
+    //   // const filterByCountryId = R.filter(
+    //   //   R.compose(
+    //   //     hasCountryId,
+    //   //     R.prop("terms")
+    //   //   )
+    //   // );
+    //   // const countryIdGtZero = () => R.gt(this.CountryId, 0);
+    //   // const filterByCountryIdAndKeyword = R.compose(
+    //   //   filterByKeyword,
+    //   //   R.when(countryIdGtZero, filterByCountryId)
+    //   // );
+    //   const filterBy = R.pipe(
+    //     filterByKeyword,
+    //     filterByKeywordGender,
+    //     filterByKeywordAddress
+    //   );
+    //   return filterBy(this.active);
+    // }
   },
   methods: {
     selectStore(clickedId) {
