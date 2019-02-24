@@ -52,7 +52,11 @@ export default {
       })[0];
 
       const infowindow = new InfoWindow({
-        content: store.name + ""
+        content: `<div class="store-name">${store.name}<br>
+        ${store.gender}</div>
+        <div>${store.address}</div> 
+        ${store.phone}<br>
+        ${store.hours}`
       });
       this.infowindows.forEach(element => {
         element.close();
@@ -92,5 +96,8 @@ export default {
 <style lang="scss">
 .cluster {
   display: none;
+}
+.store-name {
+  font-weight: bold;
 }
 </style>
