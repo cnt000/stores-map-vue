@@ -1,7 +1,3 @@
-<template>
-  <div class="cluster"></div>
-</template>
-
 <script>
 import { mapState } from "vuex";
 import MarkerMarkerser from "@google/markerclusterer";
@@ -119,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss">
-.cluster {
+.markers {
   display: none;
 }
 .store-name {
