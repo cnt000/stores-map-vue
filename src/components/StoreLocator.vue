@@ -6,7 +6,7 @@
     <map-loader :map-config="mapConfig" :apiKey="apiKey">
       <template slot-scope="scopeProps">
         <my-position :google="scopeProps.google" :map="scopeProps.map"/>
-        <cluster :google="scopeProps.google" :map="scopeProps.map"/>
+        <markers :google="scopeProps.google" :map="scopeProps.map"/>
       </template>
     </map-loader>
   </div>
@@ -16,7 +16,7 @@
 import * as R from "ramda";
 import MapLoader from "./MapLoader.vue";
 import MyPosition from "./MyPosition.vue";
-import Cluster from "./Cluster.vue";
+import Markers from "./Markers.vue";
 import Sidebar from "./Sidebar.vue";
 import StoresList from "./StoresList.vue";
 import { mapConfig, apiKey } from "@/conf.js";
@@ -46,7 +46,7 @@ export default {
     Sidebar,
     StoresList,
     MyPosition,
-    Cluster
+    Markers
   }
 };
 </script>

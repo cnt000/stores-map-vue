@@ -4,7 +4,7 @@
 
 <script>
 import { mapState } from "vuex";
-import MarkerClusterer from "@google/markerclusterer";
+import MarkerMarkerser from "@google/markerclusterer";
 import { clusterImgs, clusterizeResults, markerIcon } from "@/conf.js";
 
 export default {
@@ -16,8 +16,8 @@ export default {
     return {
       gMarkers: null,
       infowindows: [],
-      MarkerCluster: null,
-      isClusterized: false
+      MarkerMarkers: null,
+      isMarkersized: false
     };
   },
   computed: {
@@ -44,18 +44,18 @@ export default {
   },
   methods: {
     clusterize() {
-      this.markerCluster = new MarkerClusterer(this.map, this.gMarkers, {
+      this.markerMarkers = new MarkerMarkerser(this.map, this.gMarkers, {
         imagePath: clusterImgs
       });
-      this.isClusterized = true;
+      this.isMarkersized = true;
     },
     checkZoom() {
       const zoom = this.map.getZoom();
-      if (zoom > 20 && this.isClusterized) {
-        this.markerCluster.clearMarkers();
-        this.isClusterized = false;
+      if (zoom > 20 && this.isMarkersized) {
+        this.markerMarkers.clearMarkers();
+        this.isMarkersized = false;
         this.addMarker();
-      } else if (zoom < 14 && !this.isClusterized) {
+      } else if (zoom < 14 && !this.isMarkersized) {
         this.clusterize();
       }
     },
@@ -70,8 +70,14 @@ export default {
       })[0];
       const mark = this.gMarkers.filter(m => {
         return (
-          m.getPosition().lat() === +store.lat &&
-          m.getPosition().lng() === +store.lng
+          m
+            .getPosition()
+            .lat()
+            .toFixed(7) === (+store.lat).toFixed(7) &&
+          m
+            .getPosition()
+            .lng()
+            .toFixed(7) === (+store.lng).toFixed(7)
         );
       })[0];
 

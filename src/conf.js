@@ -8,7 +8,7 @@ export const mapConfig = {
 };
 
 export const apiKey = "AIzaSyBNzPxDEDzlMCA9cedItIPCwtbdk037BGg";
-export const markerIcon = "http://maps.google.com/mapfiles/kml/paddle/1.png";
+export const markerIcon = "https://maps.google.com/mapfiles/kml/paddle/1.png";
 export const clusterImgs =
   "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m";
 export const clusterizeResults = true;
