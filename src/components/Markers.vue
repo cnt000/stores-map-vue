@@ -1,6 +1,6 @@
 <script>
 import { mapState } from "vuex";
-import MarkerMarkerser from "@google/markerclusterer";
+import MarkerCluster from "@google/markerclusterer";
 import { clusterImgs, clusterizeResults, markerIcon } from "@/conf.js";
 
 export default {
@@ -12,7 +12,7 @@ export default {
     return {
       gMarkers: null,
       infowindows: [],
-      MarkerMarkers: null,
+      Markers: null,
       isMarkersized: false
     };
   },
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     clusterize() {
-      this.markerMarkers = new MarkerMarkerser(this.map, this.gMarkers, {
+      this.Markers = new MarkerCluster(this.map, this.gMarkers, {
         imagePath: clusterImgs
       });
       this.isMarkersized = true;
@@ -48,7 +48,7 @@ export default {
     checkZoom() {
       const zoom = this.map.getZoom();
       if (zoom > 20 && this.isMarkersized) {
-        this.markerMarkers.clearMarkers();
+        this.Markers.clearMarkers();
         this.isMarkersized = false;
         this.addMarker();
       } else if (zoom < 14 && !this.isMarkersized) {
