@@ -1,7 +1,7 @@
 <template>
   <div>
-    <template v-if="!!this.mapLoaded">
-      <slot :google="google" :map="map"/>
+    <template v-if="!!mapLoaded">
+      <slot :google="google" :map="map" />
     </template>
     <div class="map-container">
       <div id="map" class="map"></div>

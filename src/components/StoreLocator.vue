@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
     <sidebar>
-      <stores-list/>
+      <stores-list />
     </sidebar>
     <map-loader :map-config="mapConfig" :apiKey="apiKey">
       <template slot-scope="scopeProps">
-        <my-position :google="scopeProps.google" :map="scopeProps.map"/>
-        <markers :google="scopeProps.google" :map="scopeProps.map"/>
+        <my-position :google="scopeProps.google" :map="scopeProps.map" />
+        <markers :google="scopeProps.google" :map="scopeProps.map" />
       </template>
     </map-loader>
   </div>

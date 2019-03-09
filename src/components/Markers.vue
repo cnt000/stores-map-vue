@@ -1,3 +1,7 @@
+<template>
+  <div class="marker"></div>
+</template>
+
 <script>
 import { mapState } from "vuex";
 import MarkerCluster from "@google/markerclusterer";

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <router-link to="/store-locator">Store locator</router-link>
-    baseUrl: {{baseUrl}}
+    baseUrl: {{ baseUrl }}
   </div>
 </template>
 

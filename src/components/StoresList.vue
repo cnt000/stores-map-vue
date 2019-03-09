@@ -9,23 +9,32 @@
       >{{ country.name }}</option>
     </select>-->
     <div>
-      <input class="stores_search" type="text" placeholder="filter" v-model="keyword">
+      <input
+        class="stores_search"
+        type="text"
+        placeholder="filter"
+        v-model="keyword"
+      />
       <span v-if="pending">... LOADING ...</span>
       <span v-if="error">... ERROR!!! ...</span>
       <ul class="stores_list">
         <li
           v-if="filteredStores.length === 0"
           class="stores_list_store stores_list_store--empty"
-        >Non ci sono risultati</li>
+        >
+          Non ci sono risultati
+        </li>
         <li
           v-else
           v-for="store in filteredStores"
           :data-storeid="store.id"
           :key="store.id"
           v-on:click="selectStore(store.id)"
-          :class="{'selected': storeId === store.id, 'stores_list_store': true}"
+          :class="{ selected: storeId === store.id, stores_list_store: true }"
         >
-          <div class="stores_list_store_name" :title="store.name">{{ store.name }}</div>
+          <div class="stores_list_store_name" :title="store.name">
+            {{ store.name }}
+          </div>
           <div class="stores_list_store_address">{{ store.address }}</div>
           <!--div>({{ store.lat }} - {{ store.lng }})</div-->
         </li>
