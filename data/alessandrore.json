@@ -95,7 +95,7 @@
         "54.38876131600796"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -130,7 +130,7 @@
     "_yoox-store-gallery": "builtin",
     "_yoox-store-lat": "24.50138013631387",
     "_yoox-store-lng": "54.38876131600796",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "555 555 555",
     "wpcf-yoox-store-email": "",
@@ -451,7 +451,7 @@
         "builtin"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -489,7 +489,7 @@
       793217
     ],
     "_yoox-store-gallery": "builtin",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "008601064168189",
     "wpcf-yoox-store-email": "",
@@ -639,7 +639,7 @@
         ""
       ],
       "wpcf-yoox-store-phone": [
-        "Womenswear: +555 555 555 / Menswear: +555 555 555"
+        "Womenswear: +555 555 555 | Menswear: +555 555 555"
       ],
       "wpcf-yoox-store-email": [
         "shinkongplacertw.bj@cn.ale.com"
@@ -670,7 +670,7 @@
     "_yoox-store-gallery": "builtin",
     "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
-    "wpcf-yoox-store-phone": "Womenswear: +555 555 555 / Menswear: +555 555 555",
+    "wpcf-yoox-store-phone": "Womenswear: +555 555 555 | Menswear: +555 555 555",
     "wpcf-yoox-store-email": "shinkongplacertw.bj@cn.ale.com",
     "wpcf-yoox-store-hours": "Monday to Sunday 10:00 - 22:00",
     "wpcf-yoox-store-address": "Shop D1046, D4010, D4052-1 (WRTW), D2040 (Men’s)\r\nLevel 1\r\nShin Kong Place\r\nNo. 87 Jianguo Road, Chaoyang District\r\nChina 10025",
@@ -985,7 +985,7 @@
         "builtin"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -1000,7 +1000,7 @@
         "Monday to Sunday 09:00 - 22:00"
       ],
       "wpcf-yoox-store-address": [
-        "Shop 1111 &amp; 2111\r\nLevel 1 &amp; Level 2\r\nSino-Ocean Taikoo Li Chengdu\r\nNo.8 Mid Shamao Street\r\nJinjiang District\r\nChengdu 610021"
+        "Shop 1111 & 2111\r\nLevel 1 & Level 2\r\nSino-Ocean Taikoo Li Chengdu\r\nNo.8 Mid Shamao Street\r\nJinjiang District\r\nChengdu 610021"
       ],
       "wpcf-yoox-store-geolocation-address": [
         "MID-SHAMAO STREET, JINJIANG DISTRICT, CHENGDU, 610021"
@@ -1023,12 +1023,12 @@
     "_yoox-store-lat": "30.65311299999999",
     "_yoox-store-lng": "104.08171489999995",
     "_yoox-store-gallery": "builtin",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 7158",
     "wpcf-yoox-store-email": "daici.cd@cn.ale.com",
     "wpcf-yoox-store-hours": "Monday to Sunday 09:00 - 22:00",
-    "wpcf-yoox-store-address": "Shop 1111 &amp; 2111\r\nLevel 1 &amp; Level 2\r\nSino-Ocean Taikoo Li Chengdu\r\nNo.8 Mid Shamao Street\r\nJinjiang District\r\nChengdu 610021",
+    "wpcf-yoox-store-address": "Shop 1111 & 2111\r\nLevel 1 & Level 2\r\nSino-Ocean Taikoo Li Chengdu\r\nNo.8 Mid Shamao Street\r\nJinjiang District\r\nChengdu 610021",
     "wpcf-yoox-store-geolocation-address": "MID-SHAMAO STREET, JINJIANG DISTRICT, CHENGDU, 610021",
     "wpcf-yoox-store-country-iso": "CN",
     "location": {
@@ -1578,7 +1578,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -1618,7 +1618,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 5550",
     "wpcf-yoox-store-email": "highlandpark@us.ale.com",
@@ -1746,7 +1746,7 @@
         "3"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -1787,7 +1787,7 @@
     "_yoox-store-bookable": "0",
     "_edit_lock": "1532591147:3",
     "_edit_last": "3",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "_wpcf-store-image-sort-order": [
       60006
@@ -1939,7 +1939,7 @@
         "builtin"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -1977,7 +1977,7 @@
     "_yoox-store-lat": "25.198567178545442",
     "_yoox-store-lng": "55.27961143254083",
     "_yoox-store-gallery": "builtin",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "555 555 555",
     "wpcf-yoox-store-email": "",
@@ -2121,7 +2121,7 @@
         "builtin"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -2156,7 +2156,7 @@
     "_yoox-store-lat": "25.11809",
     "_yoox-store-lng": "55.20035029999997",
     "_yoox-store-gallery": "builtin",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "00971 04-3470239",
     "wpcf-yoox-store-email": "",
@@ -2492,7 +2492,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear &amp; Menswear"
+        "Womenswear & Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -2532,7 +2532,7 @@
     "_yoox-store-gallery": "builtin",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear &amp; Menswear",
+    "wpcf-store-gender": "Womenswear & Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": "cantonroad.hk@ale.com",
@@ -2690,7 +2690,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -2730,7 +2730,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": "elements.hk@hk.ale.com",
@@ -2888,7 +2888,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -2928,7 +2928,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": "landmark.hk@hk.ale.com",
@@ -3098,7 +3098,7 @@
         "sogo.hk@hk.ale.com"
       ],
       "wpcf-yoox-store-hours": [
-        "Sunday to Thursday 10:00 - 22:30\r\nFriday to Saturday &amp; Day Before Public Holidays 10:00 - 22:30"
+        "Sunday to Thursday 10:00 - 22:30\r\nFriday to Saturday & Day Before Public Holidays 10:00 - 22:30"
       ],
       "wpcf-yoox-store-address": [
         "Alexander McQueen \r\nShop 1-11\r\nLevel 1/F \r\nSOGO Department Store\r\n555 Hennessy Road\r\nCauseway Bay\r\nHong Kong"
@@ -3130,7 +3130,7 @@
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": "sogo.hk@hk.ale.com",
-    "wpcf-yoox-store-hours": "Sunday to Thursday 10:00 - 22:30\r\nFriday to Saturday &amp; Day Before Public Holidays 10:00 - 22:30",
+    "wpcf-yoox-store-hours": "Sunday to Thursday 10:00 - 22:30\r\nFriday to Saturday & Day Before Public Holidays 10:00 - 22:30",
     "wpcf-yoox-store-address": "Alexander McQueen \r\nShop 1-11\r\nLevel 1/F \r\nSOGO Department Store\r\n555 Hennessy Road\r\nCauseway Bay\r\nHong Kong",
     "wpcf-yoox-store-country-iso": "HK",
     "location": {
@@ -4210,7 +4210,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -4250,7 +4250,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "555 555 555 0510",
     "wpcf-yoox-store-email": "wynnlasvegas@us.ale.com",
@@ -4408,7 +4408,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Accessories"
+        "Womenswear | Accessories"
       ],
       "wpcf-store-image": [
         ""
@@ -4448,7 +4448,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Accessories",
+    "wpcf-store-gender": "Womenswear | Accessories",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+44 (0) 555 555 555",
     "wpcf-yoox-store-email": "clientservice.gb@ale.com",
@@ -4606,7 +4606,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Menswear / Accessories"
+        "Menswear | Accessories"
       ],
       "wpcf-store-image": [
         ""
@@ -4651,7 +4651,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Menswear / Accessories",
+    "wpcf-store-gender": "Menswear | Accessories",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+44 (0)555 555 555",
     "wpcf-yoox-store-email": [
@@ -4813,7 +4813,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -4853,7 +4853,7 @@
     "_yoox-store-gallery": "builtin",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 5553",
     "wpcf-yoox-store-email": "rodeo@ale.com",
@@ -5410,7 +5410,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -5451,7 +5451,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": "wynnpalace.mo@mo.ale.com",
@@ -5787,7 +5787,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -5827,7 +5827,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 5559",
     "wpcf-yoox-store-email": "balharbour@us.ale.com",
@@ -5985,7 +5985,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Women's Accessories &amp; RTW"
+        "Women's Accessories | RTW"
       ],
       "wpcf-store-image": [
         ""
@@ -6027,7 +6027,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Women's Accessories &amp; RTW",
+    "wpcf-store-gender": "Women's Accessories | RTW",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": [
@@ -6191,7 +6191,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -6232,7 +6232,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "555 555 555 3374",
     "wpcf-yoox-store-email": "clientservice.it@ale.com",
@@ -6390,7 +6390,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -6430,7 +6430,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 090",
     "wpcf-yoox-store-email": "monaco@mc.ale.com",
@@ -6786,7 +6786,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -6826,7 +6826,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "555 555 555 33 73",
     "wpcf-yoox-store-email": "",
@@ -6984,7 +6984,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -7024,7 +7024,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 5557",
     "wpcf-yoox-store-email": "madison@ale.com",
@@ -8180,7 +8180,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -8220,7 +8220,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+33 (0)555 555 555 78 00",
     "wpcf-yoox-store-email": "clientservice.fr@ale.com",
@@ -8552,7 +8552,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -8592,7 +8592,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 5551",
     "wpcf-yoox-store-email": "sanfrancisco@us.ale.com",
@@ -8948,7 +8948,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Women's RTW, Men's RTW, Women's Shoes &amp; Accessories"
+        "Women's RTW, Men's RTW, Women's Shoes | Accessories"
       ],
       "wpcf-store-image": [
         ""
@@ -8956,7 +8956,7 @@
       "wpcf-yoox-store-email": [
         "Women's RTW | skpwomen.xian@ale.com ",
         "Men's RTW | skpmen.xian@ale.com",
-        "Women's Shoes &amp; Accessories | skpshoes.xian@ale.com"
+        "Women's Shoes | Accessories | skpshoes.xian@ale.com"
       ],
       "wpcf-yoox-store-hours": [
         "Monday to Sunday 10:00 - 22:00\r\n\r\nWomen's RTW: +555 555 555 8790\r\nMen's RTW: +555 555 555 8751\r\nWomen's Shoes and Accessories: +555 555 555 8926"
@@ -8989,12 +8989,12 @@
     "_yoox-store-lng": "108.97335750000002",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Women's RTW, Men's RTW, Women's Shoes &amp; Accessories",
+    "wpcf-store-gender": "Women's RTW, Men's RTW, Women's Shoes|Accessories",
     "wpcf-store-image": "",
     "wpcf-yoox-store-email": [
       "Women's RTW | skpwomen.xian@ale.com ",
       "Men's RTW | skpmen.xian@ale.com",
-      "Women's Shoes &amp; Accessories | skpshoes.xian@ale.com"
+      "Women's Shoes & Accessories | skpshoes.xian@ale.com"
     ],
     "wpcf-yoox-store-hours": "Monday to Sunday 10:00 - 22:00\r\n\r\nWomen's RTW: +555 555 555 8790\r\nMen's RTW: +555 555 555 8751\r\nWomen's Shoes and Accessories: +555 555 555 8926",
     "wpcf-yoox-store-address": "NO.261 Changan North Road\r\nBeilin District, SKP Xi'an   \r\nXi’an 710061\r\nShaanxi, China",
@@ -9135,7 +9135,7 @@
         "builtin"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -9170,7 +9170,7 @@
       793078
     ],
     "_yoox-store-gallery": "builtin",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 1170",
     "wpcf-yoox-store-email": "iapm.cn@cn.ale.com",
@@ -9416,7 +9416,7 @@
         "builtin"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -9451,7 +9451,7 @@
     "_yoox-store-lat": "22.539721180766165",
     "_yoox-store-lng": "114.11146600000006",
     "_yoox-store-gallery": "builtin",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555 2720",
     "wpcf-yoox-store-email": "mixcity.sz@cn.ale.com",
@@ -9807,7 +9807,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -9847,7 +9847,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+555 555 555",
     "wpcf-yoox-store-email": "scottssquare.sg@sg.ale.com",
@@ -10159,7 +10159,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -10199,7 +10199,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+ 555 555 555 0910",
     "wpcf-yoox-store-email": "aoyama@jp.ale.com",
@@ -11367,7 +11367,7 @@
         "fullbleed"
       ],
       "wpcf-store-gender": [
-        "Womenswear / Menswear"
+        "Womenswear | Menswear"
       ],
       "wpcf-store-image": [
         ""
@@ -11407,7 +11407,7 @@
     "_yoast_wpseo_content_score": "30",
     "wpcf-hero-image-focus-point": "cc",
     "wpcf-hero-image-behaviour": "fullbleed",
-    "wpcf-store-gender": "Womenswear / Menswear",
+    "wpcf-store-gender": "Womenswear | Menswear",
     "wpcf-store-image": "",
     "wpcf-yoox-store-phone": "+43 (0) 555 555 555 395",
     "wpcf-yoox-store-email": "wien@at.ale.com",
