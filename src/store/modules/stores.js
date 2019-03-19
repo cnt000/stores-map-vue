@@ -14,7 +14,8 @@ const state = {
   error: false,
   mapLoaded: false,
   selectedCountryId: 0,
-  countries: []
+  countries: [],
+  filters: []
 };
 
 const getters = {
@@ -65,6 +66,9 @@ const actions = {
   },
   getActive({ commit }, { map }) {
     commit("getActive", { map });
+  },
+  filterToggle({ commit }, id) {
+    commit("filterToggle", id);
   }
 };
 
@@ -107,6 +111,17 @@ const mutations = {
   },
   mapLoaded(state) {
     state.mapLoaded = true;
+  },
+  filterToggle(state, { id }) {
+    if (
+      state.filters.find(el => el.name === id.name && el.value === id.value)
+    ) {
+      state.filters = state.filters.filter(
+        el => el.name === id.name && el.value !== id.value
+      );
+    } else {
+      state.filters = [...state.filters, { name: id.name, value: id.value }];
+    }
   }
 };
 
