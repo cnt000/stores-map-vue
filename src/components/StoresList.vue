@@ -1,13 +1,5 @@
 <template>
   <div class="stores">
-    <!-- <select @change="selectCountryId" v-model="countryId" class="stores_countries">
-      <option value="0">All</option>
-      <option
-        v-for="country in countries"
-        :key="country.term_id"
-        :value="country.term_id"
-      >{{ country.name }}</option>
-    </select>-->
     <div>
       <input
         class="stores_search"
@@ -36,7 +28,6 @@
             {{ store.name }}
           </div>
           <div class="stores_list_store_address">{{ store.address }}</div>
-          <!--div>({{ store.lat }} - {{ store.lng }})</div-->
         </li>
       </ul>
     </div>
@@ -53,6 +44,11 @@ export default {
       countryId: 0
     };
   },
+  watch: {
+    filters: function() {
+      this.getFilteredStores();
+    }
+  },
   computed: {
     ...mapState({
       active: state => state.stores.active,
@@ -60,16 +56,11 @@ export default {
       CountryId: state => state.stores.selectedCountryId,
       storeId: state => state.stores.selectedStoreId,
       pending: state => state.stores.pending,
-      error: state => state.stores.error
+      error: state => state.stores.error,
+      filters: state => state.stores.filters
     }),
     filteredStores() {
-      if (this.keyword === "") return this.active;
-      return this.active.filter(elm => {
-        let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
-          elm.country
-        } ${elm.continent}`;
-        return string.toLowerCase().includes(this.keyword.toLowerCase());
-      });
+      return this.getFilteredStores();
     }
     // filteredStores() {
     //   const storeName = R.prop("name");
@@ -118,6 +109,25 @@ export default {
     // }
   },
   methods: {
+    getFilteredStores() {
+      const activeStores = this.active;
+      const storeFilters = this.filters;
+      const hasFilter = store => storeFilters.filter(filter => {
+              return store[filter.name] === filter.value;
+            }).length > 0
+      if (storeFilters.length > 0) {
+        return activeStores.filter(
+          store => hasFilter(store)
+        );
+      }
+      if (this.keyword === "") return activeStores;
+      return activeStores.filter(elm => {
+        let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
+          elm.country
+        } ${elm.continent}`;
+        return string.toLowerCase().includes(this.keyword.toLowerCase());
+      });
+    },
     selectStore(clickedId) {
       this.$store.dispatch({
         type: "stores/selectStore",
@@ -148,7 +158,6 @@ export default {
     height: inherit;
   }
   &_search {
-    margin-top: 2px;
     border: 1px solid black;
     width: 100%;
     height: 56px;

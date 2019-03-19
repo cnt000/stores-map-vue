@@ -1,6 +1,10 @@
 <template>
   <div class="app-container">
     <sidebar>
+      <div class="filters">
+        <dim-filter type="continent" />
+        <dim-filter type="gender" />
+      </div>
       <stores-list />
     </sidebar>
     <map-loader :map-config="mapConfig" :apiKey="apiKey">
@@ -19,6 +23,7 @@ import MyPosition from "./MyPosition.vue";
 import Markers from "./Markers.vue";
 import Sidebar from "./Sidebar.vue";
 import StoresList from "./StoresList.vue";
+import DimFilter from "./DimFilter.vue";
 import { mapConfig, apiKey } from "@/conf.js";
 
 export default {
@@ -46,7 +51,8 @@ export default {
     Sidebar,
     StoresList,
     MyPosition,
-    Markers
+    Markers,
+    DimFilter
   }
 };
 </script>
