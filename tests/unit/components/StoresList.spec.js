@@ -22,11 +22,15 @@ describe("StoresList.vue", () => {
     testState = {
       all: storesExamples,
       active: storesExamples,
+      filtered: storesExamples,
+      path: "/stores-map-vue/store-locator",
+      selectedStoreId: "",
       pending: false,
       error: false,
-      selectedStoreId: "",
-      countries: countriesExamples,
-      selectedCountryId: 0
+      mapLoaded: false,
+      selectedCountryId: 0,
+      countries: [],
+      filters: []
     };
 
     store = new Vuex.Store({

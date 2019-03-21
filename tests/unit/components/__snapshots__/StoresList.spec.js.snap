@@ -7,19 +7,27 @@ exports[`StoresList.vue matches snapshot 1`] = `
     <!---->
     <ul class="stores_list">
       <li data-storeid="1742" class="stores_list_store">
-        <div title="ABU DHABI - SOWWAH" class="stores_list_store_name">ABU DHABI - SOWWAH</div>
+        <div title="ABU DHABI - SOWWAH" class="stores_list_store_name">
+          ABU DHABI - SOWWAH
+        </div>
         <div class="stores_list_store_address">The Galleria, Sowwah Square</div>
       </li>
       <li data-storeid="1744" class="stores_list_store">
-        <div title="BAKU - PORT BAKU" class="stores_list_store_name">BAKU - PORT BAKU</div>
+        <div title="BAKU - PORT BAKU" class="stores_list_store_name">
+          BAKU - PORT BAKU
+        </div>
         <div class="stores_list_store_address">Port Baku Mall, Neftchiler ave. 153</div>
       </li>
       <li data-storeid="1721" class="stores_list_store">
-        <div title="BEIJING - SANLITUN" class="stores_list_store_name">BEIJING - SANLITUN</div>
+        <div title="BEIJING - SANLITUN" class="stores_list_store_name">
+          BEIJING - SANLITUN
+        </div>
         <div class="stores_list_store_address">Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027</div>
       </li>
       <li data-storeid="1739" class="stores_list_store">
-        <div title="BEIJING - Shin Kong Place" class="stores_list_store_name">BEIJING - Shin Kong Place</div>
+        <div title="BEIJING - Shin Kong Place" class="stores_list_store_name">
+          BEIJING - Shin Kong Place
+        </div>
         <div class="stores_list_store_address">Shop D1046, D4010, D4052-1 (WRTW), D2040 (Men’s)
           Level 1
           Shin Kong Place
