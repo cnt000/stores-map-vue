@@ -6,7 +6,13 @@
     <ul>
       <li v-for="dimension in dimensions" :key="dimension">
         <label>
-          <input type="checkbox" @click="selectFilter" :name="type" :value="dimension" /> {{ dimension }}
+          <input
+            type="checkbox"
+            @click="selectFilter"
+            :name="type"
+            :value="dimension"
+          />
+          {{ dimension }}
         </label>
       </li>
     </ul>

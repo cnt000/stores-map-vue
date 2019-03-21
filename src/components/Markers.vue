@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted() {
-    this.addMarker();
+    this.addMarkers();
     if (clusterizeResults) this.clusterize();
     this.setActive(this.selectedStoreId);
   },
@@ -54,7 +54,7 @@ export default {
       if (zoom > 20 && this.isMarkersized) {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
-        this.addMarker();
+        this.addMarkers();
       } else if (zoom < 14 && !this.isMarkersized) {
         this.clusterize();
       }
@@ -94,7 +94,7 @@ export default {
       infowindow.open(this.map, mark);
       this.infowindows.push(infowindow);
     },
-    addMarker() {
+    addMarkers() {
       const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;

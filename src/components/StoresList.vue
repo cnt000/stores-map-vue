@@ -44,11 +44,6 @@ export default {
       countryId: 0
     };
   },
-  watch: {
-    filters: function() {
-      this.getFilteredStores();
-    }
-  },
   computed: {
     ...mapState({
       active: state => state.stores.active,
@@ -112,13 +107,12 @@ export default {
     getFilteredStores() {
       const activeStores = this.active;
       const storeFilters = this.filters;
-      const hasFilter = store => storeFilters.filter(filter => {
-              return store[filter.name] === filter.value;
-            }).length > 0
+      const hasFilter = store =>
+        storeFilters.filter(filter => {
+          return store[filter.name] === filter.value;
+        }).length > 0;
       if (storeFilters.length > 0) {
-        return activeStores.filter(
-          store => hasFilter(store)
-        );
+        return activeStores.filter(store => hasFilter(store));
       }
       if (this.keyword === "") return activeStores;
       return activeStores.filter(elm => {

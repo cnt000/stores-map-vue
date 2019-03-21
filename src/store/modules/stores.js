@@ -109,6 +109,17 @@ const mutations = {
       map.getBounds().contains({ lat: +m.lat, lng: +m.lng })
     );
   },
+  filterActive(state) {
+    const activeStores = state.active;
+    const storeFilters = state.filters;
+    const hasFilter = store =>
+      storeFilters.filter(filter => {
+        return store[filter.name] === filter.value;
+      }).length > 0;
+    if (storeFilters.length > 0) {
+      state.active = activeStores.filter(store => hasFilter(store));
+    }
+  },
   mapLoaded(state) {
     state.mapLoaded = true;
   },

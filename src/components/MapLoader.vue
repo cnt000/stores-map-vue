@@ -37,7 +37,8 @@ export default {
     ...mapState({
       store: state => state.stores.selectedStoreId,
       country: state => state.stores.selectedCountryId,
-      mapLoaded: state => state.stores.mapLoaded
+      mapLoaded: state => state.stores.mapLoaded,
+      filters: state => state.stores.filters
     })
   },
   watch: {
@@ -49,9 +50,18 @@ export default {
     },
     mapLoaded: function() {
       this.store && this.panToSelectedStore();
+    },
+    filters: function() {
+      debugger;
+      this.filterActive();
     }
   },
   methods: {
+    filterActive() {
+      this.$store.dispatch({
+        type: "stores/filterActive"
+      });
+    },
     boundsChanged() {
       this.$store.dispatch({
         type: "stores/getActive",

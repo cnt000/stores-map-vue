@@ -39,6 +39,7 @@ export default {
 <style lang="scss">
 .geolocalize {
   &_button {
+    // background-image: url(img/icons/my-location.svg);
     position: absolute;
     left: 350px;
     bottom: 50px;
