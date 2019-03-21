@@ -1,6 +1,6 @@
 <template>
   <div class="geolocalize">
-    <button class="geolocalize_button" @click="localize">GeoLocalize Me</button>
+    <button class="geolocalize_button" @click="localize"></button>
   </div>
 </template>
 
@@ -39,14 +39,14 @@ export default {
 <style lang="scss">
 .geolocalize {
   &_button {
-    // background-image: url(img/icons/my-location.svg);
+    background-image: url(../../public/img/icons/my-location.svg);
     position: absolute;
     left: 350px;
     bottom: 50px;
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     z-index: 1;
-    border-radius: 30px;
+    border-radius: 20px;
   }
 }
 </style>
