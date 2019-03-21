@@ -54,7 +54,7 @@ export default {
     }),
     filteredStores() {
       let stores = this.active;
-      if(this.filtered.length > 0) {
+      if (this.filtered.length > 0) {
         let filteredSet = new Set(this.filtered);
         stores = this.active.filter(x => filteredSet.has(x));
       }
