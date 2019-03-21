@@ -8,6 +8,7 @@ import { sortByNames } from "@/conf";
 const state = {
   all: [],
   active: [],
+  filtered: [],
   path: "/stores-map-vue/store-locator",
   selectedStoreId: "",
   pending: false,
@@ -69,6 +70,9 @@ const actions = {
   },
   filterToggle({ commit }, id) {
     commit("filterToggle", id);
+  },
+  filterActive({ commit }) {
+    commit("filterActive");
   }
 };
 
@@ -110,14 +114,15 @@ const mutations = {
     );
   },
   filterActive(state) {
-    const activeStores = state.active;
     const storeFilters = state.filters;
     const hasFilter = store =>
       storeFilters.filter(filter => {
         return store[filter.name] === filter.value;
       }).length > 0;
     if (storeFilters.length > 0) {
-      state.active = activeStores.filter(store => hasFilter(store));
+      state.filtered = state.all.filter(store => hasFilter(store));
+    } else {
+      state.filtered = state.all;
     }
   },
   mapLoaded(state) {

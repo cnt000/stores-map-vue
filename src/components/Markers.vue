@@ -24,7 +24,9 @@ export default {
     ...mapState({
       selectedStoreId: state => state.stores.selectedStoreId,
       stores: state => state.stores.all,
-      active: state => state.stores.active
+      active: state => state.stores.active,
+      filtered: state => state.stores.filtered,
+      filters: state => state.stores.filters
     })
   },
   watch: {
@@ -34,6 +36,19 @@ export default {
     active() {
       if (clusterizeResults) {
         this.checkZoom();
+      }
+    },
+    filters() {
+      if (clusterizeResults) {
+        this.Markers.clearMarkers();
+        this.refreshMarkers();
+        this.clusterize();
+      } else {
+        // clear marker if not clusterized
+        for (var i = 0; i < this.gMarkers.length; i++) {
+          this.gMarkers[i].setMap(null);
+        }
+        this.refreshMarkers();
       }
     }
   },
@@ -99,6 +114,26 @@ export default {
       const gMap = this.map;
       let mark;
       this.gMarkers = this.stores.map(store => {
+        mark = new Marker({
+          position: { lat: +store.lat, lng: +store.lng },
+          icon: markerIcon,
+          title: store.name,
+          map: gMap
+        });
+        mark.addListener("click", () => {
+          this.$store.dispatch({
+            type: "stores/selectStore",
+            id: store.id
+          });
+        });
+        return mark;
+      });
+    },
+    refreshMarkers() {
+      const { Marker } = this.google.maps;
+      const gMap = this.map;
+      let mark;
+      this.gMarkers = this.filtered.map(store => {
         mark = new Marker({
           position: { lat: +store.lat, lng: +store.lng },
           icon: markerIcon,

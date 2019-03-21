@@ -106,14 +106,14 @@ export default {
   methods: {
     getFilteredStores() {
       const activeStores = this.active;
-      const storeFilters = this.filters;
-      const hasFilter = store =>
-        storeFilters.filter(filter => {
-          return store[filter.name] === filter.value;
-        }).length > 0;
-      if (storeFilters.length > 0) {
-        return activeStores.filter(store => hasFilter(store));
-      }
+      // const storeFilters = this.filters;
+      // const hasFilter = store =>
+      //   storeFilters.filter(filter => {
+      //     return store[filter.name] === filter.value;
+      //   }).length > 0;
+      // if (storeFilters.length > 0) {
+      //   return activeStores.filter(store => hasFilter(store));
+      // }
       if (this.keyword === "") return activeStores;
       return activeStores.filter(elm => {
         let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${

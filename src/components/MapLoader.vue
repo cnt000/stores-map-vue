@@ -52,7 +52,6 @@ export default {
       this.store && this.panToSelectedStore();
     },
     filters: function() {
-      debugger;
       this.filterActive();
     }
   },
