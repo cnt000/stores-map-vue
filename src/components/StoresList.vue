@@ -47,15 +47,24 @@ export default {
   computed: {
     ...mapState({
       active: state => state.stores.active,
-      countries: state => state.stores.countries,
-      CountryId: state => state.stores.selectedCountryId,
       storeId: state => state.stores.selectedStoreId,
       pending: state => state.stores.pending,
       error: state => state.stores.error,
-      filters: state => state.stores.filters
+      filtered: state => state.stores.filtered
     }),
     filteredStores() {
-      return this.getFilteredStores();
+      let stores = this.active;
+      if(this.filtered.length > 0) {
+        let filteredSet = new Set(this.filtered);
+        stores = this.active.filter(x => filteredSet.has(x));
+      }
+      if (this.keyword === "") return stores;
+      return stores.filter(elm => {
+        let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
+          elm.country
+        } ${elm.continent}`;
+        return string.toLowerCase().includes(this.keyword.toLowerCase());
+      });
     }
     // filteredStores() {
     //   const storeName = R.prop("name");
@@ -104,24 +113,6 @@ export default {
     // }
   },
   methods: {
-    getFilteredStores() {
-      const activeStores = this.active;
-      // const storeFilters = this.filters;
-      // const hasFilter = store =>
-      //   storeFilters.filter(filter => {
-      //     return store[filter.name] === filter.value;
-      //   }).length > 0;
-      // if (storeFilters.length > 0) {
-      //   return activeStores.filter(store => hasFilter(store));
-      // }
-      if (this.keyword === "") return activeStores;
-      return activeStores.filter(elm => {
-        let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
-          elm.country
-        } ${elm.continent}`;
-        return string.toLowerCase().includes(this.keyword.toLowerCase());
-      });
-    },
     selectStore(clickedId) {
       this.$store.dispatch({
         type: "stores/selectStore",
