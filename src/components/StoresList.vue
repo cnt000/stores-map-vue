@@ -59,6 +59,7 @@ export default {
         stores = this.active.filter(x => filteredSet.has(x));
       }
       if (this.keyword === "") return stores;
+      // filtrare anche su mappa con textsearch? TODO
       return stores.filter(elm => {
         let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
           elm.country

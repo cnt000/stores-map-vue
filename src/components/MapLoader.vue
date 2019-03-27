@@ -12,7 +12,6 @@
 <script>
 import GoogleMapsApiLoader from "google-maps-api-loader";
 import { mapState } from "vuex";
-import * as R from "ramda";
 
 export default {
   props: {
@@ -36,7 +35,6 @@ export default {
   computed: {
     ...mapState({
       store: state => state.stores.selectedStoreId,
-      country: state => state.stores.selectedCountryId,
       mapLoaded: state => state.stores.mapLoaded,
       filters: state => state.stores.filters
     })
@@ -44,9 +42,6 @@ export default {
   watch: {
     store: function() {
       this.mapLoaded && this.panToSelectedStore();
-    },
-    country: function(val) {
-      this.selectCountry(val);
     },
     mapLoaded: function() {
       this.store && this.panToSelectedStore();
@@ -85,23 +80,6 @@ export default {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];
       let zoom = !storeSelected.id ? 10 : 16;
       this.panToAndZoom(storeSelected.lat, storeSelected.lng, zoom);
-    },
-    selectCountry(selectedCountryId) {
-      if (selectedCountryId === 0) {
-        this.panToAndZoom(
-          R.path(["center", "lat"], this.mapConfig),
-          R.path(["center", "lng"], this.mapConfig),
-          R.path(["zoom"], this.mapConfig)
-        );
-        return;
-      }
-      const countrySelected = this.$store.getters["stores/getSelectedCountry"];
-      this.geocoder.geocode({ address: countrySelected.name }, results => {
-        const location = R.path([0, "geometry", "location"], results);
-        let lat = location.lat();
-        let lng = location.lng();
-        this.panToAndZoom(lat, lng, 6);
-      });
     },
     panToAndZoom(lat, lng, zoom) {
       this.map.panTo({

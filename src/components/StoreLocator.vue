@@ -2,7 +2,7 @@
   <div class="app-container">
     <sidebar>
       <div class="filters">
-        <dim-filter type="continent" />
+        <dim-filter type="country" />
         <dim-filter type="gender" />
       </div>
       <stores-list />
@@ -37,6 +37,7 @@ export default {
     const splitWords = R.split("-");
     const storeParam = this.$route.params.store || "";
     const storeId = R.last(splitWords(storeParam));
+    // todo serfe storeId?
     storeId &&
       this.$store.dispatch({
         type: "stores/selectStore",

@@ -23,6 +23,7 @@ export default {
             map.setCenter(pos);
             map.setZoom(10);
           },
+          // TODO?
           function() {
             // handleLocationError(true, infoWindow, map.getCenter());
           }

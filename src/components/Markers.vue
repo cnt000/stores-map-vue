@@ -113,6 +113,7 @@ export default {
       const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;
+      // unire a sotto TODO
       this.gMarkers = this.stores.map(store => {
         mark = new Marker({
           position: { lat: +store.lat, lng: +store.lng },
