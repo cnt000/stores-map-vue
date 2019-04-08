@@ -79,11 +79,10 @@ export default {
         return;
       }
       const { InfoWindow } = this.google.maps;
-      // TODO better get for mark
-      const store = this.stores.filter(pos => {
+      const store = this.stores.find(pos => {
         return pos.id === id;
-      })[0];
-      const mark = this.gMarkers.filter(m => {
+      });
+      const mark = this.gMarkers.find(m => {
         return (
           m
             .getPosition()
@@ -94,7 +93,7 @@ export default {
             .lng()
             .toFixed(7) === (+store.lng).toFixed(7)
         );
-      })[0];
+      });
 
       const infowindow = new InfoWindow({
         content: `<div class="store-name">${store.name}<br>
