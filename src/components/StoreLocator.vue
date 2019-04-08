@@ -34,15 +34,18 @@ export default {
     };
   },
   mounted() {
-    const splitWords = R.split("-");
-    const storeParam = this.$route.params.store || "";
-    const storeId = R.last(splitWords(storeParam));
-    // todo serfe storeId?
-    storeId &&
-      this.$store.dispatch({
-        type: "stores/selectStore",
-        id: storeId
-      });
+    const route = this.$route;
+    const getStoreUrl = R.pathOr("", ["params", "store"]);
+    const getStoreId = R.compose(
+      R.last,
+      R.split("-"),
+      getStoreUrl
+    );
+    const storeId = getStoreId(route) || 0; // todo remove || 0
+    this.$store.dispatch({
+      type: "stores/selectStore",
+      id: storeId
+    });
   },
   created() {
     this.$store.dispatch("stores/getAllStores");
