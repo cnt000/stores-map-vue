@@ -1,9 +1,9 @@
 <template>
   <div :class="{ open: opened, filter: true }">
-    <span class="title" @click="toggleTitle">
+    <span class="filter_title" @click="toggleTitle">
       {{ type[0].toUpperCase() + type.slice(1) }}
     </span>
-    <ul>
+    <ul class="filter_list">
       <li v-for="dimension in dimensions" :key="dimension">
         <label>
           <input
@@ -21,6 +21,7 @@
 
 <script>
 import { mapState } from "vuex";
+import * as R from "ramda";
 
 export default {
   data() {
@@ -36,12 +37,17 @@ export default {
       stores: state => state.stores.all
     }),
     dimensions() {
-      return [
-        ...this.stores.reduce(
-          (acc, curr) => acc.add(curr[this.type]),
-          new Set([])
-        )
-      ].filter(i => i);
+      const notEmpty = R.compose(R.not, R.isEmpty);
+      const stores = this.stores;
+      const filters = new Set();
+      const toArray = a => [...a];
+      const add = (a, b) => a.add(b[this.type]);
+      const addInSet = R.pipe(
+        R.reduce(add, filters),
+        toArray,
+        R.filter(notEmpty)
+      );
+      return addInSet(stores);
     }
   },
   methods: {
@@ -49,13 +55,15 @@ export default {
       this.opened = !this.opened;
     },
     selectFilter(filter) {
+      const { name, value, checked } = filter.target;
+      const id = {
+        name,
+        value,
+        checked
+      };
       this.$store.dispatch({
         type: "stores/filterToggle",
-        id: {
-          name: filter.target.name,
-          value: filter.target.value,
-          checked: filter.target.checked
-        }
+        id
       });
     }
   }
@@ -79,13 +87,13 @@ li {
   &.open {
     height: 100%;
   }
-  ul {
-    text-align: left;
-  }
-  .title {
+  &_title {
     display: block;
     line-height: 2.2;
     font-weight: bold;
+  }
+  &_list {
+    text-align: left;
   }
 }
 </style>
