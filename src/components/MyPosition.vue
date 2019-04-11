@@ -15,7 +15,7 @@ export default {
       const map = this.map;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          function(position) {
+          position => {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
@@ -23,14 +23,10 @@ export default {
             map.setCenter(pos);
             map.setZoom(10);
           },
-          // TODO?
-          function() {
-            // handleLocationError(true, infoWindow, map.getCenter());
+          function locationError() {
+            throw "Location error";
           }
         );
-      } else {
-        // Browser doesn't support Geolocation
-        // handleLocationError(false, infoWindow, map.getCenter());
       }
     }
   }

@@ -35,16 +35,20 @@ export default {
   },
   mounted() {
     const route = this.$route;
-    const getStoreUrl = R.pathOr("", ["params", "store"]);
-    const getStoreId = R.compose(
-      R.last,
-      R.split("-"),
-      getStoreUrl
+    const getStoreId = R.pipe(
+      R.pathOr(0, ["params", "store"]),
+      R.when(
+        R.identity,
+        R.pipe(
+          R.split("-"),
+          R.last
+        )
+      )
     );
-    const storeId = getStoreId(route) || 0; // todo remove || 0
+    const id = getStoreId(route);
     this.$store.dispatch({
       type: "stores/selectStore",
-      id: storeId
+      id
     });
   },
   created() {
