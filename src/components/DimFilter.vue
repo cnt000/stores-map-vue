@@ -37,7 +37,10 @@ export default {
       stores: state => state.stores.all
     }),
     dimensions() {
-      const notEmpty = R.compose(R.not, R.isEmpty);
+      const notEmpty = R.compose(
+        R.not,
+        R.isEmpty
+      );
       const stores = this.stores;
       const filters = new Set();
       const toArray = a => [...a];

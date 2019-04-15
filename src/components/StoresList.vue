@@ -53,17 +53,26 @@ export default {
       filtered: state => state.stores.filtered
     }),
     filteredStores() {
+      // filtrare anche su mappa con textsearch? TODO
       let stores = this.active;
       if (this.filtered.length > 0) {
-        let filteredSet = new Set(this.filtered);
-        stores = this.active.filter(x => filteredSet.has(x));
+        /*         let filteredSet = new Set(this.filtered);
+        const has = x => filteredSet.has(x);
+        const filterResultWithActive = R.filter(has);
+        stores = filterResultWithActive(this.active); */
       }
       if (this.keyword === "") return stores;
-      // filtrare anche su mappa con textsearch? TODO
       return stores.filter(elm => {
         let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
           elm.country
         } ${elm.continent}`;
+        /*         const todo = R.pipe(
+          R.toLower,
+          R.contains(
+            R.toLower(this.keyword)
+          )
+        );
+        return todo(string);*/
         return string.toLowerCase().includes(this.keyword.toLowerCase());
       });
     }

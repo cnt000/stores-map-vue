@@ -21,12 +21,14 @@ const state = {
 
 const getters = {
   getSelectedStore: state => {
+    // todo ramda
     const selectStoreFromId = post => post.id === state.selectedStoreId;
     const selectStore = pred => R.filter(pred);
     const getStore = selectStore(selectStoreFromId);
     return R.head(getStore(state.all));
   },
   getSelectedCountry: state => {
+    // todo ramda
     const getStoreFromCountryId = R.filter(
       R.propEq("term_id", state.selectedCountryId)
     );
@@ -100,27 +102,32 @@ const mutations = {
     state.error = true;
   },
   selectStore(state, id) {
-    const getStoreById = R.filter(elm => elm.id === id, state.all);
-    const storeName = R.prop("name", R.head(getStoreById));
-    const sanitize = name => R.replace(/([ ]+)/g, "", R.toLower(name));
-    state.storeName = sanitize(storeName);
+    const getId = x => x.id === id;
+    const getSanitizedStoreName = R.pipe(
+      R.find(getId),
+      R.prop("name"),
+      R.toLower,
+      R.replace(/([ ]+)/g, "")
+    );
+    state.storeName = getSanitizedStoreName(state.all);
     state.path = `/store-locator/${state.storeName}-${id}`;
-    router.push(state.path);
     state.selectedStoreId = id;
+    router.push(state.path);
   },
   getActive(state, { map }) {
-    state.active = state.all.filter(m =>
-      map.getBounds().contains({ lat: +m.lat, lng: +m.lng })
-    );
+    state.active = state.all.filter((
+      m // todo ramda
+    ) => map.getBounds().contains({ lat: +m.lat, lng: +m.lng }));
   },
   filterActive(state) {
     const storeFilters = state.filters;
     const hasFilter = store =>
       storeFilters.filter(filter => {
+        // todo ramda
         return store[filter.name] === filter.value;
       }).length > 0;
     if (storeFilters.length > 0) {
-      state.filtered = state.all.filter(store => hasFilter(store));
+      state.filtered = state.all.filter(store => hasFilter(store)); // todo ramda
     } else {
       state.filtered = state.all;
     }
@@ -130,9 +137,10 @@ const mutations = {
   },
   filterToggle(state, { id }) {
     if (
-      state.filters.find(el => el.name === id.name && el.value === id.value)
+      state.filters.find(el => el.name === id.name && el.value === id.value) // todo ramda
     ) {
       state.filters = state.filters.filter(
+        // todo ramda
         el => el.name === id.name && el.value !== id.value
       );
     } else {

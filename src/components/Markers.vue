@@ -54,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    this.addMarkers();
+    this.drawMarkers();
     if (clusterizeResults) this.clusterize();
     this.setActive(this.selectedStoreId);
   },
@@ -95,7 +95,7 @@ export default {
       });
       const lat = parseFloat(store.lat).toFixed(7);
       const lng = parseFloat(store.lng).toFixed(7);
-      const findMarker = gMark => 
+      const findMarker = gMark =>
         gMark
           .getPosition()
           .lat()
@@ -113,7 +113,7 @@ export default {
       const gMap = this.map;
       let mark;
       const { Marker } = this.google.maps;
-      this.filtered.map(store => {
+      return this.filtered.forEach(store => {
         mark = new Marker({
           position: { lat: +store.lat, lng: +store.lng },
           icon: markerIcon,

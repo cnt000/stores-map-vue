@@ -2,7 +2,6 @@ import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
 import StoresList from "@/components/StoresList.vue";
 import storesExamples from "../stores-examples.json";
-import countriesExamples from "../countries-examples.json";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
