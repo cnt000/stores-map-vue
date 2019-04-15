@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
-    "testWatch": "npm run test:unit -- --watch",
+    "test": "npm run test:unit -- --watch",
     "ui": "vue ui",
     "deploy": "bash deploy.sh"
   },
