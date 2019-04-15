@@ -42,19 +42,19 @@ export default {
     filters() {
       if (clusterizeResults) {
         this.Markers.clearMarkers();
-        this.drawMarkers();
+        this.refreshMarkers();
         this.clusterize();
       } else {
         // clear marker if not clusterized
-        const clearGMarker = gMarker => gMarker.setMap(null);
-        const clearGMarkers = R.forEach(clearGMarker);
-        clearGMarkers(this.gMarkers);
-        this.drawMarkers();
+        for (var i = 0; i < this.gMarkers.length; i++) {
+          this.gMarkers[i].setMap(null);
+        }
+        this.refreshMarkers();
       }
     }
   },
   mounted() {
-    this.drawMarkers();
+    this.addMarkers();
     if (clusterizeResults) this.clusterize();
     this.setActive(this.selectedStoreId);
   },
@@ -70,7 +70,7 @@ export default {
       if (zoom > 20 && this.isMarkersized) {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
-        this.drawMarkers();
+        this.addMarkers();
       } else if (zoom < 14 && !this.isMarkersized) {
         this.clusterize();
       }
@@ -109,11 +109,32 @@ export default {
       infowindow.open(this.map, mark);
       this.infowindows.push(infowindow);
     },
-    drawMarkers() {
+    addMarkers() {
+      const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;
+      // unire a sotto TODO
+      this.gMarkers = this.stores.map(store => {
+        mark = new Marker({
+          position: { lat: +store.lat, lng: +store.lng },
+          icon: markerIcon,
+          title: store.name,
+          map: gMap
+        });
+        mark.addListener("click", () => {
+          this.$store.dispatch({
+            type: "stores/selectStore",
+            id: store.id
+          });
+        });
+        return mark;
+      });
+    },
+    refreshMarkers() {
       const { Marker } = this.google.maps;
-      return this.filtered.forEach(store => {
+      const gMap = this.map;
+      let mark;
+      this.gMarkers = this.filtered.map(store => {
         mark = new Marker({
           position: { lat: +store.lat, lng: +store.lng },
           icon: markerIcon,
