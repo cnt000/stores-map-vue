@@ -54,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    this.addMarkers();
+    this.refreshMarkers(this.stores);
     if (clusterizeResults) this.clusterize();
     this.setActive(this.selectedStoreId);
   },
@@ -70,7 +70,7 @@ export default {
       if (zoom > 20 && this.isMarkersized) {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
-        this.addMarkers();
+        this.refreshMarkers();
       } else if (zoom < 14 && !this.isMarkersized) {
         this.clusterize();
       }
@@ -108,27 +108,6 @@ export default {
       const mark = findMarkerByPosition(this.gMarkers);
       infowindow.open(this.map, mark);
       this.infowindows.push(infowindow);
-    },
-    addMarkers() {
-      const { Marker } = this.google.maps;
-      const gMap = this.map;
-      let mark;
-      // unire a sotto TODO
-      this.gMarkers = this.stores.map(store => {
-        mark = new Marker({
-          position: { lat: +store.lat, lng: +store.lng },
-          icon: markerIcon,
-          title: store.name,
-          map: gMap
-        });
-        mark.addListener("click", () => {
-          this.$store.dispatch({
-            type: "stores/selectStore",
-            id: store.id
-          });
-        });
-        return mark;
-      });
     },
     refreshMarkers() {
       const { Marker } = this.google.maps;

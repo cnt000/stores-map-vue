@@ -21,7 +21,6 @@ describe("StoresList.vue", () => {
     testState = {
       all: storesExamples,
       active: storesExamples,
-      filtered: storesExamples,
       path: "/stores-map-vue/store-locator",
       selectedStoreId: "",
       pending: false,

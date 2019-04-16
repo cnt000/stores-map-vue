@@ -32,6 +32,11 @@ export default {
   props: {
     type: String
   },
+  mounted() {
+    this.$store.dispatch({
+      type: "stores/filterActive"
+    });
+  },
   computed: {
     ...mapState({
       stores: state => state.stores.all
