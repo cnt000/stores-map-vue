@@ -11,14 +11,14 @@
       <span v-if="error">... ERROR!!! ...</span>
       <ul class="stores_list">
         <li
-          v-if="filteredStores.length === 0"
+          v-if="active.length === 0"
           class="stores_list_store stores_list_store--empty"
         >
           Non ci sono risultati
         </li>
         <li
           v-else
-          v-for="store in filteredStores"
+          v-for="store in active"
           :data-storeid="store.id"
           :key="store.id"
           v-on:click="selectStore(store.id)"
@@ -51,76 +51,7 @@ export default {
       pending: state => state.stores.pending,
       error: state => state.stores.error,
       filtered: state => state.stores.filtered
-    }),
-    filteredStores() {
-      // filtrare anche su mappa con textsearch? TODO
-      let stores = this.active;
-      if (this.filtered.length > 0) {
-        /*         let filteredSet = new Set(this.filtered);
-        const has = x => filteredSet.has(x);
-        const filterResultWithActive = R.filter(has);
-        stores = filterResultWithActive(this.active); */
-      }
-      if (this.keyword === "") return stores;
-      return stores.filter(elm => {
-        let string = `${elm.name} ${elm.address} ${elm.gender} ${elm.city} ${
-          elm.country
-        } ${elm.continent}`;
-        /*         const todo = R.pipe(
-          R.toLower,
-          R.contains(
-            R.toLower(this.keyword)
-          )
-        );
-        return todo(string);*/
-        return string.toLowerCase().includes(this.keyword.toLowerCase());
-      });
-    }
-    // filteredStores() {
-    //   const storeName = R.prop("name");
-    //   const address = R.prop("address");
-    //   const gender = R.prop("gender");
-    //   const city = R.path(["locations", "city", "name"]);
-    //   const country = R.path(["locations", "country", "name"]);
-    //   const continent = R.path(["locations", "continent", "name"]);
-
-    //   const keywordInLowerCase = R.toLower(this.keyword);
-    //   const hasKeywordInTitle = R.includes(keywordInLowerCase);
-
-    //   const filterByKeywordAddress = R.filter(
-    //     R.pipe(
-    //       address,
-    //       R.toLower,
-    //       hasKeywordInTitle
-    //     )
-    //   );
-    //   const filterByKeywordGender = R.filter(
-    //     R.pipe(
-    //       gender,
-    //       R.toLower,
-    //       hasKeywordInTitle
-    //     )
-    //   );
-    //   // const countryId = this.CountryId;
-    //   // const hasCountryId = R.any(R.propEq("term_id", countryId));
-    //   // const filterByCountryId = R.filter(
-    //   //   R.compose(
-    //   //     hasCountryId,
-    //   //     R.prop("terms")
-    //   //   )
-    //   // );
-    //   // const countryIdGtZero = () => R.gt(this.CountryId, 0);
-    //   // const filterByCountryIdAndKeyword = R.compose(
-    //   //   filterByKeyword,
-    //   //   R.when(countryIdGtZero, filterByCountryId)
-    //   // );
-    //   const filterBy = R.pipe(
-    //     filterByKeyword,
-    //     filterByKeywordGender,
-    //     filterByKeywordAddress
-    //   );
-    //   return filterBy(this.active);
-    // }
+    })
   },
   methods: {
     selectStore(clickedId) {
@@ -138,6 +69,11 @@ export default {
   },
   created() {
     this.$store.dispatch("stores/getCountries");
+  },
+  watch: {
+    keyword() {
+      this.$store.dispatch("stores/filterByKeyword", this.keyword);
+    }
   }
 };
 </script>
