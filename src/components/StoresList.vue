@@ -11,14 +11,14 @@
       <span v-if="error">... ERROR!!! ...</span>
       <ul class="stores_list">
         <li
-          v-if="active.length === 0"
+          v-if="filtered.length === 0"
           class="stores_list_store stores_list_store--empty"
         >
           Non ci sono risultati
         </li>
         <li
           v-else
-          v-for="store in active"
+          v-for="store in filtered"
           :data-storeid="store.id"
           :key="store.id"
           v-on:click="selectStore(store.id)"

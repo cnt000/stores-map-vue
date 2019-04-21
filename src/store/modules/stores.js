@@ -28,7 +28,6 @@ const getters = {
     return R.head(getStore(state.all));
   },
   getSelectedCountry: state => {
-    // todo ramda
     const getStoreFromCountryId = R.filter(
       R.propEq("term_id", state.selectedCountryId)
     );
@@ -75,6 +74,9 @@ const actions = {
   },
   filterActive({ commit }) {
     commit("filterActive");
+  },
+  filterByKeyword({ commit }, id) {
+    commit("filterByKeyword", id);
   }
 };
 
@@ -118,6 +120,9 @@ const mutations = {
     state.active = state.all.filter((
       m // todo ramda
     ) => map.getBounds().contains({ lat: +m.lat, lng: +m.lng }));
+    // active is a copy of visible markers,
+    // filtered is a copy of active filtered
+    state.filtered = state.active;
   },
   filterActive(state) {
     const storeFilters = state.filters;
@@ -126,16 +131,18 @@ const mutations = {
         // todo ramda
         return store[filter.name] === filter.value;
       }).length > 0;
+    state.active = state.all;
     if (storeFilters.length > 0) {
-      state.filtered = state.all.filter(store => hasFilter(store)); // todo ramda
+      state.filtered = state.active.filter(store => hasFilter(store)); // todo ramda
     } else {
-      state.filtered = state.all;
+      state.filtered = state.active;
     }
   },
   mapLoaded(state) {
     state.mapLoaded = true;
   },
   filterToggle(state, { id }) {
+    // todo active
     if (
       state.filters.find(el => el.name === id.name && el.value === id.value) // todo ramda
     ) {
@@ -146,6 +153,25 @@ const mutations = {
     } else {
       state.filters = [...state.filters, { name: id.name, value: id.value }];
     }
+  },
+  filterByKeyword(state, id) {
+    if (id === "") {
+      return;
+    }
+    const lowerStrings = ({
+      name,
+      address,
+      gender,
+      city,
+      country,
+      continent
+    }) => `${name} ${address} ${gender} ${city} ${country} ${continent}`;
+    const byKeyword = R.useWith(R.includes, [R.toLower, lowerStrings]);
+    const filterTerms = keyword =>
+      R.filter(element => byKeyword(keyword, element));
+
+    const filterByBologna = filterTerms(id);
+    state.filtered = filterByBologna(state.active);
   }
 };
 
