@@ -67,6 +67,8 @@ const mutations = {
   receiveAll(state, stores) {
     state.pending = false;
     state.all = stores;
+    state.active = state.all;
+    state.filtered = state.all;
   },
   apiPending(state) {
     state.pending = true;
@@ -89,21 +91,22 @@ const mutations = {
     router.push(state.path);
   },
   getActive(state, { map }) {
+    // active is a copy of visible markers
     state.active = state.all.filter((
       m // todo ramda
     ) => map.getBounds().contains({ lat: +m.lat, lng: +m.lng }));
-    // active is a copy of visible markers,
     // filtered is a copy of active filtered
     state.filtered = state.active;
   },
   filterActive(state) {
     const storeFilters = state.filters;
+
     const hasFilter = store =>
       storeFilters.filter(filter => {
         // todo ramda
         return store[filter.name] === filter.value;
       }).length > 0;
-    state.active = state.all;
+
     if (storeFilters.length > 0) {
       state.filtered = state.active.filter(store => hasFilter(store)); // todo ramda
     } else {
