@@ -1,9 +1,9 @@
-import { termsToCountries } from "@/helpers";
-import countriesExample from "../countries-examples";
+import { titleCase } from "@/helpers";
 
-describe("Terms filter correctly countries", () => {
-  it("Filter countries with test data", () => {
-    const countriesTerms = termsToCountries(countriesExample);
-    expect(countriesTerms.countries.length).toBeGreaterThanOrEqual(3);
+describe("Helpers work", () => {
+  it("titleCase works", () => {
+    const title = "hello store locator";
+    const titleCased = titleCase(title);
+    expect("Hello Store Locator").toBe(titleCased);
   });
 });

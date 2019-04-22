@@ -5,9 +5,7 @@ import { decodeStores } from "@/helpers";
 describe("Testing Getters", () => {
   const state = {
     all: [{ id: 1 }, { id: 3 }, { id: 5 }],
-    selectedStoreId: 3,
-    selectedCountryId: 6,
-    countries: [{ term_id: 2 }, { term_id: 6 }, { term_id: 8 }]
+    selectedStoreId: 3
   };
   it("getSelectedStore", () => {
     expect(stores.getters.getSelectedStore(state)).toEqual({ id: 3 });
@@ -51,7 +49,6 @@ describe("Testing Mutations", () => {
 
   beforeEach(() => {
     state = {
-      selectedCountryId: 0,
       selectedStoreId: "",
       pending: false,
       all: [

@@ -40,8 +40,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      keyword: "",
-      countryId: 0
+      keyword: ""
     };
   },
   computed: {
@@ -59,16 +58,7 @@ export default {
         type: "stores/selectStore",
         id: clickedId
       });
-    },
-    selectCountryId() {
-      this.$store.dispatch({
-        type: "stores/selectCountryId",
-        id: +this.countryId
-      });
     }
-  },
-  created() {
-    this.$store.dispatch("stores/getCountries");
   },
   watch: {
     keyword() {
@@ -98,10 +88,6 @@ export default {
     &::placeholder {
       font-size: 14px;
     }
-  }
-  &_countries {
-    width: 100%;
-    height: 60px;
   }
   &_list {
     border-top: 1px solid black;

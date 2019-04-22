@@ -51,7 +51,20 @@ export default {
         }
         this.refreshMarkers();
       }
-    }
+    } //,
+    // filtered() {
+    //   if (clusterizeResults) {
+    //     this.Markers.clearMarkers();
+    //     this.refreshMarkers();
+    //     this.clusterize();
+    //   } else {
+    //     // clear marker if not clusterized
+    //     for (var i = 0; i < this.gMarkers.length; i++) {
+    //       this.gMarkers[i].setMap(null);
+    //     }
+    //     this.refreshMarkers();
+    //   }
+    // }
   },
   mounted() {
     this.refreshMarkers(this.stores);

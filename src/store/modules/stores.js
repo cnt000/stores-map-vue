@@ -1,7 +1,6 @@
 import * as R from "ramda";
 import places from "../../../data/alessandrore";
-import termsJson from "../../../data/terms";
-import { termsToCountries, decodeStores } from "@/helpers";
+import { decodeStores } from "@/helpers";
 import router from "@/router";
 import { sortByNames } from "@/conf";
 
@@ -14,33 +13,20 @@ const state = {
   pending: false,
   error: false,
   mapLoaded: false,
-  selectedCountryId: 0,
-  countries: [],
   filters: []
 };
 
 const getters = {
   getSelectedStore: state => {
-    // todo ramda
-    const selectStoreFromId = post => post.id === state.selectedStoreId;
+    const selectedId = state.selectedStoreId;
+    const selectedStore = post => post.id === selectedId;
     const selectStore = pred => R.filter(pred);
-    const getStore = selectStore(selectStoreFromId);
+    const getStore = selectStore(selectedStore);
     return R.head(getStore(state.all));
-  },
-  getSelectedCountry: state => {
-    const getStoreFromCountryId = R.filter(
-      R.propEq("term_id", state.selectedCountryId)
-    );
-    return R.head(getStoreFromCountryId(state.countries));
   }
 };
 
 const actions = {
-  getCountries({ commit }) {
-    commit("apiPending");
-
-    commit("receiveCountries", termsJson);
-  },
   getAllStores({ commit }) {
     commit("apiPending");
     let allStores = decodeStores(places);
@@ -60,9 +46,6 @@ const actions = {
   selectStore({ commit }, { id }) {
     commit("selectStore", id);
   },
-  selectCountryId({ commit }, { id }) {
-    commit("selectCountryId", id);
-  },
   mapLoaded({ commit }) {
     commit("mapLoaded");
   },
@@ -81,17 +64,6 @@ const actions = {
 };
 
 const mutations = {
-  selectCountryId(state, term_id) {
-    if (term_id === 0) {
-      state.path = `/store-locator/`;
-      router.push(state.path);
-    }
-    state.selectedCountryId = term_id;
-  },
-  receiveCountries(state, jsonTerms) {
-    state.pending = false;
-    state.countries = termsToCountries(jsonTerms.terms).countries;
-  },
   receiveAll(state, stores) {
     state.pending = false;
     state.all = stores;

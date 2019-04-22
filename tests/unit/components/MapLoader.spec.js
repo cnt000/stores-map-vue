@@ -2,7 +2,6 @@ import { mount, shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
 import MapLoader from "@/components/MapLoader.vue";
 import storesExamples from "../stores-examples.json";
-import countriesExamples from "../countries-examples.json";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -15,8 +14,6 @@ describe("MapLoader.vue", () => {
   beforeEach(() => {
     actions = {
       "stores/selectStore": jest.fn(),
-      "stores/getCountries": jest.fn(),
-      "stores/selectCountryId": jest.fn()
     };
 
     testState = {
@@ -24,8 +21,6 @@ describe("MapLoader.vue", () => {
       pending: false,
       error: false,
       selectedStoreId: "1934",
-      countries: countriesExamples,
-      selectedCountryId: 0,
       mapLoaded: true
     };
 
@@ -77,7 +72,6 @@ describe("MapLoader.vue", () => {
   it("initial values for store state", () => {
     const wrapper = mount(MapLoader, { store, localVue });
     expect(wrapper.vm.store).toBe("1934");
-    expect(wrapper.vm.country).toBe(0);
     expect(wrapper.vm.mapLoaded).toBe(true);
     // console.log(wrapper.vm.$watch("store"));
   });

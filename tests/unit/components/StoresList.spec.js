@@ -14,20 +14,18 @@ describe("StoresList.vue", () => {
   beforeEach(() => {
     actions = {
       "stores/selectStore": jest.fn(),
-      "stores/getCountries": jest.fn(),
-      "stores/selectCountryId": jest.fn()
+      "stores/filterByKeyword": jest.fn()
     };
 
     testState = {
       all: storesExamples,
       active: storesExamples,
+      filtered: storesExamples,
       path: "/stores-map-vue/store-locator",
       selectedStoreId: "",
       pending: false,
       error: false,
       mapLoaded: false,
-      selectedCountryId: 0,
-      countries: [],
       filters: []
     };
 
@@ -59,26 +57,8 @@ describe("StoresList.vue", () => {
     expect(wrapper.find("li:nth-child(2) > div").text()).toMatch(msg);
   });
 
-  // it("renders countries select with All", () => {
-  //   const msg = "All";
-  //   const wrapper = shallowMount(StoresList, {
-  //     store,
-  //     localVue
-  //   });
-  //   expect(wrapper.find("select option").text()).toMatch(msg);
-  // });
-
-  // it("renders countries select with China second option", () => {
-  //   const msg = "Asia"; // not important if country or continents in this test
-  //   const wrapper = shallowMount(StoresList, {
-  //     store,
-  //     localVue
-  //   });
-  //   expect(wrapper.find("select option:nth-child(2)").text()).toMatch(msg);
-  // });
-
   it("renders one store searching for BAKU - PORT BAKU", () => {
-    const msg = "BAKU - PORT BAKU";
+    const msg = "ABU DHABI - SOWWAH";
     const wrapper = shallowMount(StoresList, {
       store,
       localVue
@@ -106,17 +86,6 @@ describe("StoresList.vue", () => {
     expect(actions["stores/selectStore"]).toHaveBeenCalled();
   });
 
-  // it('calls store action "selectCountryId" when select change', () => {
-  //   const wrapper = shallowMount(StoresList, { store, localVue });
-  //   const selectCountry = wrapper.find("select");
-  //   selectCountry.trigger("change", 0);
-  //   expect(actions["stores/selectCountryId"]).toHaveBeenCalled();
-  // });
-
-  it('calls store action "getCountries" when is created', () => {
-    shallowMount(StoresList, { store, localVue });
-    expect(actions["stores/getCountries"]).toHaveBeenCalled();
-  });
   it("matches snapshot", () => {
     const wrapper = shallowMount(StoresList, { store, localVue });
     expect(wrapper.html()).toMatchSnapshot();
