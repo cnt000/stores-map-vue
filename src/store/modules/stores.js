@@ -117,14 +117,13 @@ const mutations = {
     state.mapLoaded = true;
   },
   filterToggle(state, { id }) {
-    // todo active
-    if (
-      state.filters.find(el => el.name === id.name && el.value === id.value) // todo ramda
-    ) {
-      state.filters = state.filters.filter(
-        // todo ramda
-        el => el.name === id.name && el.value !== id.value
-      );
+    const matchNameAndValue = el =>
+      el.name === id.name && el.value === id.value;
+    const matchName = el => el.name === id.name && el.value !== id.value;
+    const hasFilter = R.find(matchNameAndValue);
+    const hasFilterName = R.filter(matchName);
+    if (hasFilter(state.filters)) {
+      state.filters = hasFilterName(state.filters);
     } else {
       state.filters = [...state.filters, { name: id.name, value: id.value }];
     }
