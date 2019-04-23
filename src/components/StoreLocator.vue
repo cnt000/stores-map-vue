@@ -46,10 +46,12 @@ export default {
       )
     );
     const id = getStoreId(route);
-    this.$store.dispatch({
-      type: "stores/selectStore",
-      id
-    });
+    if (id) {
+      this.$store.dispatch({
+        type: "stores/selectStore",
+        id
+      });
+    }
   },
   created() {
     this.$store.dispatch("stores/getAllStores");
