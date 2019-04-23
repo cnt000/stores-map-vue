@@ -1,30 +1,32 @@
-import * as R from "ramda";
+import { prop, propOr, pathOr, map, pipe, split, join, toLower, toUpper, replace } from "ramda";
 
 export function decodeStores(rawStores) {
-  return rawStores.map(store => ({
-    id: String(R.prop("ID", store)),
-    name: titleCase(store.post_title.toLowerCase()) || "",
-    address: R.propOr("", "wpcf-yoox-store-address", store),
-    gender: R.propOr("", "wpcf-store-gender", store),
-    lat: R.propOr("", "lat", store),
-    lng: R.propOr("", "lng", store),
-    phone: R.propOr("", "wpcf-yoox-store-phone", store),
-    mail: R.propOr("", "wpcf-yoox-store-email", store),
-    hours: R.propOr("", "wpcf-yoox-store-hours", store),
-    countryIso: R.propOr("", "wpcf-yoox-store-country-iso", store),
-    city: R.pathOr("", ["location", "city", "name"], store),
-    country: R.pathOr("", ["location", "country", "name"], store),
-    continent: R.pathOr("", ["location", "continent", "name"], store),
+  const decoder = store => ({
+    id: String(prop("ID", store)),
+    name: titleCase(propOr("", "post_title", store)),
+    address: propOr("", "wpcf-yoox-store-address", store),
+    gender: propOr("", "wpcf-store-gender", store),
+    lat: propOr("", "lat", store),
+    lng: propOr("", "lng", store),
+    phone: propOr("", "wpcf-yoox-store-phone", store),
+    mail: propOr("", "wpcf-yoox-store-email", store),
+    hours: propOr("", "wpcf-yoox-store-hours", store),
+    countryIso: propOr("", "wpcf-yoox-store-country-iso", store),
+    city: pathOr("", ["location", "city", "name"], store),
+    country: pathOr("", ["location", "country", "name"], store),
+    continent: pathOr("", ["location", "continent", "name"], store),
     visible: true
-  }));
+  });
+  return map(decoder, rawStores);
 }
 
 export function titleCase(str) {
-  return str
-    .toLowerCase()
-    .split(" ")
-    .map(function(word) {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(" ");
+  const capitalize = replace(/^./, toUpper);
+  const toTitleCase = pipe(
+    toLower,
+    split(" "),
+    map(capitalize),
+    join(" ")
+  );
+  return toTitleCase(str);
 }
