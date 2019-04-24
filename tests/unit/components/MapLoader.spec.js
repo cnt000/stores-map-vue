@@ -13,7 +13,7 @@ describe("MapLoader.vue", () => {
 
   beforeEach(() => {
     actions = {
-      "stores/selectStore": jest.fn(),
+      "stores/selectStore": jest.fn()
     };
 
     testState = {
