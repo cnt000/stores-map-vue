@@ -1,4 +1,15 @@
-import { prop, propOr, pathOr, map, pipe, split, join, toLower, toUpper, replace } from "ramda";
+import {
+  prop,
+  propOr,
+  pathOr,
+  map,
+  pipe,
+  split,
+  join,
+  toLower,
+  toUpper,
+  replace
+} from "ramda";
 
 export function decodeStores(rawStores) {
   const decoder = store => ({

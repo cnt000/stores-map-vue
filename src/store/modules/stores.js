@@ -91,10 +91,11 @@ const mutations = {
     router.push(state.path);
   },
   getActive(state, { map }) {
+    const containedInMap = m =>
+      map.getBounds().contains({ lat: +m.lat, lng: +m.lng });
+    const getActiveMarkers = R.filter(containedInMap);
     // active is a copy of visible markers
-    state.active = state.all.filter((
-      m // todo ramda
-    ) => map.getBounds().contains({ lat: +m.lat, lng: +m.lng }));
+    state.active = getActiveMarkers(state.all);
     // filtered is a copy of active filtered
     state.filtered = state.active;
   },
@@ -102,13 +103,14 @@ const mutations = {
     const storeFilters = state.filters;
 
     const hasFilter = store =>
+      // todo ramda
       storeFilters.filter(filter => {
-        // todo ramda
         return store[filter.name] === filter.value;
       }).length > 0;
 
     if (storeFilters.length > 0) {
-      state.filtered = state.active.filter(store => hasFilter(store)); // todo ramda
+      // todo ramda
+      state.filtered = state.active.filter(store => hasFilter(store)); 
     } else {
       state.filtered = state.active;
     }

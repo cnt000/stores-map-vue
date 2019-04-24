@@ -126,7 +126,7 @@ export default {
       const { Marker } = this.google.maps;
       const gMap = this.map;
       let mark;
-      this.gMarkers = this.filtered.map(store => {
+      const markerFactory = store => {
         mark = new Marker({
           position: { lat: +store.lat, lng: +store.lng },
           icon: markerIcon,
@@ -140,7 +140,9 @@ export default {
           });
         });
         return mark;
-      });
+      }
+      const createMarkers = R.map(markerFactory);
+      this.gMarkers = createMarkers(this.filtered);
     }
   }
 };
