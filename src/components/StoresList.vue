@@ -63,6 +63,9 @@ export default {
   watch: {
     keyword() {
       this.$store.dispatch("stores/filterByKeyword", this.keyword);
+    },
+    active() {
+      this.$store.dispatch("stores/filterActive");
     }
   }
 };

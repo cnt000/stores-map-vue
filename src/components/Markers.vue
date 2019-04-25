@@ -38,8 +38,19 @@ export default {
       if (clusterizeResults) {
         this.checkZoom();
       }
+      // this.markers();
     },
     filters() {
+      this.markers();
+    }
+  },
+  mounted() {
+    this.refreshMarkers();
+    if (clusterizeResults) this.clusterize();
+    this.setActive(this.selectedStoreId);
+  },
+  methods: {
+    markers() {
       if (clusterizeResults) {
         this.Markers.clearMarkers();
         this.refreshMarkers();
@@ -51,27 +62,7 @@ export default {
         }
         this.refreshMarkers();
       }
-    } //,
-    // filtered() {
-    //   if (clusterizeResults) {
-    //     this.Markers.clearMarkers();
-    //     this.refreshMarkers();
-    //     this.clusterize();
-    //   } else {
-    //     // clear marker if not clusterized
-    //     for (var i = 0; i < this.gMarkers.length; i++) {
-    //       this.gMarkers[i].setMap(null);
-    //     }
-    //     this.refreshMarkers();
-    //   }
-    // }
-  },
-  mounted() {
-    this.refreshMarkers(this.stores);
-    if (clusterizeResults) this.clusterize();
-    this.setActive(this.selectedStoreId);
-  },
-  methods: {
+    },
     clusterize() {
       this.Markers = new MarkerCluster(this.map, this.gMarkers, {
         imagePath: clusterImgs
@@ -80,7 +71,7 @@ export default {
     },
     checkZoom() {
       const zoom = this.map.getZoom();
-      if (zoom > 20 && this.isMarkersized) {
+      if (zoom >= 14 && this.isMarkersized) {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
         this.refreshMarkers();
@@ -142,7 +133,7 @@ export default {
         return mark;
       }
       const createMarkers = R.map(markerFactory);
-      this.gMarkers = createMarkers(this.filtered);
+      this.gMarkers = createMarkers(this.stores);
     }
   }
 };
