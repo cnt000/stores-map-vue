@@ -33,9 +33,9 @@ export default {
     type: String
   },
   mounted() {
-    this.$store.dispatch({
-      type: "stores/filterActive"
-    });
+    // this.$store.dispatch({
+    //   type: "stores/filterActive"
+    // });
   },
   computed: {
     ...mapState({

@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       gMarkers: null,
+      infowindow: null,
       infowindows: [],
       Markers: null,
       isMarkersized: false
@@ -38,13 +39,16 @@ export default {
       if (clusterizeResults) {
         this.checkZoom();
       }
-      // this.markers();
     },
     filters() {
       this.markers();
     }
   },
   mounted() {
+    const { InfoWindow } = this.google.maps;
+    this.infowindow = new InfoWindow({
+      content: ""
+    });
     this.refreshMarkers();
     if (clusterizeResults) this.clusterize();
     this.setActive(this.selectedStoreId);
@@ -75,6 +79,7 @@ export default {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
         this.refreshMarkers();
+        this.setActive(this.selectedStoreId);
       } else if (zoom < 14 && !this.isMarkersized) {
         this.clusterize();
       }
@@ -83,20 +88,9 @@ export default {
       if (!id) {
         return;
       }
-      const { InfoWindow } = this.google.maps;
       const getId = a => a.id === id;
       const findById = R.find(getId);
       const store = findById(this.stores);
-      const infowindow = new InfoWindow({
-        content: `<div class="store-name">${store.name}<br>
-        ${store.gender}</div>
-        <div>${store.address}</div> 
-        ${store.phone}<br>
-        ${store.hours}`
-      });
-      this.infowindows.forEach(element => {
-        element.close();
-      });
       const lat = parseFloat(store.lat).toFixed(7);
       const lng = parseFloat(store.lng).toFixed(7);
       const findMarker = gMark =>
@@ -110,8 +104,13 @@ export default {
           .toFixed(7) === lng;
       const findMarkerByPosition = R.find(findMarker);
       const mark = findMarkerByPosition(this.gMarkers);
-      infowindow.open(this.map, mark);
-      this.infowindows.push(infowindow);
+      this.infowindow.close();
+      this.infowindow.setContent(`<div class="store-name">${store.name}<br>
+        ${store.gender}</div>
+        <div>${store.address}</div> 
+        ${store.phone}<br>
+        ${store.hours}`);
+      this.infowindow.open(this.map, mark);
     },
     refreshMarkers() {
       const { Marker } = this.google.maps;
@@ -131,7 +130,7 @@ export default {
           });
         });
         return mark;
-      }
+      };
       const createMarkers = R.map(markerFactory);
       this.gMarkers = createMarkers(this.stores);
     }

@@ -6078,6 +6078,208 @@
     "distance": false
   },
   {
+    "ID": 999999,
+    "post_author": "1",
+    "post_date": "2016-03-07 18:09:53",
+    "post_date_gmt": "2016-03-07 17:09:53",
+    "post_content": "",
+    "post_title": "MILAN - VERRI II",
+    "post_excerpt": "",
+    "post_status": "publish",
+    "comment_status": "closed",
+    "ping_status": "closed",
+    "post_password": "",
+    "post_name": "milan",
+    "to_ping": "",
+    "pinged": "",
+    "post_modified": "2018-10-29 12:20:20",
+    "post_modified_gmt": "2018-10-29 11:20:20",
+    "post_content_filtered": "",
+    "post_parent": 0,
+    "guid": "http://www.ale.com/experience/en/store/milan-verri/",
+    "menu_order": 0,
+    "post_type": "store",
+    "post_mime_type": "",
+    "comment_count": "0",
+    "filter": "raw",
+    "terms": [
+      {
+        "term_id": 153,
+        "name": "Europe",
+        "slug": "europe",
+        "term_group": 0,
+        "term_taxonomy_id": 153,
+        "taxonomy": "location",
+        "description": "",
+        "parent": 0,
+        "count": 126,
+        "filter": "raw"
+      },
+      {
+        "term_id": 162,
+        "name": "Italy",
+        "slug": "italy",
+        "term_group": 0,
+        "term_taxonomy_id": 162,
+        "taxonomy": "location",
+        "description": "",
+        "parent": 153,
+        "count": 27,
+        "filter": "raw"
+      },
+      {
+        "term_id": 163,
+        "name": "Milan",
+        "slug": "milan",
+        "term_group": 0,
+        "term_taxonomy_id": 163,
+        "taxonomy": "location",
+        "description": "",
+        "parent": 162,
+        "count": 18,
+        "filter": "raw"
+      }
+    ],
+    "lat": "45.4678699",
+    "lng": "9.1948299",
+    "thumbnail": null,
+    "originalImage": false,
+    "custom": {
+      "_yoox-store-source-id": [
+        "6"
+      ],
+      "_yoox-store-bookable": [
+        "0"
+      ],
+      "_yoox-store-lat": [
+        "45.4678626"
+      ],
+      "_yoox-store-lng": [
+        "9.1948258"
+      ],
+      "_edit_lock": [
+        "1540812023:39"
+      ],
+      "_edit_last": [
+        "39"
+      ],
+      "_wpcf-store-image-sort-order": [
+        "a:1:{i:0;i:2355549;}"
+      ],
+      "_wpcf-yoox-store-email-sort-order": [
+        "a:1:{i:0;i:2355551;}"
+      ],
+      "_yoox-store-gallery": [
+        "builtin"
+      ],
+      "_wp_old_slug": [
+        "milan-verri"
+      ],
+      "_wpml_media_duplicate": [
+        ""
+      ],
+      "_wpml_media_featured": [
+        ""
+      ],
+      "_yoast_wpseo_content_score": [
+        "30"
+      ],
+      "wpcf-hero-image-focus-point": [
+        "cc"
+      ],
+      "wpcf-hero-image-behaviour": [
+        "fullbleed"
+      ],
+      "wpcf-store-gender": [
+        "Womenswear | Menswear"
+      ],
+      "wpcf-store-image": [
+        ""
+      ],
+      "wpcf-yoox-store-phone": [
+        "555 555 555 3374"
+      ],
+      "wpcf-yoox-store-email": [
+        "clientservice.it@ale.com"
+      ],
+      "wpcf-yoox-store-hours": [
+        "Monday to Sunday 10:30 – 19:30"
+      ],
+      "wpcf-yoox-store-address": [
+        "Via Verri 8\r\nMilan 20121"
+      ],
+      "wpcf-yoox-store-country-iso": [
+        "IT"
+      ]
+    },
+    "permalink": "https://www.ale.com/experience/en/store/milan/",
+    "_yoox-store-source-id": "6",
+    "_yoox-store-bookable": "0",
+    "_yoox-store-lat": "45.4678626",
+    "_yoox-store-lng": "9.1948258",
+    "_edit_lock": "1540812023:39",
+    "_edit_last": "39",
+    "_wpcf-store-image-sort-order": [
+      2355549
+    ],
+    "_wpcf-yoox-store-email-sort-order": [
+      2355551
+    ],
+    "_yoox-store-gallery": "builtin",
+    "_wp_old_slug": "milan-verri",
+    "_wpml_media_duplicate": "",
+    "_wpml_media_featured": "",
+    "_yoast_wpseo_content_score": "30",
+    "wpcf-hero-image-focus-point": "cc",
+    "wpcf-hero-image-behaviour": "fullbleed",
+    "wpcf-store-gender": "Womenswear | Menswear",
+    "wpcf-store-image": "",
+    "wpcf-yoox-store-phone": "555 555 555 3374",
+    "wpcf-yoox-store-email": "clientservice.it@ale.com",
+    "wpcf-yoox-store-hours": "Monday to Sunday 10:30 – 19:30",
+    "wpcf-yoox-store-address": "Via Verri 8\r\nMilan 20121",
+    "wpcf-yoox-store-country-iso": "IT",
+    "location": {
+      "continent": {
+        "term_id": 153,
+        "name": "Europe",
+        "slug": "europe",
+        "term_group": 0,
+        "term_taxonomy_id": 153,
+        "taxonomy": "location",
+        "description": "",
+        "parent": 0,
+        "count": 126,
+        "filter": "raw"
+      },
+      "country": {
+        "term_id": 162,
+        "name": "Italy",
+        "slug": "italy",
+        "term_group": 0,
+        "term_taxonomy_id": 162,
+        "taxonomy": "location",
+        "description": "",
+        "parent": 153,
+        "count": 27,
+        "filter": "raw"
+      },
+      "city": {
+        "term_id": 163,
+        "name": "Milan",
+        "slug": "milan",
+        "term_group": 0,
+        "term_taxonomy_id": 163,
+        "taxonomy": "location",
+        "description": "",
+        "parent": 162,
+        "count": 18,
+        "filter": "raw"
+      }
+    },
+    "distance": false
+  },
+  {
     "ID": 1708,
     "post_author": "1",
     "post_date": "2016-03-07 18:09:53",
