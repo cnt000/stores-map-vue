@@ -68,7 +68,6 @@ const mutations = {
     state.pending = false;
     state.all = stores;
     state.active = state.all;
-    state.filtered = state.all;
   },
   apiPending(state) {
     state.pending = true;
@@ -96,8 +95,6 @@ const mutations = {
     const getActiveMarkers = R.filter(containedInMap);
     // active is a copy of visible markers
     state.active = getActiveMarkers(state.all);
-    // filtered is a copy of active filtered
-    state.filtered = state.active;
   },
   filterActive(state) {
     const storeFilters = state.filters;
@@ -110,7 +107,7 @@ const mutations = {
 
     if (storeFilters.length > 0) {
       // todo ramda
-      state.filtered = state.active.filter(store => hasFilter(store)); 
+      state.filtered = state.active.filter(store => hasFilter(store));
     } else {
       state.filtered = state.active;
     }
@@ -145,9 +142,8 @@ const mutations = {
     const byKeyword = R.useWith(R.includes, [R.toLower, lowerStrings]);
     const filterTerms = keyword =>
       R.filter(element => byKeyword(keyword, element));
-
-    const filterByBologna = filterTerms(id);
-    state.filtered = filterByBologna(state.active);
+    const filterById = filterTerms(id);
+    state.filtered = filterById(state.active);
   }
 };
 
