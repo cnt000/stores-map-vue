@@ -36,8 +36,15 @@ export default {
       this.setActive(id);
     },
     active() {
+      const zoom = this.map.getZoom();
+      console.log(zoom);
+      // close infowindow if not clusterized on zoom out
+      if(!clusterizeResults && zoom < 10) {
+        this.infowindow.close();
+      }
+      // off clusterization on high zoom
       if (clusterizeResults) {
-        this.checkZoom();
+        this.checkZoom(zoom);
       }
     },
     filters() {
@@ -73,8 +80,7 @@ export default {
       });
       this.isMarkersized = true;
     },
-    checkZoom() {
-      const zoom = this.map.getZoom();
+    checkZoom(zoom) {
       if (zoom >= 14 && this.isMarkersized) {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
