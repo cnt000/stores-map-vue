@@ -36,9 +36,8 @@ export default {
     },
     active() {
       const zoom = this.map.getZoom();
-      console.log(zoom);
       // close infowindow if not clusterized on zoom out
-      if(!clusterizeResults && zoom < 10) {
+      if (!clusterizeResults && zoom < 10) {
         this.infowindow.close();
       }
       // off clusterization on high zoom
