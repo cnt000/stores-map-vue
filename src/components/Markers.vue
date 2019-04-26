@@ -27,7 +27,6 @@ export default {
       selectedStoreId: state => state.stores.selectedStoreId,
       stores: state => state.stores.all,
       active: state => state.stores.active,
-      filtered: state => state.stores.filtered,
       filters: state => state.stores.filters
     })
   },

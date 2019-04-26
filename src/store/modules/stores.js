@@ -7,7 +7,6 @@ import { sortByNames } from "@/conf";
 const state = {
   all: [],
   active: [],
-  filtered: [],
   path: "/stores-map-vue/store-locator",
   selectedStoreId: "",
   pending: false,
@@ -107,9 +106,7 @@ const mutations = {
 
     if (storeFilters.length > 0) {
       // todo ramda
-      state.filtered = state.active.filter(store => hasFilter(store));
-    } else {
-      state.filtered = state.active;
+      state.active = state.active.filter(store => hasFilter(store));
     }
   },
   mapLoaded(state) {
@@ -143,7 +140,7 @@ const mutations = {
     const filterTerms = keyword =>
       R.filter(element => byKeyword(keyword, element));
     const filterById = filterTerms(id);
-    state.filtered = filterById(state.active);
+    state.active = filterById(state.active);
   }
 };
 

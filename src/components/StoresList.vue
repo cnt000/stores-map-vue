@@ -11,14 +11,14 @@
       <span v-if="error">... ERROR!!! ...</span>
       <ul class="stores_list">
         <li
-          v-if="filtered.length === 0"
+          v-if="active.length === 0"
           class="stores_list_store stores_list_store--empty"
         >
           Non ci sono risultati
         </li>
         <li
           v-else
-          v-for="store in filtered"
+          v-for="store in active"
           :data-storeid="store.id"
           :key="store.id"
           v-on:click="selectStore(store.id)"
@@ -48,8 +48,7 @@ export default {
       active: state => state.stores.active,
       storeId: state => state.stores.selectedStoreId,
       pending: state => state.stores.pending,
-      error: state => state.stores.error,
-      filtered: state => state.stores.filtered
+      error: state => state.stores.error
     })
   },
   methods: {
