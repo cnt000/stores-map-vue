@@ -20,7 +20,7 @@ describe("MapLoader.vue", () => {
       all: storesExamples,
       pending: false,
       error: false,
-      selectedStoreId: "1934",
+      selectedId: "1934",
       mapLoaded: true
     };
 

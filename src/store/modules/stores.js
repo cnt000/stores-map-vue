@@ -8,7 +8,7 @@ const state = {
   all: [],
   active: [],
   path: "/stores-map-vue/store-locator",
-  selectedStoreId: "",
+  selectedId: "",
   pending: false,
   error: false,
   mapLoaded: false,
@@ -17,7 +17,7 @@ const state = {
 
 const getters = {
   getSelectedStore: state => {
-    const selectedId = state.selectedStoreId;
+    const selectedId = state.selectedId;
     const selectedStore = post => post.id === selectedId;
     const selectStore = pred => R.filter(pred);
     const getStore = selectStore(selectedStore);
@@ -51,11 +51,11 @@ const actions = {
   getActive({ commit }, { map }) {
     commit("getActive", { map });
   },
-  filterToggle({ commit }, id) {
-    commit("filterToggle", id);
+  toggleDimension({ commit }, id) {
+    commit("toggleDimension", id);
   },
-  filterActive({ commit }) {
-    commit("filterActive");
+  filterStores({ commit }) {
+    commit("filterStores");
   },
   filterByKeyword({ commit }, id) {
     commit("filterByKeyword", id);
@@ -85,7 +85,7 @@ const mutations = {
     );
     state.storeName = getSanitizedStoreName(state.all);
     state.path = `/store-locator/${state.storeName}-${id}`;
-    state.selectedStoreId = id;
+    state.selectedId = id;
     router.push(state.path);
   },
   getActive(state, { map }) {
@@ -95,7 +95,7 @@ const mutations = {
     // active is a copy of visible markers
     state.active = getActiveMarkers(state.all);
   },
-  filterActive(state) {
+  filterStores(state) {
     const storeFilters = state.filters;
 
     const hasFilter = store =>
@@ -112,7 +112,7 @@ const mutations = {
   mapLoaded(state) {
     state.mapLoaded = true;
   },
-  filterToggle(state, { id }) {
+  toggleDimension(state, { id }) {
     const matchNameAndValue = el =>
       el.name === id.name && el.value === id.value;
     const matchName = el => el.name === id.name && el.value !== id.value;

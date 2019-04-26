@@ -46,7 +46,7 @@ export default {
   computed: {
     ...mapState({
       active: state => state.stores.active,
-      storeId: state => state.stores.selectedStoreId,
+      storeId: state => state.stores.selectedId,
       pending: state => state.stores.pending,
       error: state => state.stores.error
     })
@@ -64,7 +64,7 @@ export default {
       this.$store.dispatch("stores/filterByKeyword", this.keyword);
     },
     active() {
-      this.$store.dispatch("stores/filterActive");
+      this.$store.dispatch("stores/filterStores");
     }
   }
 };

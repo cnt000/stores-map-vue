@@ -5,7 +5,7 @@ import { decodeStores } from "@/helpers";
 describe("Testing Getters", () => {
   const state = {
     all: [{ id: 1 }, { id: 3 }, { id: 5 }],
-    selectedStoreId: 3
+    selectedId: 3
   };
   it("getSelectedStore", () => {
     expect(stores.getters.getSelectedStore(state)).toEqual({ id: 3 });
@@ -49,7 +49,7 @@ describe("Testing Mutations", () => {
 
   beforeEach(() => {
     state = {
-      selectedStoreId: "",
+      selectedId: "",
       pending: false,
       all: [
         {
@@ -94,7 +94,7 @@ describe("Testing Mutations", () => {
     stores.mutations.selectStore(state, storeId);
     expect(state).toEqual({
       ...state,
-      selectedStoreId: storeId,
+      selectedId: storeId,
       storeName: "ciao-provaprova",
       path: "/store-locator/ciao-provaprova-2"
     });

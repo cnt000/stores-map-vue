@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     // this.$store.dispatch({
-    //   type: "stores/filterActive"
+    //   type: "stores/filterStores"
     // });
   },
   computed: {
@@ -70,7 +70,7 @@ export default {
         checked
       };
       this.$store.dispatch({
-        type: "stores/filterToggle",
+        type: "stores/toggleDimension",
         id
       });
     }

@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     ...mapState({
-      store: state => state.stores.selectedStoreId,
+      store: state => state.stores.selectedId,
       mapLoaded: state => state.stores.mapLoaded,
       filters: state => state.stores.filters
     })
@@ -47,13 +47,13 @@ export default {
       this.store && this.panToSelectedStore();
     },
     filters: function() {
-      this.filterActive();
+      this.filterStores();
     }
   },
   methods: {
-    filterActive() {
+    filterStores() {
       this.$store.dispatch({
-        type: "stores/filterActive"
+        type: "stores/filterStores"
       });
     },
     boundsChanged() {

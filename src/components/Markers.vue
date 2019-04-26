@@ -24,14 +24,14 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedStoreId: state => state.stores.selectedStoreId,
+      selectedId: state => state.stores.selectedId,
       stores: state => state.stores.all,
       active: state => state.stores.active,
       filters: state => state.stores.filters
     })
   },
   watch: {
-    selectedStoreId(id) {
+    selectedId(id) {
       this.setActive(id);
     },
     active() {
@@ -57,7 +57,7 @@ export default {
     });
     this.refreshMarkers();
     if (clusterizeResults) this.clusterize();
-    this.setActive(this.selectedStoreId);
+    this.setActive(this.selectedId);
   },
   methods: {
     markers() {
@@ -84,7 +84,7 @@ export default {
         this.Markers.clearMarkers();
         this.isMarkersized = false;
         this.refreshMarkers();
-        this.setActive(this.selectedStoreId);
+        this.setActive(this.selectedId);
       } else if (zoom < 14 && !this.isMarkersized) {
         this.clusterize();
       }
