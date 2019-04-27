@@ -58,14 +58,6 @@ export default {
         id: clickedId
       });
     }
-  },
-  watch: {
-    keyword() {
-      this.$store.dispatch("stores/filterByKeyword", this.keyword);
-    },
-    active() {
-      this.$store.dispatch("stores/filterStores");
-    }
   }
 };
 </script>

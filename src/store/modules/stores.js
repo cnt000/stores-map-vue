@@ -7,12 +7,14 @@ import { sortByNames } from "@/conf";
 const state = {
   all: [],
   active: [],
+  pristineActiveStores: [],
   path: "/stores-map-vue/store-locator",
   selectedId: "",
   pending: false,
   error: false,
   mapLoaded: false,
-  filters: []
+  filters: {},
+  keyword: "sss"
 };
 
 const getters = {
@@ -56,9 +58,6 @@ const actions = {
   },
   filterStores({ commit }) {
     commit("filterStores");
-  },
-  filterByKeyword({ commit }, id) {
-    commit("filterByKeyword", id);
   }
 };
 
@@ -66,7 +65,7 @@ const mutations = {
   receiveAll(state, stores) {
     state.pending = false;
     state.all = stores;
-    state.active = state.all;
+    state.active = [...state.all];
   },
   apiPending(state) {
     state.pending = true;
@@ -92,55 +91,63 @@ const mutations = {
     const containedInMap = m =>
       map.getBounds().contains({ lat: +m.lat, lng: +m.lng });
     const getActiveMarkers = R.filter(containedInMap);
-    // active is a copy of visible markers
-    state.active = getActiveMarkers(state.all);
+    const activerMakers = getActiveMarkers(state.all);
+    state.active = activerMakers;
+    state.pristineActiveStores = [...activerMakers];
   },
   filterStores(state) {
     const storeFilters = state.filters;
-
-    const hasFilter = store =>
-      // todo ramda
-      storeFilters.filter(filter => {
-        return store[filter.name] === filter.value;
-      }).length > 0;
-
-    if (storeFilters.length > 0) {
-      // todo ramda
-      state.active = state.active.filter(store => hasFilter(store));
-    }
+    const filterNonEmtpy = s =>
+      Object.keys(storeFilters).filter(f => s[f].length > 0);
+    const filterNonEmptyLength = filterNonEmtpy(storeFilters).length;
+    const getMatchedFilter = s => {
+      let checker = 0;
+      /*
+      cicla le chiavi dell'oggetto dei filtri
+      .per ogni chiave, se il valore della dimensione del negozio c'è dentro l'array collegato a questa chiave, incrementa
+      .alla fine se la lunghezza di queste chiavi è uguale alla lunghezza delle chiavi del filtro non vuote, aggiungilo
+      */
+      Object.keys(storeFilters).forEach(f => {
+        if (storeFilters[f].includes(s[f])) {
+          checker++;
+        }
+      });
+      if (filterNonEmptyLength === 0 || filterNonEmptyLength === checker) {
+        return true;
+      }
+    };
+    state.active = state.pristineActiveStores.filter(store =>
+      getMatchedFilter(store)
+    );
   },
   mapLoaded(state) {
     state.mapLoaded = true;
   },
   toggleDimension(state, { id }) {
-    const matchNameAndValue = el =>
-      el.name === id.name && el.value === id.value;
-    const matchName = el => el.name === id.name && el.value !== id.value;
-    const hasFilter = R.find(matchNameAndValue);
-    const hasFilterName = R.filter(matchName);
-    if (hasFilter(state.filters)) {
-      state.filters = hasFilterName(state.filters);
+    const storeFilters = state.filters;
+    let totalFilters = 0;
+
+    if (id.checked) {
+      state.filters = {
+        ...storeFilters,
+        [id.name]: storeFilters[id.name]
+          ? [...storeFilters[id.name], id.value]
+          : [id.value]
+      };
     } else {
-      state.filters = [...state.filters, { name: id.name, value: id.value }];
+      state.filters = {
+        ...storeFilters,
+        [id.name]: storeFilters[id.name].filter(f => f !== id.value)
+      };
     }
-  },
-  filterByKeyword(state, id) {
-    if (id === "") {
-      return;
+
+    Object.keys(state.filters).forEach(
+      k => (totalFilters += state.filters[k].length)
+    );
+
+    if (totalFilters === 0) {
+      state.active = [...state.pristineActiveStores];
     }
-    const lowerStrings = ({
-      name,
-      address,
-      gender,
-      city,
-      country,
-      continent
-    }) => `${name} ${address} ${gender} ${city} ${country} ${continent}`;
-    const byKeyword = R.useWith(R.includes, [R.toLower, lowerStrings]);
-    const filterTerms = keyword =>
-      R.filter(element => byKeyword(keyword, element));
-    const filterById = filterTerms(id);
-    state.active = filterById(state.active);
   }
 };
 

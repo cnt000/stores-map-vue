@@ -136,7 +136,7 @@ export default {
         return mark;
       };
       const createMarkers = R.map(markerFactory);
-      this.gMarkers = createMarkers(this.stores);
+      this.gMarkers = createMarkers(this.active);
     }
   }
 };

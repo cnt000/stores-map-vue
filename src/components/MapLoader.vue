@@ -61,6 +61,7 @@ export default {
         type: "stores/getActive",
         map: this.map
       });
+      this.filterStores();
     },
     initializeMap() {
       const mapContainer = this.$el.querySelector("#map");
