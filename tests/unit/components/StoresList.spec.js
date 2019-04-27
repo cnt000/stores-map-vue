@@ -25,7 +25,7 @@ describe("StoresList.vue", () => {
       pending: false,
       error: false,
       mapLoaded: false,
-      filters: []
+      filters: {}
     };
 
     store = new Vuex.Store({
