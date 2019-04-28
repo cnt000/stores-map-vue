@@ -27,7 +27,8 @@ export default {
       selectedId: state => state.stores.selectedId,
       stores: state => state.stores.all,
       active: state => state.stores.active,
-      filters: state => state.stores.filters
+      filters: state => state.stores.filters,
+      keyword: state => state.stores.keyword
     })
   },
   watch: {
@@ -46,6 +47,9 @@ export default {
       }
     },
     filters() {
+      this.markers();
+    },
+    keyword() {
       this.markers();
     }
   },

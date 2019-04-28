@@ -38,18 +38,24 @@
 import { mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      keyword: ""
-    };
-  },
   computed: {
     ...mapState({
       active: state => state.stores.active,
       storeId: state => state.stores.selectedId,
       pending: state => state.stores.pending,
       error: state => state.stores.error
-    })
+    }),
+    keyword: {
+      set: function(newValue) {
+        this.$store.dispatch({
+          type: "stores/updateKeyword",
+          id: newValue
+        });
+      },
+      get: function() {
+        return this.$store.state.stores.keyword
+      }
+    }
   },
   methods: {
     selectStore(clickedId) {

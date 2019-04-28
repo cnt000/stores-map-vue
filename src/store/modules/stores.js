@@ -14,7 +14,7 @@ const state = {
   error: false,
   mapLoaded: false,
   filters: {},
-  keyword: "sss"
+  keyword: ""
 };
 
 const getters = {
@@ -58,6 +58,9 @@ const actions = {
   },
   filterStores({ commit }) {
     commit("filterStores");
+  },
+  updateKeyword({ commit }, { id }) {
+    commit("updateKeyword", id);
   }
 };
 
@@ -100,12 +103,14 @@ const mutations = {
     const filterNonEmtpy = s =>
       Object.keys(storeFilters).filter(f => s[f].length > 0);
     const filterNonEmptyLength = filterNonEmtpy(storeFilters).length;
-    const getMatchedFilter = s => {
+    const getMatchedFilterWithDimension = s => {
       let checker = 0;
-      /*
-      cicla le chiavi dell'oggetto dei filtri
-      .per ogni chiave, se il valore della dimensione del negozio c'è dentro l'array collegato a questa chiave, incrementa
-      .alla fine se la lunghezza di queste chiavi è uguale alla lunghezza delle chiavi del filtro non vuote, aggiungilo
+      /* TODO
+      if value of store dimensione (ex: country)
+      is included in filters[dimension] (ex: filters[country])
+      increment a counter
+      if length of counter is eualt to length of the key
+      NOT EMPTY of the filter, it's true
       */
       Object.keys(storeFilters).forEach(f => {
         if (storeFilters[f].includes(s[f])) {
@@ -116,9 +121,33 @@ const mutations = {
         return true;
       }
     };
-    state.active = state.pristineActiveStores.filter(store =>
-      getMatchedFilter(store)
+    const getMatchedFilterWithText = s => {
+      const lowerStrings = ({
+        name,
+        address,
+        gender,
+        city,
+        country,
+        continent
+      }) => `${name} ${address} ${gender} ${city} ${country} ${continent}`;
+
+      if (
+        state.keyword.length === 0 ||
+        lowerStrings(s)
+          .toLowerCase()
+          .includes(state.keyword.toLowerCase())
+      ) {
+        return true;
+      }
+      return false;
+    };
+    const filteredWithDimension = state.pristineActiveStores.filter(store =>
+      getMatchedFilterWithDimension(store)
     );
+    const filteredWithText = filteredWithDimension.filter(store =>
+      getMatchedFilterWithText(store)
+    );
+    state.active = filteredWithText;
   },
   mapLoaded(state) {
     state.mapLoaded = true;
@@ -148,6 +177,9 @@ const mutations = {
     if (totalFilters === 0) {
       state.active = [...state.pristineActiveStores];
     }
+  },
+  updateKeyword(state, id) {
+    state.keyword = id;
   }
 };
 

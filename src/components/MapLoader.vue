@@ -36,7 +36,8 @@ export default {
     ...mapState({
       store: state => state.stores.selectedId,
       mapLoaded: state => state.stores.mapLoaded,
-      filters: state => state.stores.filters
+      filters: state => state.stores.filters,
+      keyword: state => state.stores.keyword
     })
   },
   watch: {
@@ -47,6 +48,9 @@ export default {
       this.store && this.panToSelectedStore();
     },
     filters: function() {
+      this.filterStores();
+    },
+    keyword: function() {
       this.filterStores();
     }
   },
