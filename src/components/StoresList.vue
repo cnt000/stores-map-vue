@@ -53,7 +53,7 @@ export default {
         });
       },
       get: function() {
-        return this.$store.state.stores.keyword
+        return this.$store.state.stores.keyword;
       }
     }
   },
