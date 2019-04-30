@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import * as R from "ramda";
 
 export default {
@@ -33,39 +33,26 @@ export default {
     type: String
   },
   computed: {
+    ...mapGetters("stores", ["getDimensions"]),
     ...mapState({
       stores: state => state.stores.all
     }),
     dimensions() {
-      const notEmpty = R.compose(
-        R.not,
-        R.isEmpty
-      );
-      const stores = this.stores;
-      const filters = new Set();
-      const toArray = a => [...a];
-      const add = (a, b) => a.add(b[this.type]);
-      const addInSet = R.pipe(
-        R.reduce(add, filters),
-        toArray,
-        R.filter(notEmpty)
-      );
-      return addInSet(stores);
+      return this.getDimensions(this.type);
     }
   },
   methods: {
-    ...mapActions('stores', ['toggleDimension']),
+    ...mapActions("stores", ["toggleDimension"]),
     toggleTitle() {
       this.opened = !this.opened;
     },
     selectFilter(filter) {
       const { name, value, checked } = filter.target;
-      const id = {
+      this.toggleDimension({
         name,
         value,
         checked
-      };
-      this.toggleDimension(id);
+      });
     }
   }
 };

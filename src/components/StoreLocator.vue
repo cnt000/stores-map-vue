@@ -35,7 +35,6 @@ export default {
     };
   },
   mounted() {
-    const route = this.$route;
     const getStoreId = R.pipe(
       R.pathOr(0, ["params", "store"]),
       R.when(
@@ -46,7 +45,7 @@ export default {
         )
       )
     );
-    const id = getStoreId(route);
+    const id = getStoreId(this.$route);
     if (id) {
       this.selectStore(id);
     }

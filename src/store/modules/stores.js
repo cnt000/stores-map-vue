@@ -24,6 +24,22 @@ const getters = {
     const selectStore = pred => R.filter(pred);
     const getStore = selectStore(selectedStore);
     return R.head(getStore(state.all));
+  },
+  getDimensions: state => type => {
+    debugger;
+    const filters = new Set();
+    const notEmpty = R.compose(
+      R.not,
+      R.isEmpty
+    );
+    const toArray = a => [...a];
+    const add = (a, b) => a.add(b[type]);
+    const addInSet = R.pipe(
+      R.reduce(add, filters),
+      toArray,
+      R.filter(notEmpty)
+    );
+    return addInSet(state.all);
   }
 };
 

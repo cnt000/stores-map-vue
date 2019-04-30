@@ -4,11 +4,24 @@ import { decodeStores } from "@/helpers";
 
 describe("Testing Getters", () => {
   const state = {
-    all: [{ id: 1 }, { id: 3 }, { id: 5 }],
+    all: [
+      { id: 1, country: "italy" },
+      { id: 3, country: "france" },
+      { id: 5, country: "italy" }
+    ],
     selectedId: 3
   };
   it("getSelectedStore", () => {
-    expect(stores.getters.getSelectedStore(state)).toEqual({ id: 3 });
+    expect(stores.getters.getSelectedStore(state)).toEqual({
+      id: 3,
+      country: "france"
+    });
+  });
+  it("getDimensions", () => {
+    expect(stores.getters.getDimensions(state)("country")).toEqual([
+      "italy",
+      "france"
+    ]);
   });
 });
 
