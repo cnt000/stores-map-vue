@@ -7,6 +7,7 @@ import "./registerServiceWorker";
 Vue.config.productionTip = true;
 
 new Vue({
+  strict: process.env.NODE_ENV !== "production",
   router,
   store,
   render: h => h(App)
