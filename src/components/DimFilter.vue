@@ -21,7 +21,6 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
-import * as R from "ramda";
 
 export default {
   data() {

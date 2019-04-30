@@ -18,15 +18,14 @@ const state = {
 };
 
 const getters = {
-  getSelectedStore: state => {
+  getStore: state => {
     const selectedId = state.selectedId;
     const selectedStore = post => post.id === selectedId;
     const selectStore = pred => R.filter(pred);
-    const getStore = selectStore(selectedStore);
-    return R.head(getStore(state.all));
+    const getStoreSel = selectStore(selectedStore);
+    return R.head(getStoreSel(state.all));
   },
   getDimensions: state => type => {
-    debugger;
     const filters = new Set();
     const notEmpty = R.compose(
       R.not,
@@ -157,13 +156,11 @@ const mutations = {
       }
       return false;
     };
-    const filteredWithDimension = state.pristineActiveStores.filter(store =>
-      getMatchedFilterWithDimension(store)
+    const filterDimensionAndText = R.pipe(
+      R.filter(getMatchedFilterWithDimension),
+      R.filter(getMatchedFilterWithText)
     );
-    const filteredWithText = filteredWithDimension.filter(store =>
-      getMatchedFilterWithText(store)
-    );
-    state.active = filteredWithText;
+    state.active = filterDimensionAndText(state.pristineActiveStores);
   },
   mapIsLoaded(state) {
     state.mapLoaded = true;

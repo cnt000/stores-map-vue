@@ -11,7 +11,7 @@
 
 <script>
 import GoogleMapsApiLoader from "google-maps-api-loader";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
@@ -33,7 +33,6 @@ export default {
     });
   },
   computed: {
-    ...mapGetters("stores", ["getStore"]),
     ...mapState({
       store: state => state.stores.selectedId,
       mapLoaded: state => state.stores.mapLoaded,
@@ -75,7 +74,7 @@ export default {
       this.filterStores();
     },
     panToSelectedStore() {
-      const storeSelected = this.getStore(); //this.$store.getters["stores/getSelectedStore"];
+      const storeSelected = this.$store.getters["stores/getStore"];
       let zoom = storeSelected.id ? 15 : 10;
       this.panToAndZoom(storeSelected.lat, storeSelected.lng, zoom);
     },
