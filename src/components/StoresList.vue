@@ -55,7 +55,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('stores', ['selectStore', 'updateKeyword'])
+    ...mapActions("stores", ["selectStore", "updateKeyword"])
   }
 };
 </script>

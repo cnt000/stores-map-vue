@@ -63,7 +63,7 @@ export default {
     this.setActive(this.selectedId);
   },
   methods: {
-    ...mapActions('stores', ['selectStore']),
+    ...mapActions("stores", ["selectStore"]),
     markers() {
       if (clusterizeResults) {
         this.Markers.clearMarkers();

@@ -54,7 +54,7 @@ export default {
     this.getAllStores();
   },
   methods: {
-    ...mapActions('stores', ['selectStore', 'getAllStores']),
+    ...mapActions("stores", ["selectStore", "getAllStores"])
   },
   components: {
     MapLoader,
