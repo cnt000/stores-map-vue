@@ -44,14 +44,14 @@ const actions = {
     //     commit("apiFailure", e);
     //   });
   },
-  selectStore({ commit }, { id }) {
+  selectStore({ commit }, id) {
     commit("selectStore", id);
   },
-  mapLoaded({ commit }) {
-    commit("mapLoaded");
+  mapIsLoaded({ commit }) {
+    commit("mapIsLoaded");
   },
-  getActive({ commit }, { map }) {
-    commit("getActive", { map });
+  getActive({ commit }, map) {
+    commit("getActive", map);
   },
   toggleDimension({ commit }, id) {
     commit("toggleDimension", id);
@@ -59,7 +59,7 @@ const actions = {
   filterStores({ commit }) {
     commit("filterStores");
   },
-  updateKeyword({ commit }, { id }) {
+  updateKeyword({ commit }, id) {
     commit("updateKeyword", id);
   }
 };
@@ -90,7 +90,7 @@ const mutations = {
     state.selectedId = id;
     router.push(state.path);
   },
-  getActive(state, { map }) {
+  getActive(state, map) {
     const containedInMap = m =>
       map.getBounds().contains({ lat: +m.lat, lng: +m.lng });
     const getActiveMarkers = R.filter(containedInMap);
@@ -149,10 +149,10 @@ const mutations = {
     );
     state.active = filteredWithText;
   },
-  mapLoaded(state) {
+  mapIsLoaded(state) {
     state.mapLoaded = true;
   },
-  toggleDimension(state, { id }) {
+  toggleDimension(state, id) {
     const storeFilters = state.filters;
     let totalFilters = 0;
 

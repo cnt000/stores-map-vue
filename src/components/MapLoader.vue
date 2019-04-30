@@ -11,7 +11,7 @@
 
 <script>
 import GoogleMapsApiLoader from "google-maps-api-loader";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
@@ -55,31 +55,23 @@ export default {
     }
   },
   methods: {
-    filterStores() {
-      this.$store.dispatch({
-        type: "stores/filterStores"
-      });
-    },
-    boundsChanged() {
-      this.$store.dispatch({
-        type: "stores/getActive",
-        map: this.map
-      });
-      this.filterStores();
-    },
+    ...mapActions("stores", [
+      "filterStores",
+      "getActive",
+      "mapIsLoaded",
+      "getSelectedStore"
+    ]),
     initializeMap() {
       const mapContainer = this.$el.querySelector("#map");
       const { Map, Geocoder } = this.google.maps;
       this.map = new Map(mapContainer, this.mapConfig);
       this.google.maps.event.addListener(this.map, "idle", this.boundsChanged);
       this.geocoder = new Geocoder();
-      this.mapIsLoaded({ map: this.map });
+      this.mapIsLoaded(this.map);
     },
-    mapIsLoaded({ map }) {
-      this.$store.dispatch({
-        type: "stores/mapLoaded",
-        map
-      });
+    boundsChanged() {
+      this.getActive(this.map);
+      this.filterStores();
     },
     panToSelectedStore() {
       const storeSelected = this.$store.getters["stores/getSelectedStore"];

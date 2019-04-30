@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import * as R from "ramda";
 
 export default {
@@ -54,6 +54,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('stores', ['toggleDimension']),
     toggleTitle() {
       this.opened = !this.opened;
     },
@@ -64,10 +65,7 @@ export default {
         value,
         checked
       };
-      this.$store.dispatch({
-        type: "stores/toggleDimension",
-        id
-      });
+      this.toggleDimension(id);
     }
   }
 };

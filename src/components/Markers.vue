@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import MarkerCluster from "@google/markerclusterer";
 import * as R from "ramda";
 import { clusterImgs, clusterizeResults, markerIcon } from "@/conf.js";
@@ -63,6 +63,7 @@ export default {
     this.setActive(this.selectedId);
   },
   methods: {
+    ...mapActions('stores', ['selectStore']),
     markers() {
       if (clusterizeResults) {
         this.Markers.clearMarkers();
@@ -132,10 +133,7 @@ export default {
           map: gMap
         });
         mark.addListener("click", () => {
-          this.$store.dispatch({
-            type: "stores/selectStore",
-            id: store.id
-          });
+          this.selectStore(store.id);
         });
         return mark;
       };

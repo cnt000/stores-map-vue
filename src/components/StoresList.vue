@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
@@ -47,10 +47,7 @@ export default {
     }),
     keyword: {
       set: function(newValue) {
-        this.$store.dispatch({
-          type: "stores/updateKeyword",
-          id: newValue
-        });
+        this.updateKeyword(newValue);
       },
       get: function() {
         return this.$store.state.stores.keyword;
@@ -58,12 +55,7 @@ export default {
     }
   },
   methods: {
-    selectStore(clickedId) {
-      this.$store.dispatch({
-        type: "stores/selectStore",
-        id: clickedId
-      });
-    }
+    ...mapActions('stores', ['selectStore', 'updateKeyword'])
   }
 };
 </script>

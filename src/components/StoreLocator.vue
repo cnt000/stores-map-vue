@@ -18,6 +18,7 @@
 
 <script>
 import * as R from "ramda";
+import { mapActions } from "vuex";
 import MapLoader from "./MapLoader.vue";
 import MyPosition from "./MyPosition.vue";
 import Markers from "./Markers.vue";
@@ -47,14 +48,14 @@ export default {
     );
     const id = getStoreId(route);
     if (id) {
-      this.$store.dispatch({
-        type: "stores/selectStore",
-        id
-      });
+      this.selectStore(id);
     }
   },
   created() {
-    this.$store.dispatch("stores/getAllStores");
+    this.getAllStores();
+  },
+  methods: {
+    ...mapActions('stores', ['selectStore', 'getAllStores']),
   },
   components: {
     MapLoader,
