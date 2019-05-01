@@ -115,46 +115,34 @@ const mutations = {
   },
   filterStores(state) {
     const storeFilters = state.filters;
-    const filterNonEmtpy = s =>
-      Object.keys(storeFilters).filter(f => s[f].length > 0);
-    const filterNonEmptyLength = filterNonEmtpy(storeFilters).length;
+    const cleanedFilters = Object.keys(storeFilters).reduce((object, key) => {
+      if (storeFilters[key].length > 0) {
+        object[key] = storeFilters[key];
+      }
+      return object;
+    }, {});
+    const isEmptyFilters = !Object.keys(cleanedFilters).length;
+    const matchFilters = s =>
+      Object.keys(cleanedFilters).every(f => storeFilters[f].includes(s[f]));
+    const lowerStrings = ({
+      name,
+      address,
+      gender,
+      city,
+      country,
+      continent
+    }) => `${name} ${address} ${gender} ${city} ${country} ${continent}`;
+
     const getMatchedFilterWithDimension = s => {
-      let checker = 0;
-      /* TODO
-      if value of store dimensione (ex: country)
-      is included in filters[dimension] (ex: filters[country])
-      increment a counter
-      if length of counter is eualt to length of the key
-      NOT EMPTY of the filter, it's true
-      */
-      Object.keys(storeFilters).forEach(f => {
-        if (storeFilters[f].includes(s[f])) {
-          checker++;
-        }
-      });
-      if (filterNonEmptyLength === 0 || filterNonEmptyLength === checker) {
+      if (isEmptyFilters || matchFilters(s)) {
         return true;
       }
     };
     const getMatchedFilterWithText = s => {
-      const lowerStrings = ({
-        name,
-        address,
-        gender,
-        city,
-        country,
-        continent
-      }) => `${name} ${address} ${gender} ${city} ${country} ${continent}`;
-
-      if (
-        state.keyword.length === 0 ||
+      state.keyword.length === 0 ||
         lowerStrings(s)
           .toLowerCase()
-          .includes(state.keyword.toLowerCase())
-      ) {
-        return true;
-      }
-      return false;
+          .includes(state.keyword.toLowerCase());
     };
     const filterDimensionAndText = R.pipe(
       R.filter(getMatchedFilterWithDimension),
