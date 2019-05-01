@@ -1,4 +1,15 @@
-import * as R from "ramda";
+import {
+  filter,
+  head,
+  compose,
+  pipe,
+  isEmpty,
+  not,
+  reduce,
+  toLower,
+  replace,
+  prop
+} from "ramda";
 import places from "../../../data/alessandrore";
 import { decodeStores } from "@/helpers";
 import router from "@/router";
@@ -21,22 +32,22 @@ const getters = {
   getStore: state => {
     const selectedId = state.selectedId;
     const selectedStore = post => post.id === selectedId;
-    const selectStore = pred => R.filter(pred);
+    const selectStore = pred => filter(pred);
     const getStoreSel = selectStore(selectedStore);
-    return R.head(getStoreSel(state.all));
+    return head(getStoreSel(state.all));
   },
   getDimensions: state => type => {
     const filters = new Set();
-    const notEmpty = R.compose(
-      R.not,
-      R.isEmpty
+    const notEmpty = compose(
+      not,
+      isEmpty
     );
     const toArray = a => [...a];
     const add = (a, b) => a.add(b[type]);
-    const addInSet = R.pipe(
-      R.reduce(add, filters),
+    const addInSet = pipe(
+      reduce(add, filters),
       toArray,
-      R.filter(notEmpty)
+      filter(notEmpty)
     );
     return addInSet(state.all);
   }
@@ -94,11 +105,11 @@ const mutations = {
   },
   selectStore(state, id) {
     const getId = x => x.id === id;
-    const getSanitizedStoreName = R.pipe(
-      R.find(getId),
-      R.prop("name"),
-      R.toLower,
-      R.replace(/([ ]+)/g, "")
+    const getSanitizedStoreName = pipe(
+      find(getId),
+      prop("name"),
+      toLower,
+      replace(/([ ]+)/g, "")
     );
     state.storeName = getSanitizedStoreName(state.all);
     state.path = `/store-locator/${state.storeName}-${id}`;
@@ -108,7 +119,7 @@ const mutations = {
   getActive(state, map) {
     const containedInMap = m =>
       map.getBounds().contains({ lat: +m.lat, lng: +m.lng });
-    const getActiveMarkers = R.filter(containedInMap);
+    const getActiveMarkers = filter(containedInMap);
     const activerMakers = getActiveMarkers(state.all);
     state.active = activerMakers;
     state.pristineActiveStores = [...activerMakers];
@@ -144,9 +155,9 @@ const mutations = {
         .toLowerCase()
         .includes(state.keyword.toLowerCase());
 
-    const filterDimensionAndText = R.pipe(
-      R.filter(getMatchedFilterWithDimension),
-      R.filter(getMatchedFilterWithText)
+    const filterDimensionAndText = pipe(
+      filter(getMatchedFilterWithDimension),
+      filter(getMatchedFilterWithText)
     );
     state.active = filterDimensionAndText(state.pristineActiveStores);
   },

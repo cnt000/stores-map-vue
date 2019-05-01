@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import * as R from "ramda";
+import { pathOr, when, identity, pipe, split, last } from "ramda";
 import { mapActions } from "vuex";
 import MapLoader from "./MapLoader.vue";
 import MyPosition from "./MyPosition.vue";
@@ -35,13 +35,13 @@ export default {
     };
   },
   mounted() {
-    const getStoreId = R.pipe(
-      R.pathOr(0, ["params", "store"]),
-      R.when(
-        R.identity,
-        R.pipe(
-          R.split("-"),
-          R.last
+    const getStoreId = pipe(
+      pathOr(0, ["params", "store"]),
+      when(
+        identity,
+        pipe(
+          split("-"),
+          last
         )
       )
     );
