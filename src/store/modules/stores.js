@@ -138,12 +138,12 @@ const mutations = {
         return true;
       }
     };
-    const getMatchedFilterWithText = s => {
+    const getMatchedFilterWithText = s =>
       state.keyword.length === 0 ||
-        lowerStrings(s)
-          .toLowerCase()
-          .includes(state.keyword.toLowerCase());
-    };
+      lowerStrings(s)
+        .toLowerCase()
+        .includes(state.keyword.toLowerCase());
+
     const filterDimensionAndText = R.pipe(
       R.filter(getMatchedFilterWithDimension),
       R.filter(getMatchedFilterWithText)
