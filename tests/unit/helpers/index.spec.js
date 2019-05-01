@@ -1,5 +1,27 @@
-import { titleCase } from "@/helpers";
-import { decodeStores } from "../../../src/helpers";
+import { titleCase, decodeStores, lowerStrings } from "@/helpers";
+
+const storeMock = {
+  id: "1721",
+  name: "Beijing - Sanlitun",
+  address:
+    "Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027",
+  gender: "Womenswear | Menswear",
+  lat: "39.938991808861964",
+  lng: "116.45540810317993",
+  phone: "008601064168189",
+  mail: "",
+  hours: "Monday to Sunday 10:00 - 22:00",
+  countryIso: "CN",
+  city: "Beijing",
+  country: "China",
+  continent: "Asia",
+  visible: true
+};
+
+const storeMockLessProp = {
+  id: "1721",
+  name: "Beijing - Sanlitun"
+};
 
 const dataRaw = [
   {
@@ -279,9 +301,34 @@ describe("Helpers work", () => {
     expect(result).toEqual(decoded);
   });
 
-  it("titleCase works", () => {
+  it("titleCase works from lowercase", () => {
     const title = "hello store locator";
     const titleCased = titleCase(title);
     expect("Hello Store Locator").toBe(titleCased);
+  });
+
+  it("titleCase works from uppercase", () => {
+    const title = "HELLO STORE LOCATOR";
+    const titleCased = titleCase(title);
+    expect("Hello Store Locator").toBe(titleCased);
+  });
+
+  it("lowerStrings works", () => {
+    const searchStringMock =
+      "Beijing - Sanlitun Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027 Womenswear | Menswear Beijing China Asia";
+    const lowerString = lowerStrings(storeMock);
+    expect(searchStringMock).toBe(lowerString);
+  });
+
+  it("lowerStrings works less prop", () => {
+    const searchStringMock = "Beijing - Sanlitun";
+    const lowerString = lowerStrings(storeMockLessProp);
+    expect(searchStringMock).toBe(lowerString);
+  });
+
+  it("lowerStrings works with empty", () => {
+    const searchStringMock = "";
+    const lowerString = lowerStrings({});
+    expect(searchStringMock).toBe(lowerString);
   });
 });

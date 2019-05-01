@@ -1,6 +1,6 @@
 import * as R from "ramda";
 import places from "../../../data/alessandrore";
-import { decodeStores } from "@/helpers";
+import { decodeStores, lowerStrings } from "@/helpers";
 import router from "@/router";
 import { sortByNames } from "@/conf";
 
@@ -47,6 +47,7 @@ const actions = {
     commit("apiPending");
     let allStores = decodeStores(places);
     if (sortByNames) {
+      // todo, pass from component
       allStores.sort((a, b) => (a.name < b.name ? -1 : 1));
     }
     commit("receiveAll", allStores);
@@ -124,14 +125,6 @@ const mutations = {
     const isEmptyFilters = !Object.keys(cleanedFilters).length;
     const matchFilters = s =>
       Object.keys(cleanedFilters).every(f => storeFilters[f].includes(s[f]));
-    const lowerStrings = ({
-      name,
-      address,
-      gender,
-      city,
-      country,
-      continent
-    }) => `${name} ${address} ${gender} ${city} ${country} ${continent}`;
 
     const getMatchedFilterWithDimension = s => {
       if (isEmptyFilters || matchFilters(s)) {

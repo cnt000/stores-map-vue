@@ -41,3 +41,15 @@ export function titleCase(str) {
   );
   return toTitleCase(str);
 }
+
+export function lowerStrings({
+  name,
+  address,
+  gender,
+  city,
+  country,
+  continent
+}) {
+  return `${name || ""} ${address || ""} ${gender || ""} ${city ||
+    ""} ${country || ""} ${continent || ""}`.trim();
+}

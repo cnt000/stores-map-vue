@@ -1,5 +1,5 @@
+import places from "../../../..//data/alessandrore";
 import stores from "@/store/modules/stores";
-import places from "#/alessandrore";
 import { decodeStores } from "@/helpers";
 
 describe("Testing Getters", () => {
@@ -12,16 +12,27 @@ describe("Testing Getters", () => {
     selectedId: 3
   };
   it("getSelectedStore", () => {
-    expect(stores.getters.getSelectedStore(state)).toEqual({
+    expect(stores.getters.getStore(state)).toEqual({
       id: 3,
       country: "france"
     });
   });
-  it("getDimensions", () => {
+  it("getSelectedStore empty", () => {
+    expect(
+      stores.getters.getStore({
+        all: [],
+        selectedId: 0
+      })
+    ).toEqual(undefined);
+  });
+  it("getDimensions country", () => {
     expect(stores.getters.getDimensions(state)("country")).toEqual([
       "italy",
       "france"
     ]);
+  });
+  it("getDimensions prop do not exist", () => {
+    expect(stores.getters.getDimensions(state)("name")).toEqual([undefined]);
   });
 });
 
@@ -42,17 +53,58 @@ describe("Testing Actions", () => {
       }
     };
   });
-  // it("getAllStores", () => {
-  //   stores.actions.getAllStores(obj);
-  //   let allStores = decodeStores(places);
-  //   expect(actionNames).toEqual([
-  //     { key: "apiPending" },
-  //     { key: "receiveAll", payload: allStores }
-  //   ]);
-  // });
+  it("getAllStores sorted", () => {
+    stores.actions.getAllStores(obj);
+    const sortByNames = true;
+    let allStores = decodeStores(places);
+    if (sortByNames) {
+      allStores.sort((a, b) => (a.name < b.name ? -1 : 1));
+    }
+    expect(actionNames).toEqual([
+      { key: "apiPending" },
+      { key: "receiveAll", payload: allStores }
+    ]);
+  });
+  it("getAllStores not sorted, ", () => {
+    stores.actions.getAllStores(obj);
+    const sortByNames = false;
+    let allStores = decodeStores(places);
+    if (sortByNames) {
+      allStores.sort((a, b) => (a.name < b.name ? -1 : 1));
+    }
+    expect(actionNames).not.toEqual([
+      { key: "apiPending" },
+      { key: "receiveAll", payload: allStores }
+    ]);
+  });
   it("selectStore", () => {
     stores.actions.selectStore(obj, payload);
     expect(actionNames).toEqual([{ key: "selectStore", payload: { id: 1 } }]);
+  });
+  it("selectStore empty", () => {
+    stores.actions.selectStore(obj, {});
+    expect(actionNames).toEqual([{ key: "selectStore", payload: {} }]);
+  });
+
+  it("mapIsLoaded", () => {
+    stores.actions.mapIsLoaded(obj);
+    expect(actionNames).toEqual([{ key: "mapIsLoaded" }]);
+  });
+  it("getActive", () => {
+    stores.actions.getActive(obj, {});
+    expect(actionNames).toEqual([{ key: "getActive", payload: {} }]);
+  });
+  it("toggleDimension", () => {
+    stores.actions.toggleDimension(obj, "name");
+    expect(actionNames).toEqual([{ key: "toggleDimension", payload: "name" }]);
+  });
+  it("filterStores", () => {
+    stores.actions.filterStores(obj);
+    expect(actionNames).toEqual([{ key: "filterStores" }]);
+  });
+  it("updateKeyword", () => {
+    stores.actions.updateKeyword(obj, "milan");
+    expect(actionNames).toEqual([{ key: "updateKeyword", payload: "milan" }]);
   });
 });
 
@@ -64,6 +116,8 @@ describe("Testing Mutations", () => {
     state = {
       selectedId: "",
       pending: false,
+      mapLoaded: false,
+      filters: {},
       all: [
         {
           name: "ciao - prova prova",
@@ -73,6 +127,7 @@ describe("Testing Mutations", () => {
       ]
     };
     storeId = 2;
+    state.pristineActiveStores = state.all;
   });
   it("receiveAll", () => {
     const apiPendingState = { ...state, pending: true };
@@ -112,4 +167,80 @@ describe("Testing Mutations", () => {
       path: "/store-locator/ciao-provaprova-2"
     });
   });
+
+  it("mapIsLoaded", () => {
+    stores.mutations.mapIsLoaded(state);
+    expect(state).toEqual({
+      ...state,
+      mapLoaded: true
+    });
+  });
+  it("updateKeyword", () => {
+    stores.mutations.updateKeyword(state, "milan");
+    expect(state).toEqual({
+      ...state,
+      keyword: "milan"
+    });
+  });
+  it("updateKeyword empty", () => {
+    stores.mutations.updateKeyword(state, "");
+    expect(state).toEqual({
+      ...state,
+      keyword: ""
+    });
+  });
+  it("toggleDimension toggle ON", () => {
+    const filter = {
+      checked: true,
+      value: "italy",
+      name: "country"
+    };
+    stores.mutations.toggleDimension(state, filter);
+    expect(state).toEqual({
+      ...state,
+      filters: {
+        country: ["italy"]
+      }
+    });
+  });
+  it("toggleDimension toggle OFF", () => {
+    const filter = {
+      checked: true,
+      value: "italy",
+      name: "country"
+    };
+    stores.mutations.toggleDimension(state, filter);
+    expect(state).toEqual({
+      ...state,
+      filters: {
+        country: ["italy"]
+      }
+    });
+    stores.mutations.toggleDimension(state, { ...filter, checked: false });
+    expect(state).toEqual({
+      ...state,
+      filters: {
+        country: []
+      }
+    });
+  });
+
+  it("getActive", () => {
+    // test just pristine == all
+    function map() {}
+    const contains = () => ({ contains: () => true });
+    map.prototype.getBounds = contains;
+    stores.mutations.getActive(state, new map());
+    expect(state.active).toEqual(state.pristineActiveStores);
+  });
+  it("getActive all false", () => {
+    // test just pristine == all
+    function map() {}
+    const contains = () => ({ contains: () => false });
+    map.prototype.getBounds = contains;
+    stores.mutations.getActive(state, new map());
+    expect(state.active).toEqual(state.pristineActiveStores);
+  });
 });
+
+// filterStores;
