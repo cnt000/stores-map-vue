@@ -21,6 +21,7 @@ describe("StoresList.vue", () => {
     testState = {
       all: storesExamples,
       active: storesExamples,
+      keyword: "AAA",
       path: "/stores-map-vue/store-locator",
       selectedId: "",
       pending: false,
@@ -59,25 +60,21 @@ describe("StoresList.vue", () => {
   });
 
   it("renders one store searching for BAKU - PORT BAKU", () => {
-    const msg = "ABU DHABI - SOWWAH";
+    const msg = "AAA";
     const wrapper = shallowMount(StoresList, {
       store,
       localVue
     });
-    wrapper.find(".stores_search").element.value = msg;
-    wrapper.find(".stores_search").trigger("input");
-    expect(wrapper.find("li:first-child > div").text()).toMatch(msg);
+    expect(wrapper.find(".stores_search").element.value).toMatch(msg);
   });
 
   it("renders any store searching for AAA", () => {
-    const msg = "";
     const wrapper = shallowMount(StoresList, {
       store,
       localVue
     });
-    wrapper.find(".stores_search").element.value = msg;
-    wrapper.find(".stores_search").trigger("input");
-    expect(wrapper.find("li:first-child > div").text()).toMatch(msg);
+    wrapper.find(".stores_search").element.value = "";
+    expect(wrapper.find(".stores_search").element.value).toMatch("");
   });
 
   // it('calls store action "selectStore" when list item is clicked', () => {

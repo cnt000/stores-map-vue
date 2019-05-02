@@ -1,4 +1,5 @@
-import places from "../../../..//data/alessandrore";
+import places from "../../../../data/alessandrore";
+import storeMock from "../../../../data/storeMock";
 import stores from "@/store/modules/stores";
 import { decodeStores } from "@/helpers";
 
@@ -118,6 +119,7 @@ describe("Testing Mutations", () => {
       pending: false,
       mapLoaded: false,
       filters: {},
+      keyword: "",
       all: [
         {
           name: "ciao - prova prova",
@@ -241,6 +243,30 @@ describe("Testing Mutations", () => {
     stores.mutations.getActive(state, new map());
     expect(state.active).toEqual(state.pristineActiveStores);
   });
-});
 
-// filterStores;
+  it("filterStores", () => {
+    stores.mutations.filterStores(state);
+    expect(state.active).toEqual(state.pristineActiveStores);
+  });
+  // it("filterStores", () => {
+  //   const newState = {
+  //     ...state,
+  //     filters: { name: "Yeijing - Yanlitun" },
+  //     all: [
+  //       ...Array(3).fill({
+  //         ...storeMock
+  //       }),
+  //       ...Array(3).fill({
+  //         ...storeMock,
+  //         name: storeMock.name.replace(
+  //           /[A-Z]/g,
+  //           Math.random() > 0.5 ? "Y" : "Z"
+  //         )
+  //       })
+  //     ]
+  //   };
+  //   state.pristineActiveStores = state.all;
+  //   stores.mutations.filterStores({ ...newState });
+  //   expect(newState.active).toEqual(undefined);
+  // });
+});

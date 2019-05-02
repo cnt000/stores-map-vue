@@ -1,22 +1,5 @@
 import { titleCase, decodeStores, lowerStrings } from "@/helpers";
-
-const storeMock = {
-  id: "1721",
-  name: "Beijing - Sanlitun",
-  address:
-    "Sanlitun Village, Village North Shop N2 - 12/22 11 Sanlitun Road, Chaoyang District 100027",
-  gender: "Womenswear | Menswear",
-  lat: "39.938991808861964",
-  lng: "116.45540810317993",
-  phone: "008601064168189",
-  mail: "",
-  hours: "Monday to Sunday 10:00 - 22:00",
-  countryIso: "CN",
-  city: "Beijing",
-  country: "China",
-  continent: "Asia",
-  visible: true
-};
+import storeMock from "../../../data/storeMock";
 
 const storeMockLessProp = {
   id: "1721",

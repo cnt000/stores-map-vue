@@ -27,6 +27,7 @@ describe("MapLoader.vue", () => {
     store = new Vuex.Store({
       modules: {
         stores: {
+          namespaced: true,
           state: testState,
           actions
         }
