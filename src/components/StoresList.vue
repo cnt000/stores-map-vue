@@ -4,7 +4,7 @@
       <input
         class="stores_search"
         type="text"
-        placeholder="CERCAAA"
+        placeholder="filter"
         v-model="keyword"
       />
       <span v-if="pending">... LOADING ...</span>
