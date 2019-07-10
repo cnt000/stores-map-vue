@@ -73,6 +73,7 @@ li {
   overflow: hidden;
   &.open {
     height: 100%;
+    border-top: lightgreen;
   }
   &_title {
     display: block;
